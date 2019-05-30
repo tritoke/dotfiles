@@ -1,0 +1,6 @@
+#!/bin/sh
+toremove=$(xinput list --name-only | grep pointer | egrep -vi '(test|virtual)' | dmenu -l 30 -p 'Choose the pointer to remove: ')
+id=$(xinput list --id-only "$toremove")
+master=$(xinput list --name-only | head -1)
+masterid=$(xinput list --id-only "$master")
+xinput remove-master "$id" AttachToMaster "$masterid" "$masterid"

@@ -1,0 +1,13 @@
+alias ls='exa'
+alias l='exa'
+alias ll='exa -lh'
+alias la='exa -al'
+alias tree='exa -T'
+alias grep="grep --color=auto"
+alias ccat="highlight --out-format=ansi"
+alias pdf="zathura"
+alias find="find 2>/dev/null"
+alias firefox="/home/tritoke/Downloads/firefox/firefox &"
+alias proj="$HOME/school/CS/networkScanner"
+alias tt="$HOME/school/revision/timetable"
+alias cs="$HOME/school/CS/revision"

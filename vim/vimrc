@@ -1,0 +1,146 @@
+"                            vim:foldmethod=marker
+
+" General Options {{{
+syntax on
+set encoding=utf-8
+set fileformat=unix
+set showcmd
+set foldmethod=indent
+set laststatus=0 ruler
+
+" add some space below/above the cursor when scrolling
+set scrolloff=2
+
+" use vim defaults because its not 1960 any more
+set nocompatible
+
+" backspace over all the things
+set bs=indent,eol,start
+
+" don't redraw while doing macros (super speedy bois)
+set lazyredraw
+
+" indentation settings
+set autoindent
+set cindent
+set smarttab
+
+" set the same spellfile as neovim
+set spellfile=~/.config/nvim/spell/en.utf-8.add
+
+" highight a badly spelt word red
+hi clear SpellBad
+hi SpellBad ctermbg=Red 
+hi SpellCap ctermbg=DarkGrey
+
+" highlighting for folds
+hi clear Folded
+hi Folded guifg=Black
+
+" Tab Configuration
+set softtabstop=2 tabstop=2 shiftwidth=2 expandtab
+autocmd Filetype python setlocal ts=4 sw=4 sts=0 cinwords=if,elif,else,for,while,try,except,finally,with,def,class
+autocmd Filetype java setlocal ts=4 sw=4 sts=0
+autocmd Filetype asm setlocal ts=4 sw=4 sts=0 ft=nasm
+autocmd FileType bib setlocal ts=6 sw=6 sts=0
+autocmd FileType markdown setlocal ts=4 sw=4 sts=0 spell noai nocin
+
+" search settings
+set showmatch
+" start searching as you type
+set incsearch
+" case insensitive searching
+set ignorecase
+" become case sensitive if a capital is used
+set smartcase
+
+" splitting pane defaults
+set splitbelow splitright
+
+" highlight .md files
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+
+" set spell checking in latex and markdown documents
+autocmd BufNewFile,BufReadPost *tex,*md,*rmd,mail set spell
+
+" }}}
+
+" Keyboard Shortcuts and remaps {{{
+" remapping arrow keys and pageup/down
+" normal mode
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
+noremap <PageUp> <Nop>
+noremap <PageDown> <Nop>
+
+" insert mode
+inoremap <Up> <Nop>
+inoremap <Down> <Nop>
+inoremap <Left> <Nop>
+inoremap <Right> <Nop>
+inoremap <PageUp> <Nop>
+inoremap <PageDown> <Nop>
+
+" visual mode
+vnoremap <Up> <Nop>
+vnoremap <Down> <Nop>
+vnoremap <Left> <Nop>
+vnoremap <Right> <Nop>
+vnoremap <PageUp> <Nop>
+vnoremap <PageDown> <Nop>
+
+" fold and unfold with space
+nnoremap <space> za
+
+" add and remove words to the spelling dictionary
+" add word
+nnoremap <leader>g zg
+" remove work
+nnoremap <leader>b zw
+
+" switch buffers
+" next
+nnoremap = :tabn<CR>
+nnoremap L :tabn<CR>
+" previous
+nnoremap - :tabp<CR> 
+nnoremap H :tabp<CR> 
+
+" Copy text to the clipboard directly
+vmap <C-c> "+yi
+vmap <C-x> "+c
+" Paste text from the clipboard directly
+vmap <C-v> <ESC>"+p
+imap <C-v> <ESC>"+pa
+
+" Map the Esc key to exit terminal mode
+tnoremap <Esc> <C-\><C-n>
+
+nnoremap <leader>n /<++><CR>ca<
+
+" awesome line to toggle highlighting after a search but only until the next
+" one so each consecutive search will be highlighted but only the current
+" search can be toggled
+nnoremap <silent><expr> <Leader>h (&hls && v:hlsearch ? ':nohls' : ':set hls')."\n"
+
+" shortcut automatically making a PDF in each of RMarkdown, Markdown
+autocmd FileType tex nnoremap <leader>p :!latexrun %<CR>
+autocmd FileType markdown map <leader>p :!pandoc % -s -o "%:r".pdf<CR>
+autocmd FileType rmd map <leader>p :!echo<space>"rmarkdown::render('<c-r>%')"<space>\|<space>R<space>--vanilla<CR>
+autocmd FileType rnd,markdown,tex nnoremap <leader>v :!zathura "%:r".pdf & disown<CR><CR>
+
+" }}}
+
+" Behaviour Settings {{{
+" Allow persistent undo 
+set undolevels=10000
+set undodir=/tmp/tritoke/vim_undo
+set undofile
+
+" Jump to last location when file is opened
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
+" }}}

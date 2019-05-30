@@ -1,0 +1,17 @@
+#!/bin/sh
+# get device to add and it's device ID
+device=$(xinput list --name-only | dmenu -l 30 -p 'Choose the mouse you want to add a pointer for: ')
+[ "$device" = "" ] && exit
+deviceid=$(xinput list --id-only "$device")
+
+# check for any previously added pointers
+masternumber=0
+while true
+do
+  [ "$(xinput | grep "master$masternumber")" = "" ] && break
+  masternumber=$((masternumber+1))
+done
+
+xinput create-master "master$masternumber"
+masterid=$(xinput list --id-only "master$masternumber pointer")
+xinput reattach $deviceid $masterid

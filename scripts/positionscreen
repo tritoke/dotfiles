@@ -1,0 +1,16 @@
+#!/bin/sh
+primary=$(xrandr | grep primary | cut -d ' ' -f 1)
+screens=$(xrandr | egrep -v "(dis|primary)" | grep connect | cut -d ' ' -f 1)
+toattach=$(echo $screens | dmenu -p 'Screen to attach: ')
+[ "$toattach" = "" ] && exit
+direction=$(echo -e 'left\nright\nabove\nbelow\nmirror' | dmenu -p "How to attach screen: " -l 5)
+[ "$direction" = "" ] && exit
+case $direction in
+  left ) directionarg='--left-of' ;;
+  right ) directionarg='--right-of' ;;
+  above ) directionarg='--above' ;;
+  below ) directionarg='--below' ;;
+  mirror ) directionarg='--same-as' ;;
+esac
+
+xrandr --output $toattach --auto $directionarg $primary

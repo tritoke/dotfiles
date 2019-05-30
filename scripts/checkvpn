@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# -s flag can be used to silence output
+# though this does not disable in /var/log/vpn.log
+
+# direct stderr to stdout so we can grep for name resolution failure
+PINGRES=`ping -c 2 google.com 2>&1` 
+
+# loss checks for packet loss
+LOSS=`echo $PINGRES | grep -oP '\d+(?=% packet loss)'`
+# fail checks for a failure in name resolution
+FAIL=`echo $PINGRES | grep 'failure in name resolution'`
+
+# if we have 100% ping loss or a failure in name resolution then restart the vpn.
+if [ "$LOSS" = "100" ] || [ "$FAIL" != "" ]
+then
+  [ "$1" != "-s" ] && echo "Restarting VPN"
+  systemctl restart openvpn-client@protonvpn.service 
+  echo "Restarted VPN on $(date)" >> /var/log/vpn.log
+else
+  [ "$1" != "-s" ] && echo "VPN up"
+fi

@@ -1,0 +1,13 @@
+#!/bin/sh
+# qemu-system-x86_64 -cdrom kali-linux-2019.2-amd64.iso -boot order=d -enable-kvm -drive file=kali.qcow2,format=qcow2 -m 4G
+
+# give them a menu of all the ISO files they can choose from
+ISO=$(ls *.iso | dmenu -l 30 -p "Choose the ISO to use when creating VM:")
+echo "Creating VM with: $ISO"
+DISKSIZE=$(echo '256M\n512M\n1G\n2G\n4G\n10G\n15G\n20G\n40G\n100G\nother' | dmenu -l 30 -p "How big do you want the virtual disk to be? ")
+# if the disksize is other then let them enter their own size but check it for being in a valid format
+while [ $(echo $DISKSIZE | egrep '^[0-9]+(G|M|K)$') = "" ] do
+echo "Disk size must be a number followed by either G, M or K. The regex used to match it is: '^[0-9]+(G|M|K)$'"
+[ "$DISKSIZE" = "other" ] && echo -n "Enter custom disk size: " && read DISKSIZE
+done
+echo "
