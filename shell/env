@@ -8,15 +8,29 @@ source ~/.scriptvars
 
 # global variables {{{
 
+# set locale
 export LANG="en_GB.UTF-8"
-export LC_ALL="en_GB.UTF-8"
+export LC_ALL="en_GB.UTF-8" 
+
+# makes mouse less jittery in kvm virtual machines
+export SDL_VIDEO_X11_DGAMOUSE=0
 
 export EDITOR='nvim'
+
+# make pyenv not change the prompt
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 export PYENV_ROOT="$HOME/.pyenv"
 export ZSH="$HOME/.oh-my-zsh"
 export GOPATH="$HOME/Code/Go"
 export SSH_KEY_PATH="$HOME/.ssh/rsa_id"
+
+# }}}
+
+# location shortcuts{{{
+
+SCRIPTDIR="$HOME/.scripts"
+tt="$HOME/school/revision/timetable"
+sd="$SCRIPTDIR"
 
 # }}}
 
@@ -29,10 +43,3 @@ PATH="$GOPATH/bin:$PATH"
 export PATH="$HOME/.poetry/bin:$PATH"
 
 # }}}
-
-# location shortcuts
-
-tt="$HOME/school/revision/timetable"
-sd="$HOME/.scripts"
-
-# 
