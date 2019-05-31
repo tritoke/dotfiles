@@ -1,0 +1,5 @@
+#!/bin/sh
+
+eval "$(cat $HOME/.scriptvars)"
+BOOK=$(ls $BOOKDIR/*.pdf | rev | cut -d '/' -f 1 | cut -d '.' -f 1 --complement | rev | dmenu -l 30 -p "Select the book to open: ")
+[ "$BOOK" = "" ] || zathura ~/.books/"$BOOK".pdf

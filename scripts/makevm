@@ -1,13 +1,36 @@
 #!/bin/sh
-# qemu-system-x86_64 -cdrom kali-linux-2019.2-amd64.iso -boot order=d -enable-kvm -drive file=kali.qcow2,format=qcow2 -m 4G
 
 # give them a menu of all the ISO files they can choose from
 ISO=$(ls *.iso | dmenu -l 30 -p "Choose the ISO to use when creating VM:")
-echo "Creating VM with: $ISO"
-DISKSIZE=$(echo '256M\n512M\n1G\n2G\n4G\n10G\n15G\n20G\n40G\n100G\nother' | dmenu -l 30 -p "How big do you want the virtual disk to be? ")
-# if the disksize is other then let them enter their own size but check it for being in a valid format
-while [ $(echo $DISKSIZE | egrep '^[0-9]+(G|M|K)$') = "" ] do
-echo "Disk size must be a number followed by either G, M or K. The regex used to match it is: '^[0-9]+(G|M|K)$'"
-[ "$DISKSIZE" = "other" ] && echo -n "Enter custom disk size: " && read DISKSIZE
+# get the hard disk size
+SIZE=$(echo '256M\n512M\n1G\n2G\n4G\n10G\n15G\n20G\n40G\n100G\nother' | dmenu -l 30 -p "How big do you want the virtual disk to be? ")
+while [ "$(echo $SIZE | egrep '^[0-9]+(G|M|K)$')" = "" ]
+do
+  echo "Disk size must be a number followed by either G, M or K. The regex used to match it is: '^[0-9]+(G|M|K)$'"
+  echo -n "Enter custom disk size: " && read SIZE
 done
-echo "
+FORMAT=$(echo "qcow2\nraw" | dmenu -l 2 -p "What format to use for the virtual disk? ")
+NAME="$(echo $ISO | cut -d '.' -f 1).$FORMAT"
+
+RAM=$(echo '256M\n512M\n1G\n2G\n4G\n6G\n8G\n10G\n12G\nother' | dmenu -l 30 -p "How much RAM do you want to allocate the virtual machine as it is installing on the virtual disk? ")
+while [ "$(echo $RAM | egrep '^[0-9]+(G|M|K)$')" = "" ]
+do
+  echo "custom RAM size must be a number followed by either G, M or K. The regex used to match it is: '^[0-9]+(G|M|K)$'"
+  echo -n "Enter custom RAM size: " && read RAM
+done
+
+echo "Creating virtual disk of size $SIZE in format $FORMAT called $NAME"
+echo "Installing $ISO on disk $NAME giving the installer $RAM of RAM."
+echo -n "Confirm generation (y/n): "
+read RESPONSE
+
+case $RESPONSE in
+	"no" ) exit ;;
+	"No" ) exit ;;
+	"NO" ) exit ;;
+	"N"  ) exit ;;
+	"n"  ) exit ;;
+esac
+
+qemu-img create -f "$FORMAT" "$NAME" "$SIZE"
+qemu-system-x86_64 -cdrom "$ISO" -boot order=d -enable-kvm -drive file="$NAME",format="$FORMAT" -m 4G

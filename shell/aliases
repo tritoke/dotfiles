@@ -1,13 +1,16 @@
+# use exa instead of ls and tree
 alias ls='exa'
 alias l='exa'
 alias ll='exa -lh'
 alias la='exa -al'
 alias tree='exa -T'
+
+# make grep auto color
 alias grep="grep --color=auto"
+
+# application shortcuts
 alias ccat="highlight --out-format=ansi"
 alias pdf="zathura"
+
+# make find never print when it can't access a directory
 alias find="find 2>/dev/null"
-alias firefox="/home/tritoke/Downloads/firefox/firefox &"
-alias proj="$HOME/school/CS/networkScanner"
-alias tt="$HOME/school/revision/timetable"
-alias cs="$HOME/school/CS/revision"
