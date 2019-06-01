@@ -36,9 +36,9 @@ dmenuinstall() {
 
 	if [ -e "$location/$name" ]
 	then
-		message="Do you want to replace your $name with the new one? (y/N): "
+		message="Do you want to replace your $name with the new one?"
 	else
-		message="Do you want to install $name? (y/N): "
+		message="Do you want to install $name?"
 	fi
 
 	replace=$(echo "yes\nno" | dmenu -p "$message")
