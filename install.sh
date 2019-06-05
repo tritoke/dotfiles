@@ -1,3 +1,5 @@
+#!/bin/sh
+
 cmdinstall() {
 	file=$1
 	name=$(echo $file | rev | cut -d '/' -f 1 | rev)

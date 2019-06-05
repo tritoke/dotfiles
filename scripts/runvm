@@ -9,47 +9,46 @@ run() {
 
   USB_VENDORID=$5
   USB_PRODUCTID=$6
+
   DRIVE="file=$BASEPATH/$DISKFILE,format=$DISKFORMAT"
   if [ "$USB_VENDORID" = "" ]
   then
-    qemu-system-x86_64 -enable-kvm -drive "$DRIVE" -m "$MEMORY" &
+    qemu-system-x86_64 -enable-kvm -cpu host -smp 4 -drive "$DRIVE" -m "$MEMORY" &
   else
     echo "Passing through USB with vendorid=$USB_VENDORID and productid=$USB_PRODUCTID"
     echo "\nUDEV rule in case of permissions error:"
     echo "SUBSYSTEM==\"usb\", ATTR{idVendor}==\""$(echo $USB_VENDORID | cut -d 'x' -f 2)"\", ATTR{idProduct}==\""$(echo $USB_PRODUCTID | cut -d 'x' -f 2)"\", MODE=\"0666\""
     echo "\nPlace in /etc/udev/rules.d/<rulename>.rules"
     DEVICE="usb-host,bus=xhci.0,vendorid=$USB_VENDORID,productid=$USB_PRODUCTID"
-    qemu-system-x86_64 -enable-kvm -drive "$DRIVE" -m "$MEMORY" -device nec-usb-xhci,id=xhci -device "$DEVICE" &
+    qemu-system-x86_64 -enable-kvm -cpu host -smp 4 -drive "$DRIVE" -m "$MEMORY" -device nec-usb-xhci,id=xhci -device "$DEVICE" &
   fi
 }
 
-eval "$(cat $HOME/.scriptvars)"
-# first give a menu of all the available machines in both .raw and .qcow2 format
-VM=$(ls $VMDIR/*.qcow2 $VMDIR/*.raw 2>/dev/null | rev | cut -d '/' -f 1 | rev | dmenu -l 30 -p "Select the VM to run: ")
-[ "$VM" = "" ] && exit
+select_vm() {
+  # first give a menu of all the available machines in both .raw and .qcow2 format
+  VM=$(ls $VMDIR/*.qcow2 $VMDIR/*.raw 2>/dev/null | rev | cut -d '/' -f 1 | rev | dmenu -l 30 -p "Select the VM to run: ")
+  # exit if they don't select one
+  [ "$VM" = "" ] && exit
+  FORMAT=$(echo $VM | rev | cut -d '.' -f 1 | rev)
+}
 
-FORMAT=$(echo $VM | rev | cut -d '.' -f 1 | rev)
-[ "$FORMAT" = "" ] && exit
+select_ram() {
+  RAM=$(echo '256M\n512M\n1G\n2G\n4G\n6G\n8G\n10G\n12G\nother' | dmenu -l 30 -p "How much RAM do you want to allocate the virtual machine")
+  [ "$RAM" = "" ] && exit
+  while [ "$(echo $RAM | egrep '^[0-9]+(G|M|K)$')" = "" ]
+  do
+    echo "custom RAM size must be a number followed by either G, M or K. The regex used to match it is: '^[0-9]+(G|M|K)$'"
+    echo -n "Enter custom RAM size: " && read RAM
+  done
+}
 
-RAM=$(echo '256M\n512M\n1G\n2G\n4G\n6G\n8G\n10G\n12G\nother' | dmenu -l 30 -p "How much RAM do you want to allocate the virtual machine")
-[ "$RAM" = "" ] && exit
-
-while [ "$(echo $RAM | egrep '^[0-9]+(G|M|K)$')" = "" ]
-do
-  echo "custom RAM size must be a number followed by either G, M or K. The regex used to match it is: '^[0-9]+(G|M|K)$'"
-  echo -n "Enter custom RAM size: " && read RAM
-done
-
-ATTACH=$(echo "yes\nno" | dmenu -l 2 -p "Do you want to pass a USB through to the VM? ")
-
-if [ "$ATTACH" = "yes" ]
-then
-  # first unplug the usd get the output of lsusb then plug it in
-  # the new entry is the plugged in usb.
+select_usb() {
   echo "Done" | dmenu -p "Ensure the USB is unplugged." 1>/dev/null
   lsusb > a
   echo "Done" | dmenu -p "Now plug the USB device in again." 1>/dev/null
   
+  # diff the output of lsusb from without the usb in and with the usb in
+
   echo "a" > counter
   # wait until different or 4 seconds have passed
   while [ "$DIFF" = "" ] && [ "$(wc -l counter)" != "40 counter" ] 
@@ -71,15 +70,27 @@ then
     DEVICE=$(echo "$DIFF" | cut -d ' ' -f 5)
     VENDOR=$(lsusb -D "/dev/bus/usb/$BUS/$DEVICE" 2>/dev/null | pcregrep -o1 'idVendor.*(0x[^ ]+)')
     PRODUCT=$(lsusb -D "/dev/bus/usb/$BUS/$DEVICE" 2>/dev/null | pcregrep -o1 'idProduct.*(0x[^ ]+)')
-
-    run "$VMDIR" "$VM" "$FORMAT" "$RAM" "$VENDOR" "$PRODUCT"
-
   else
     echo "ok" | dmenu -p "Couldn't detect the USB device, try leaving a second of so before continuing once the device is plugged in."
     CONT=$(echo "exit\ncontinue" | dmenu -p "Do you want to exit and try again or continue without USB?")
     [ $CONT != "continue" ] && exit
-    run "$VMDIR" "$VM" "$FORMAT" "$RAM"
+    VENDOR=""
+    PRODUCT=""
   fi
-else
-  run "$VMDIR" "$VM" "$FORMAT" "$RAM"
-fi
+}
+
+main() {
+  # source the script variables file to get useful locations
+  eval "$(cat $HOME/.scriptvars)"
+
+  select_vm
+  select_ram
+
+  ATTACH_USB=$(echo "yes\nno" | dmenu -p "Do you want to pass a USB through to the VM? ")
+  [ "$ATTACH_USB" = "yes" ] && select_usb
+
+  run $VMDIR $VM $FORMAT $RAM $VENDOR $PRODUCT
+
+}
+
+main
