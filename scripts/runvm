@@ -26,7 +26,7 @@ run() {
 
 select_vm() {
   # first give a menu of all the available machines in both .raw and .qcow2 format
-  VM=$(ls $VMDIR/*.qcow2 $VMDIR/*.raw 2>/dev/null | rev | cut -d '/' -f 1 | rev | dmenu -l 30 -p "Select the VM to run: ")
+  VM=$(ls $VMDIR/*.qcow2 $VMDIR/*.raw $VMDIR/*.vhd 2>/dev/null | rev | cut -d '/' -f 1 | rev | dmenu -l 30 -p "Select the VM to run: ")
   # exit if they don't select one
   [ "$VM" = "" ] && exit
   FORMAT=$(echo $VM | rev | cut -d '.' -f 1 | rev)

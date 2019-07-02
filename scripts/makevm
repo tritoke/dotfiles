@@ -33,4 +33,4 @@ case $RESPONSE in
 esac
 
 qemu-img create -f "$FORMAT" "$NAME" "$SIZE"
-qemu-system-x86_64 -cdrom "$ISO" -boot order=d -enable-kvm -drive file="$NAME",format="$FORMAT" -m 4G
+qemu-system-x86_64 -cdrom "$ISO" -boot order=d -enable-kvm -drive file="$NAME",format="$FORMAT" -m 4G &

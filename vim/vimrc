@@ -7,6 +7,7 @@ set fileformat=unix
 set showcmd
 set foldmethod=indent
 set laststatus=0 ruler
+set foldlevel=99
 
 " add some space below/above the cursor when scrolling
 set scrolloff=2
@@ -41,9 +42,11 @@ hi Folded guifg=Black
 set softtabstop=2 tabstop=2 shiftwidth=2 expandtab
 autocmd Filetype python setlocal ts=4 sw=4 sts=0 cinwords=if,elif,else,for,while,try,except,finally,with,def,class
 autocmd Filetype java setlocal ts=4 sw=4 sts=0
+autocmd Filetype rust setlocal ts=4 sw=4 sts=0
 autocmd Filetype asm setlocal ts=4 sw=4 sts=0 ft=nasm
 autocmd FileType bib setlocal ts=6 sw=6 sts=0
 autocmd FileType markdown setlocal ts=4 sw=4 sts=0 spell noai nocin
+autocmd FileType makefile setlocal noet
 
 " search settings
 set showmatch

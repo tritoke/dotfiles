@@ -1,8 +1,8 @@
 # use exa instead of ls and tree
 alias ls='exa'
 alias l='exa'
-alias ll='exa -lh'
-alias la='exa -al'
+alias ll='exa -lhg'
+alias la='exa -alhg'
 alias tree='exa -T'
 
 # make grep auto color
