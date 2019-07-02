@@ -6,8 +6,8 @@ set encoding=utf-8
 set fileformat=unix
 set showcmd
 set foldmethod=indent
-set laststatus=0 ruler
 set foldlevel=99
+  set laststatus=0 ruler
 
 " add some space below/above the cursor when scrolling
 set scrolloff=2
@@ -71,12 +71,12 @@ autocmd BufNewFile,BufReadPost *tex,*md,*rmd,mail set spell
 " Keyboard Shortcuts and remaps {{{
 " remapping arrow keys and pageup/down
 " normal mode
-noremap <Up> <Nop>
-noremap <Down> <Nop>
-noremap <Left> <Nop>
-noremap <Right> <Nop>
-noremap <PageUp> <Nop>
-noremap <PageDown> <Nop>
+nnoremap <Up> <Nop>
+nnoremap <Down> <Nop>
+nnoremap <Left> <Nop>
+nnoremap <Right> <Nop>
+nnoremap <PageUp> <Nop>
+nnoremap <PageDown> <Nop>
 
 " insert mode
 inoremap <Up> <Nop>
@@ -93,6 +93,11 @@ vnoremap <Left> <Nop>
 vnoremap <Right> <Nop>
 vnoremap <PageUp> <Nop>
 vnoremap <PageDown> <Nop>
+
+"map F1 to escape
+nnoremap <F1> <Esc>
+inoremap <F1> <Esc>
+vnoremap <F1> <Esc>
 
 " fold and unfold with space
 nnoremap <space> za
