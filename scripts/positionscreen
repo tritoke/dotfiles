@@ -14,3 +14,6 @@ case $direction in
 esac
 
 xrandr --output $toattach --auto $directionarg $primary
+# if there is a background set, reset it for the new window
+[ -f ~/.fehbg ] && ~/.fehbg
+setxkbmap gb
