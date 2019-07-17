@@ -1,2 +1,2 @@
-BOOKPATH="$HOME/.books:$HOME/school/books"
+BOOKPATH="$HOME/.books"
 VMDIR="$HOME/.kvm"

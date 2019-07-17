@@ -7,7 +7,7 @@ set fileformat=unix
 set showcmd
 set foldmethod=indent
 set foldlevel=99
-  set laststatus=0 ruler
+set laststatus=0 ruler
 
 " add some space below/above the cursor when scrolling
 set scrolloff=2
@@ -126,7 +126,9 @@ imap <C-v> <ESC>"+pa
 " Map the Esc key to exit terminal mode
 tnoremap <Esc> <C-\><C-n>
 
+" some leader maps
 nnoremap <leader>n /<++><CR>ca<
+nnoremap <leader>t :!st&disown<CR><CR>
 
 " awesome line to toggle highlighting after a search but only until the next
 " one so each consecutive search will be highlighted but only the current
