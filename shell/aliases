@@ -1,9 +1,12 @@
 # replace with modern rust based versions
 alias cat=bat
-alias find='fd -c always'
-alias grep='rg --color always'
+alias fd='fd -c always --no-ignore-vcs'
+alias rg='rg --color always'
+alias grep=rg
+
 # use exa instead of ls and tree
-alias ls='exa --colour=always'
+alias exa='exa --colour=always'
+alias ls=exa
 alias l=ls
 alias ll='l -lhg'
 alias la='ll -a'
@@ -12,6 +15,9 @@ alias tree='exa -T'
 # make less interpret control characters
 # this is why always colour is used above
 alias less='less -r'
+
+# make find errors go to /dev/null
+alias find='find 2>/dev/null'
 
 # .. aliases
 
@@ -24,7 +30,7 @@ alias .......='cd ../../../../../..'
 alias ........='cd ../../../../../../..'
 
 # application shortcuts
-alias pdf="zathura"
+alias z="zathura"
 
 # make st spawn a terminal in another process and disown the process
 alias st="st & disown 2>&1 > /dev/null"
