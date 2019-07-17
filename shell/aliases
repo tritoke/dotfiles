@@ -1,16 +1,31 @@
+# replace with modern rust based versions
+alias cat=bat
+alias find='fd -c always'
+alias grep='rg --color always'
 # use exa instead of ls and tree
-alias ls='exa'
-alias l='exa'
-alias ll='exa -lhg'
-alias la='exa -alhg'
+alias ls='exa --colour=always'
+alias l=ls
+alias ll='l -lhg'
+alias la='ll -a'
 alias tree='exa -T'
 
-# make grep auto color
-alias grep="grep --color=auto"
+# make less interpret control characters
+# this is why always colour is used above
+alias less='less -r'
+
+# .. aliases
+
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
+alias .......='cd ../../../../../..'
+alias ........='cd ../../../../../../..'
 
 # application shortcuts
-alias ccat="highlight --out-format=ansi"
 alias pdf="zathura"
 
-# make find never print when it can't access a directory
-alias find="find 2>/dev/null"
+# make st spawn a terminal in another process and disown the process
+alias st="st & disown 2>&1 > /dev/null"
+alias renew="st & exit"
