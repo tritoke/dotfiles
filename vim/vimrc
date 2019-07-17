@@ -1,13 +1,11 @@
-"                            vim:foldmethod=marker
+" vim:foldmethod=marker
 
 " General Options {{{
 syntax on
 set encoding=utf-8
 set fileformat=unix
 set showcmd
-set foldmethod=indent
-set foldlevel=99
-  set laststatus=0 ruler
+set laststatus=0 ruler
 
 " add some space below/above the cursor when scrolling
 set scrolloff=2
@@ -21,13 +19,6 @@ set bs=indent,eol,start
 " don't redraw while doing macros (super speedy bois)
 set lazyredraw
 
-" indentation settings
-set autoindent
-set cindent
-set smarttab
-
-" set the same spellfile as neovim
-set spellfile=~/.config/nvim/spell/en.utf-8.add
 
 " highight a badly spelt word red
 hi clear SpellBad
@@ -38,33 +29,38 @@ hi SpellCap ctermbg=DarkGrey
 hi clear Folded
 hi Folded guifg=Black
 
-" Tab Configuration
-set softtabstop=2 tabstop=2 shiftwidth=2 expandtab
-autocmd Filetype python setlocal ts=4 sw=4 sts=0 cinwords=if,elif,else,for,while,try,except,finally,with,def,class
-autocmd Filetype java setlocal ts=4 sw=4 sts=0
-autocmd Filetype rust setlocal ts=4 sw=4 sts=0
-autocmd Filetype asm setlocal ts=4 sw=4 sts=0 ft=nasm
-autocmd FileType bib setlocal ts=6 sw=6 sts=0
-autocmd FileType markdown setlocal ts=4 sw=4 sts=0 spell noai nocin
-autocmd FileType makefile setlocal noet
-
-" search settings
-set showmatch
-" start searching as you type
-set incsearch
-" case insensitive searching
-set ignorecase
-" become case sensitive if a capital is used
-set smartcase
-
-" splitting pane defaults
-set splitbelow splitright
-
 " highlight .md files
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
-" set spell checking in latex and markdown documents
-autocmd BufNewFile,BufReadPost *tex,*md,*rmd,mail set spell
+" indentation settings
+set autoindent " keep the current level of indentation when you go to a newline, e.g. with o
+set smarttab " back space over tab boundaries i.e. <tab><bs> will leave you where you started
+
+" global language settings
+filetype on
+set softtabstop=2 tabstop=2 shiftwidth=2 expandtab " global s
+set spellfile=~/.vim/spell/en.utf-8.add
+
+" language specific settings
+
+autocmd Filetype c setlocal cin fdm=syntax
+autocmd Filetype python setlocal ts=4 sw=4 sts=0 tw=79 si fdm=indent 
+       \ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
+autocmd Filetype java setlocal ts=4 sw=4 sts=0 cin fdm=syntax
+autocmd Filetype rust setlocal ts=4 sw=4 sts=0 cin fdm=syntax
+autocmd Filetype asm setlocal ts=4 sw=4 sts=0 ft=nasm
+autocmd FileType bib setlocal ts=6 sw=6 sts=0
+autocmd FileType markdown setlocal ts=4 sw=4 sts=0 noai spell
+autocmd FileType rmd,plaintex,mail setlocal spell
+autocmd FileType make setlocal noet
+
+" search settings
+set incsearch  " start searching as you type
+set ignorecase " case insensitive searching
+set smartcase  " become case sensitive if a capital is used
+
+" splitting pane defaults
+set splitbelow splitright
 
 " }}}
 
@@ -105,10 +101,10 @@ nnoremap <space> za
 " add and remove words to the spelling dictionary
 " add word
 nnoremap <leader>g zg
-" remove work
+" remove word
 nnoremap <leader>b zw
 
-" switch buffers
+" switch tabs
 " next
 nnoremap = :tabn<CR>
 nnoremap L :tabn<CR>
@@ -123,10 +119,9 @@ vmap <C-x> "+c
 vmap <C-v> <ESC>"+p
 imap <C-v> <ESC>"+pa
 
-" Map the Esc key to exit terminal mode
-tnoremap <Esc> <C-\><C-n>
-
+" random leader commands
 nnoremap <leader>n /<++><CR>ca<
+nnoremap <leader>t :!st&disown<CR><CR>
 
 " awesome line to toggle highlighting after a search but only until the next
 " one so each consecutive search will be highlighted but only the current
