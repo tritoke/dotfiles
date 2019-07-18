@@ -1,6 +1,6 @@
 # replace with modern rust based versions
 alias cat=bat
-alias fd='fd -c always --no-ignore-vcs'
+alias fd='fd -c always -I -H'
 alias rg='rg --color always'
 alias grep=rg
 
@@ -20,7 +20,6 @@ alias less='less -r'
 alias find='find 2>/dev/null'
 
 # .. aliases
-
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
@@ -33,5 +32,5 @@ alias ........='cd ../../../../../../..'
 alias z="zathura"
 
 # make st spawn a terminal in another process and disown the process
-alias st="st & disown 2>&1 > /dev/null"
-alias renew="st & exit"
+alias st="st & disown"
+alias renew="st && exit"

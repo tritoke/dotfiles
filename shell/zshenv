@@ -1,7 +1,7 @@
 # vim:foldmethod=marker
 
 # source environment vars
-source $HOME/.env
+source ~/.env
 
 # man page said so
 if [[ -o rcs ]]

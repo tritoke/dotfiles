@@ -2,7 +2,6 @@
 
 #  sourcing {{{
 
-source $ZSH/oh-my-zsh.sh
 source ~/.aliases
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -17,7 +16,6 @@ zplug "zplug/zplug", hook-build:'zplug --self-manage'
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-history-substring-search"
 zplug denysdovhan/spaceship-prompt, use:spaceship.zsh, from:github, as:theme
 
 if ! zplug check --verbose
@@ -72,5 +70,10 @@ setopt hist_save_no_dups        # Omit older commands in favor of newer ones.
 setopt pushd_ignore_dups        # Dont push copies of the same dir on stack.
 setopt pushd_minus              # Reference stack entries with "-".
 setopt extended_glob
+
+# emacs bad but I don't like vi mode as I don't edit terminal commands often
+# and setting emacs mode explicitly means I can set EDITOR=vim without
+# it making vi mode be a thing
+set -o emacs
 
 # }}}

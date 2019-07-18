@@ -15,7 +15,7 @@ export LC_ALL="en_GB.UTF-8"
 # makes mouse less jittery in kvm virtual machines
 export SDL_VIDEO_X11_DGAMOUSE=0
 
-export EDITOR='nvim'
+export EDITOR='vim'
 
 # make pyenv not change the prompt
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1

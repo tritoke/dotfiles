@@ -6,6 +6,7 @@ set encoding=utf-8
 set fileformat=unix
 set showcmd
 set laststatus=0 ruler
+set foldlevel=99 " user has to choose to fold some text
 
 " add some space below/above the cursor when scrolling
 set scrolloff=2
@@ -30,7 +31,7 @@ hi clear Folded
 hi Folded guifg=Black
 
 " highlight .md files
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+au BufNewFile,BufReadPost *.md set filetype=markdown
 
 " indentation settings
 set autoindent " keep the current level of indentation when you go to a newline, e.g. with o
@@ -43,16 +44,17 @@ set spellfile=~/.vim/spell/en.utf-8.add
 
 " language specific settings
 
-autocmd Filetype c setlocal cin fdm=syntax
-autocmd Filetype python setlocal ts=4 sw=4 sts=0 tw=79 si fdm=indent 
+au Filetype c setlocal cin fdm=syntax
+au Filetype python setlocal ts=4 sw=4 sts=0 tw=79 si fdm=indent 
        \ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
-autocmd Filetype java setlocal ts=4 sw=4 sts=0 cin fdm=syntax
-autocmd Filetype rust setlocal ts=4 sw=4 sts=0 cin fdm=syntax
-autocmd Filetype asm setlocal ts=4 sw=4 sts=0 ft=nasm
-autocmd FileType bib setlocal ts=6 sw=6 sts=0
-autocmd FileType markdown setlocal ts=4 sw=4 sts=0 noai spell
-autocmd FileType rmd,plaintex,mail setlocal spell
-autocmd FileType make setlocal noet
+au Filetype java setlocal ts=4 sw=4 sts=0 cin fdm=syntax
+au Filetype rust setlocal ts=4 sw=4 sts=0 cin fdm=syntax
+au Filetype asm setlocal ts=4 sw=4 sts=0 ft=nasm
+au FileType bib setlocal ts=6 sw=6 sts=0
+au FileType markdown setlocal ts=4 sw=4 sts=0 noai spell
+au FileType rmd,plaintex,mail setlocal spell
+au FileType make setlocal noet
+au FileType vim,zsh setlocal fdm=marker
 
 " search settings
 set incsearch  " start searching as you type
@@ -129,10 +131,10 @@ nnoremap <leader>t :!st&disown<CR><CR>
 nnoremap <silent><expr> <Leader>h (&hls && v:hlsearch ? ':nohls' : ':set hls')."\n"
 
 " shortcut automatically making a PDF in each of RMarkdown, Markdown
-autocmd FileType tex nnoremap <leader>p :!latexrun %<CR>
-autocmd FileType markdown map <leader>p :!pandoc % -s -o "%:r".pdf<CR>
-autocmd FileType rmd map <leader>p :!echo<space>"rmarkdown::render('<c-r>%')"<space>\|<space>R<space>--vanilla<CR>
-autocmd FileType rnd,markdown,tex nnoremap <leader>v :!zathura "%:r".pdf & disown<CR><CR>
+au FileType tex nnoremap <leader>p :!latexrun %<CR>
+au FileType markdown map <leader>p :!pandoc % -s -o "%:r".pdf<CR>
+au FileType rmd map <leader>p :!echo<space>"rmarkdown::render('<c-r>%')"<space>\|<space>R<space>--vanilla<CR>
+au FileType rnd,markdown,tex nnoremap <leader>v :!zathura "%:r".pdf & disown<CR><CR>
 
 " }}}
 
@@ -143,7 +145,7 @@ set undodir=/tmp/tritoke/vim_undo
 set undofile
 
 " Jump to last location when file is opened
-if has("autocmd")
+if has("au")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 " }}}
