@@ -1,37 +1,27 @@
-# vim:foldmethod=marker
-
 #  sourcing {{{
 
+# environment information
+source ~/.env
+# general aliases
 source ~/.aliases
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# fzf key bindings
+source "$FZF/key-bindings.zsh"
+source "$FZF/completion.zsh"
 
-# }}}
-
-# zplug {{{
-
-source ~/.zplug/init.zsh
-
-zplug "zplug/zplug", hook-build:'zplug --self-manage'
-zplug "zsh-users/zsh-syntax-highlighting", defer:2
-zplug "zsh-users/zsh-completions"
-zplug "zsh-users/zsh-autosuggestions"
-zplug denysdovhan/spaceship-prompt, use:spaceship.zsh, from:github, as:theme
-
-if ! zplug check --verbose
-  then
-  printf "Install? [y/N]: "
-  if read -q
-    then
-    echo; zplug install
-  fi
-fi
-
-zplug load
+# zsh syntax highlighting
+source "$ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+# zsh autosuggestions
+source "$ZSH_PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh"
+# zsh history substring search
+source "$ZSH_PLUGINS/zsh-history-substring-search/zsh-history-substring-search.zsh"
 
 # }}}
 
 # spaceship options {{{
+
+autoload -U promptinit; promptinit
+prompt spaceship
 
 SPACESHIP_PYENV_PREFIX="pyenv:("
 SPACESHIP_PYENV_SUFFIX=") "
@@ -40,6 +30,8 @@ SPACESHIP_VENV_PREFIX="venv:("
 SPACESHIP_VENV_SUFFIX=") "
 
 SPACESHIP_BATTERY_THRESHOLD=4
+
+SPACESHIP_VI_MODE_SHOW=0
 
 # }}}
 
@@ -71,9 +63,14 @@ setopt pushd_ignore_dups        # Dont push copies of the same dir on stack.
 setopt pushd_minus              # Reference stack entries with "-".
 setopt extended_glob
 
-# emacs bad but I don't like vi mode as I don't edit terminal commands often
-# and setting emacs mode explicitly means I can set EDITOR=vim without
-# it making vi mode be a thing
-set -o emacs
+# to deal with control and arrow keys being speccy
+bindkey ";5C" forward-word
+bindkey ";5D" backward-word
+bindkey -v '^?' backward-delete-char
+
+# TODO: sort out getting control up/down to do the fuzzy searching
+HISTORY_SUBSTRING_SEARCH_FUZZY=1
+bindkey ";5A" history-substring-search-up
+bindkey ";5A" history-substring-search-down
 
 # }}}
