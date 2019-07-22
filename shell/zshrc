@@ -1,3 +1,21 @@
+# load prompt first because it is often the slowest part
+# and it makes it feel like the shell loaded faster if
+# you see the prompt sooner
+# spaceship options {{{
+
+autoload -U promptinit; promptinit
+prompt spaceship
+
+SPACESHIP_PYENV_PREFIX="pyenv:("
+SPACESHIP_PYENV_SUFFIX=") "
+
+SPACESHIP_VENV_PREFIX="venv:("
+SPACESHIP_VENV_SUFFIX=") "
+
+SPACESHIP_BATTERY_THRESHOLD=4
+
+# }}}
+
 #  sourcing {{{
 
 # environment information
@@ -15,23 +33,6 @@ source "$ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 source "$ZSH_PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh"
 # zsh history substring search
 source "$ZSH_PLUGINS/zsh-history-substring-search/zsh-history-substring-search.zsh"
-
-# }}}
-
-# spaceship options {{{
-
-autoload -U promptinit; promptinit
-prompt spaceship
-
-SPACESHIP_PYENV_PREFIX="pyenv:("
-SPACESHIP_PYENV_SUFFIX=") "
-
-SPACESHIP_VENV_PREFIX="venv:("
-SPACESHIP_VENV_SUFFIX=") "
-
-SPACESHIP_BATTERY_THRESHOLD=4
-
-SPACESHIP_VI_MODE_SHOW=0
 
 # }}}
 
@@ -64,13 +65,13 @@ setopt pushd_minus              # Reference stack entries with "-".
 setopt extended_glob
 
 # to deal with control and arrow keys being speccy
-bindkey ";5C" forward-word
-bindkey ";5D" backward-word
-bindkey -v '^?' backward-delete-char
+set -o emacs
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
 
-# TODO: sort out getting control up/down to do the fuzzy searching
+# control up/down does a fuzzy history search
 HISTORY_SUBSTRING_SEARCH_FUZZY=1
-bindkey ";5A" history-substring-search-up
-bindkey ";5A" history-substring-search-down
+bindkey "^[[1;5A" history-substring-search-up
+bindkey "^[[1;5B" history-substring-search-down
 
 # }}}

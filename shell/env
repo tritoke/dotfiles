@@ -1,5 +1,3 @@
-# vim:foldmethod=marker
-
 # locations of things used in scripts {{{
 
 source ~/.scriptvars
@@ -25,7 +23,7 @@ export SSH_KEY_PATH="$HOME/.ssh/rsa_id"
 
 # }}}
 
-# location shortcuts{{{
+# location shortcuts {{{
 
 SCRIPTDIR="$HOME/.scripts"
 tt="$HOME/school/revision/timetable"
