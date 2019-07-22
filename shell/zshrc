@@ -18,6 +18,8 @@ SPACESHIP_BATTERY_THRESHOLD=4
 
 #  sourcing {{{
 
+# set emacs mode early so we can overwrite other mappings
+set -o emacs
 # environment information
 source ~/.env
 # general aliases
@@ -65,7 +67,7 @@ setopt pushd_minus              # Reference stack entries with "-".
 setopt extended_glob
 
 # to deal with control and arrow keys being speccy
-set -o emacs
+bindkey '^R' fzf-history-widget
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 
