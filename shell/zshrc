@@ -3,7 +3,9 @@
 # you see the prompt sooner
 # spaceship options {{{
 
-autoload -U promptinit; promptinit
+autoload -U compinit promptinit
+promptinit
+compinit
 prompt spaceship
 
 SPACESHIP_PYENV_PREFIX="pyenv:("
@@ -27,7 +29,8 @@ source ~/.aliases
 
 # fzf key bindings
 source "$FZF/key-bindings.zsh"
-source "$FZF/completion.zsh"
+
+autoload compinit; compinit
 
 # zsh syntax highlighting
 source "$ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
@@ -66,10 +69,14 @@ setopt pushd_ignore_dups        # Dont push copies of the same dir on stack.
 setopt pushd_minus              # Reference stack entries with "-".
 setopt extended_glob
 
-# to deal with control and arrow keys being speccy
+# use ctrl-v then the key combination to get weird symbols
 bindkey '^R' fzf-history-widget
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
+
+# ctrl backspace and delete for deleting words forward and back
+bindkey "^H" backward-kill-word
+bindkey "^[[M" kill-word
 
 # control up/down does a fuzzy history search
 HISTORY_SUBSTRING_SEARCH_FUZZY=1

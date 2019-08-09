@@ -1,16 +1,14 @@
 # replace with modern rust based versions
 alias cat=bat
 alias fd='fd -c always -I -H'
-alias rg='rg --color always'
-alias grep=rg
+alias rg='rg --color always 2>/dev/null'
 
 # use exa instead of ls and tree
-alias exa='exa --colour=always'
 alias ls=exa
 alias l=ls
 alias ll='l -lhg'
 alias la='ll -a'
-alias tree='exa -T'
+alias tree='exa -T --color=always'
 
 # make less interpret control characters
 # this is why always colour is used above
