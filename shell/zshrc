@@ -4,7 +4,10 @@ source ~/.env
 # spaceship options {{{
 
 SPACESHIP_ROOT="/usr/lib/spaceship-prompt"
-autoload -U promptinit; promptinit
+
+autoload -U compinit promptinit
+promptinit
+compinit
 prompt spaceship
 
 autoload compinit; compinit
@@ -67,14 +70,14 @@ setopt pushd_minus              # Reference stack entries with "-".
 setopt extended_glob
 setopt autopushd
 
-# to deal with control and arrow keys being speccy
-bindkey "^R" fzf-history-widget
+# use ctrl-v then the key combination to get weird symbols
+bindkey '^R' fzf-history-widget
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 
-# forward and backward word/char deletion with ctrl-(delete|backspace)
+# ctrl backspace and delete for deleting words forward and back
+bindkey "^H" backward-kill-word
 bindkey "^[[M" kill-word
-bindkey "^[[P" delete-char-or-list
 
 # control up/down does a fuzzy history search
 HISTORY_SUBSTRING_SEARCH_FUZZY=1

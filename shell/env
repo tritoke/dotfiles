@@ -15,18 +15,21 @@ export SDL_VIDEO_X11_DGAMOUSE=0
 
 export EDITOR='vim'
 
+export SSH_KEY_PATH="$HOME/.ssh/rsa_id"
+
 # make pyenv not change the prompt
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 export PYENV_ROOT="$HOME/.pyenv"
-export ZSH="$HOME/.oh-my-zsh"
 export SSH_KEY_PATH="$HOME/.ssh/rsa_id"
 
 # }}}
 
-# location shortcuts {{{
+# location shortcuts{{{
 
+FZF="/usr/share/fzf"
+ZSH_PLUGINS="/usr/share/zsh/plugins"
 SCRIPTDIR="$HOME/.scripts"
-tt="$HOME/school/revision/timetable"
+PROGRAMDIR="$HOME/Programs"
 sd="$SCRIPTDIR"
 ZSH_PLUGINS="/usr/share/zsh/plugins"
 FZF="/usr/share/fzf"
