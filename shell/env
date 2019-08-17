@@ -28,6 +28,8 @@ export SSH_KEY_PATH="$HOME/.ssh/rsa_id"
 SCRIPTDIR="$HOME/.scripts"
 tt="$HOME/school/revision/timetable"
 sd="$SCRIPTDIR"
+ZSH_PLUGINS="/usr/share/zsh/plugins"
+FZF="/usr/share/fzf"
 
 # }}}
 
@@ -38,5 +40,3 @@ PATH="$HOME/.local/bin:$PATH"
 PATH="$PYENV_ROOT/bin:$PATH" 
 PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.poetry/bin:$PATH"
-
-# }}}

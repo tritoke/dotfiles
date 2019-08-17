@@ -1,8 +1,6 @@
 # replace with modern rust based versions
-alias cat=bat
-alias fd='fd -c always -I -H'
+alias fd='fd -IH'
 alias rg='rg --color always'
-alias grep=rg
 
 # use exa instead of ls and tree
 alias exa='exa --colour=always'
@@ -34,3 +32,7 @@ alias z="zathura"
 # make st spawn a terminal in another process and disown the process
 alias st="st & disown"
 alias renew="st && exit"
+
+# I always forget sudo for these commands...
+alias mount='sudo mount'
+alias umount='sudo umount'

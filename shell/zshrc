@@ -1,10 +1,13 @@
-# load prompt first because it is often the slowest part
-# and it makes it feel like the shell loaded faster if
-# you see the prompt sooner
+# environment information
+source ~/.env
+
 # spaceship options {{{
 
+SPACESHIP_ROOT="/usr/lib/spaceship-prompt"
 autoload -U promptinit; promptinit
 prompt spaceship
+
+autoload compinit; compinit
 
 SPACESHIP_PYENV_PREFIX="pyenv:("
 SPACESHIP_PYENV_SUFFIX=") "
@@ -20,14 +23,11 @@ SPACESHIP_BATTERY_THRESHOLD=4
 
 # set emacs mode early so we can overwrite other mappings
 set -o emacs
-# environment information
-source ~/.env
 # general aliases
 source ~/.aliases
 
 # fzf key bindings
 source "$FZF/key-bindings.zsh"
-source "$FZF/completion.zsh"
 
 # zsh syntax highlighting
 source "$ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
@@ -65,15 +65,20 @@ setopt hist_save_no_dups        # Omit older commands in favor of newer ones.
 setopt pushd_ignore_dups        # Dont push copies of the same dir on stack.
 setopt pushd_minus              # Reference stack entries with "-".
 setopt extended_glob
+setopt autopushd
 
 # to deal with control and arrow keys being speccy
-bindkey '^R' fzf-history-widget
+bindkey "^R" fzf-history-widget
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 
+# forward and backward word/char deletion with ctrl-(delete|backspace)
+bindkey "^[[M" kill-word
+bindkey "^[[P" delete-char-or-list
+
 # control up/down does a fuzzy history search
 HISTORY_SUBSTRING_SEARCH_FUZZY=1
-bindkey "^[[1;5A" history-substring-search-up
-bindkey "^[[1;5B" history-substring-search-down
+bindkey "^[[A" history-substring-search-up
+bindkey "^[[B" history-substring-search-down
 
 # }}}

@@ -8,6 +8,12 @@ set showcmd
 set laststatus=0 ruler
 set foldlevel=99 " user has to choose to fold some text
 
+" colourschemes
+" light: https://www.vim.org/scripts/download_script.php?src_id=10153
+" colorscheme summerfruit256
+" dark: https://raw.githubusercontent.com/tomasr/molokai/master/colors/molokai.vim
+colorscheme molokai
+
 " add some space below/above the cursor when scrolling
 set scrolloff=2
 
@@ -45,7 +51,7 @@ set spellfile=~/.vim/spell/en.utf-8.add
 " language specific settings
 
 au Filetype c setlocal cin fdm=syntax
-au Filetype python setlocal ts=4 sw=4 sts=0 tw=79 si fdm=indent 
+au Filetype python setlocal ts=4 sw=4 sts=0 si fdm=indent 
        \ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 au Filetype java setlocal ts=4 sw=4 sts=0 cin fdm=syntax
 au Filetype rust setlocal ts=4 sw=4 sts=0 cin fdm=syntax
