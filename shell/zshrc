@@ -1,16 +1,14 @@
-# environment information
-source ~/.env
+# Make sure the GRML zsh config is installed so that cd is good and other things..
 
+# load prompt first because it is often the slowest part
+# and it makes it feel like the shell loaded faster if
+# you see the prompt sooner
 # spaceship options {{{
-
-SPACESHIP_ROOT="/usr/lib/spaceship-prompt"
 
 autoload -U compinit promptinit
 promptinit
 compinit
 prompt spaceship
-
-autoload compinit; compinit
 
 SPACESHIP_PYENV_PREFIX="pyenv:("
 SPACESHIP_PYENV_SUFFIX=") "
@@ -26,11 +24,15 @@ SPACESHIP_BATTERY_THRESHOLD=4
 
 # set emacs mode early so we can overwrite other mappings
 set -o emacs
+# environment information
+source ~/.env
 # general aliases
 source ~/.aliases
 
 # fzf key bindings
 source "$FZF/key-bindings.zsh"
+
+autoload compinit; compinit
 
 # zsh syntax highlighting
 source "$ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
@@ -55,20 +57,44 @@ HISTFILE=~/.zsh_history
 HISTSIZE=100000
 SAVEHIST=100000
 
-setopt autocd                   # Allow changing directories without `cd`
+# History Options
 setopt append_history           # Dont overwrite history
 setopt extended_history         # Also record time and duration of commands.
 setopt share_history            # Share history between multiple shells
+setopt hist_ignore_space        # prefix a command with space to not add it to history
 setopt hist_expire_dups_first   # Clear duplicates when trimming internal hist.
 setopt hist_find_no_dups        # remove duplicates during searches.
 setopt hist_ignore_dups         # Ignore consecutive duplicates.
 setopt hist_ignore_all_dups     # Remember only one unique copy of the command.
 setopt hist_reduce_blanks       # Remove superfluous blanks.
 setopt hist_save_no_dups        # Omit older commands in favor of newer ones.
+
+# General Behaviour Options
+setopt extended_glob            # allow negated matches: [^a] in globs
+setopt nobeep                   # this is a beep free terminal thank you
+setopt noshwordsplit            # use zsh-style word splitting
+
+# Process Suspension Options
+setopt no_hup                   # allow jobs to be started in the background
+setopt longlistjobs             # display pid when suspending processes
+setopt notify                   # report the status of background jobs immediately
+
+# Changing Directories
+setopt auto_cd                  # Allow changing directories without `cd`
+setopt auto_pushd               # automatically push directories onto the dirstack
 setopt pushd_ignore_dups        # Dont push copies of the same dir on stack.
 setopt pushd_minus              # Reference stack entries with "-".
-setopt extended_glob
-setopt autopushd
+
+# Completion Options
+setopt hash_list_all            # hash the entire command path before attempting completion
+setopt always_to_end            # move to the end of the word after completion
+setopt auto_menu                # get a menu of completion suggestions
+setopt complete_in_word         # tab completion from inside words
+unsetopt menu_complete          # make sure the completion menu can be shown
+
+# }}}
+
+# key bindings {{{
 
 # use ctrl-v then the key combination to get weird symbols
 bindkey '^R' fzf-history-widget
@@ -76,8 +102,8 @@ bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 
 # ctrl backspace and delete for deleting words forward and back
-bindkey "^H" backward-kill-word
-bindkey "^[[M" kill-word
+bindkey "^[[M" delete-word
+bindkey "^[[P" delete-char-or-list
 
 # control up/down does a fuzzy history search
 HISTORY_SUBSTRING_SEARCH_FUZZY=1

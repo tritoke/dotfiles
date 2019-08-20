@@ -1,6 +1,8 @@
 # replace with modern rust based versions
 alias fd='fd -IH'
-alias rg='rg --color always 2>/dev/null'
+alias grep='grep --color=auto'
+alias rg='rg --color=always 2>/dev/null'
+alias h=tldr
 
 # use exa instead of ls and tree
 alias ls=exa
@@ -28,10 +30,14 @@ alias ........='cd ../../../../../../..'
 # application shortcuts
 alias z="zathura"
 
-# make st spawn a terminal in another process and disown the process
-alias st="st & disown"
-alias renew="st && exit"
-
-# I always forget sudo for these commands...
+# I always forget to sudo these
 alias mount='sudo mount'
 alias umount='sudo umount'
+
+# some commands for spawning new terminals from the current directory
+alias new="st &!"
+alias renew="st &! exit"
+
+# make gdbserver work by just running gdbserver2
+SOFILE='/home/tritoke/Programs/gdbserver2/lib/libri5cy-gdbserver-target.so'
+alias gdbserver2="noname-gdbserver --soname $SOFILE --rsp-port 12345"
