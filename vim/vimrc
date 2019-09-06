@@ -5,7 +5,6 @@ set fileformat=unix
 set showcmd
 set laststatus=0 ruler
 set foldlevel=99
-set nowrap " wrapping is ugly
 
 " colourschemes
 " light: https://www.vim.org/scripts/download_script.php?src_id=10153

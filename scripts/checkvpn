@@ -4,7 +4,7 @@
 # though this does not disable in /var/log/vpn.log
 
 # direct stderr to stdout so we can grep for name resolution failure
-PINGRES=`ping -c 2 google.com 2>&1` 
+PINGRES=`ping -c 2 archlinux.org 2>&1` 
 
 # loss checks for packet loss
 LOSS=`echo $PINGRES | grep -oP '\d+(?=% packet loss)'`

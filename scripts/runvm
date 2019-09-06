@@ -1,5 +1,7 @@
 #!/bin/sh
 
+alias echo='echo -e'
+
 run() {
   BASEPATH=$1
   DISKFILE=$2
@@ -94,3 +96,5 @@ main() {
 }
 
 main
+
+unalias echo

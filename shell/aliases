@@ -37,7 +37,3 @@ alias umount='sudo umount'
 # some commands for spawning new terminals from the current directory
 alias new="st &!"
 alias renew="st &! exit"
-
-# make gdbserver work by just running gdbserver2
-SOFILE='/home/tritoke/Programs/gdbserver2/lib/libri5cy-gdbserver-target.so'
-alias gdbserver2="noname-gdbserver --soname $SOFILE --rsp-port 12345"

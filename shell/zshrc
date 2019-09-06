@@ -107,7 +107,7 @@ bindkey "^[[P" delete-char-or-list
 
 # control up/down does a fuzzy history search
 HISTORY_SUBSTRING_SEARCH_FUZZY=1
-bindkey "^[[A" history-substring-search-up
-bindkey "^[[B" history-substring-search-down
+bindkey "^[OA" history-substring-search-up
+bindkey "^[OB" history-substring-search-down
 
 # }}}
