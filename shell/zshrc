@@ -102,12 +102,14 @@ bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 
 # ctrl backspace and delete for deleting words forward and back
-bindkey "^[[M" delete-word
+bindkey "^[[3;5~" delete-word
 bindkey "^[[P" delete-char-or-list
 
 # control up/down does a fuzzy history search
 HISTORY_SUBSTRING_SEARCH_FUZZY=1
+bindkey "^[[A" history-substring-search-up
+bindkey "^[[B" history-substring-search-down
+# for some reason my terminal likes to switch between these codes for up and down
 bindkey "^[OA" history-substring-search-up
 bindkey "^[OB" history-substring-search-down
-
 # }}}
