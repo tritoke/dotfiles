@@ -5,7 +5,7 @@ set fileformat=unix
 set showcmd
 set laststatus=0 ruler
 set foldlevel=99
-set nowrap " wrapping is ugly
+set mouse="" " the mouse is annoying
 
 " colourschemes
 " light: https://www.vim.org/scripts/download_script.php?src_id=10153
@@ -25,7 +25,6 @@ set bs=indent,eol,start
 " don't redraw while doing macros (super speedy bois)
 set lazyredraw
 
-
 " highight a badly spelt word red
 highlight clear SpellBad
 highlight SpellBad ctermbg=Red 
@@ -34,6 +33,10 @@ highlight SpellCap ctermbg=DarkGrey
 " highlighting for folds
 highlight clear Folded
 highlight Folded guifg=Black
+
+" styling for the vertical spliters - use unicode vertical bar
+set fillchars+=vert:│
+
 
 " highlight .md files
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
@@ -54,12 +57,15 @@ autocmd Filetype python setlocal ts=4 sw=4 sts=0 si fdm=indent
        \ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 autocmd Filetype java setlocal ts=4 sw=4 sts=0 cin fdm=syntax
 autocmd Filetype rust setlocal ts=4 sw=4 sts=0 cin fdm=syntax
-autocmd Filetype asm setlocal ts=4 sw=4 sts=0 ft=nasm
+autocmd Filetype asm setlocal ts=4 sw=4 sts=0 fdm=indent 
 autocmd FileType bib setlocal ts=6 sw=6 sts=0
 autocmd FileType markdown setlocal ts=4 sw=4 sts=0 noai spell
 autocmd FileType rmd,plaintex,mail setlocal spell
-autocmd FileType make setlocal noet
+autocmd FileType make setlocal noet fdm=indent
 autocmd FileType email setlocal tw=72
+autocmd FileType zsh,bash,vim setlocal fdm=marker
+autocmd FileType verilog,systemverilog setlocal si fdm=indent nowrap
+      \ cinwords=module,begin,function,task
 
 " search settings
 set incsearch  " start searching as you type

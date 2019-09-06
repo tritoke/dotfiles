@@ -39,5 +39,9 @@ alias new="st &!"
 alias renew="st &! exit"
 
 # make gdbserver work by just running gdbserver2
-SOFILE='/home/tritoke/Programs/gdbserver2/lib/libri5cy-gdbserver-target.so'
+# SOFILE='/home/tritoke/Programs/gdbserver2/lib/libnoname-target-ri5cy.so'
+SOFILE='/home/tritoke/Programs/gdbserver2/lib/libnoname-target-ri5cy.so'
 alias gdbserver2="noname-gdbserver --soname $SOFILE --rsp-port 12345"
+
+# made gtkwave direct all output to dev null
+alias gtkwave="gtkwave > /dev/null 2>&1"

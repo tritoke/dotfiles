@@ -1,9 +1,3 @@
-# locations of things used in scripts {{{
-
-source ~/.scriptvars
-
-# }}}
-
 # global variables {{{
 
 # set locale
@@ -17,10 +11,8 @@ export EDITOR='vim'
 
 export SSH_KEY_PATH="$HOME/.ssh/rsa_id"
 
-# make pyenv not change the prompt
-export PYENV_VIRTUALENV_DISABLE_PROMPT=1
-export PYENV_ROOT="$HOME/.pyenv"
-export SSH_KEY_PATH="$HOME/.ssh/rsa_id"
+export PKG_CONFIG_PATH="/home/tritoke/Programs/verilator/share/pkgconfig"
+export RISCV="/home/tritoke/Work/tools/scarv/riscv-tools/riscv-gnu-toolchain"
 
 # }}}
 
@@ -31,15 +23,13 @@ ZSH_PLUGINS="/usr/share/zsh/plugins"
 SCRIPTDIR="$HOME/.scripts"
 PROGRAMDIR="$HOME/Programs"
 sd="$SCRIPTDIR"
-ZSH_PLUGINS="/usr/share/zsh/plugins"
-FZF="/usr/share/fzf"
 
 # }}}
 
 # PATH changes {{{
 
 PATH="$SCRIPTDIR:$PATH"
-PATH="$HOME/.local/bin:$PATH"
-PATH="$PYENV_ROOT/bin:$PATH" 
-PATH="$HOME/.cargo/bin:$PATH"
-export PATH="$HOME/.poetry/bin:$PATH"
+PATH="$PROGRAMDIR/riscv/bin:$PATH"
+export PATH="$PROGRAMDIR/gdbserver2/bin:$PATH"
+
+# }}}
