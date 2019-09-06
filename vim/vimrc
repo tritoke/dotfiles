@@ -7,6 +7,10 @@ set laststatus=0 ruler
 set foldlevel=99
 set mouse="" " the mouse is annoying
 
+" Text wrapping options.
+set linebreak " wrap words at word boundaries instead of at at characters
+set showbreak=…
+
 " colourschemes
 " light: https://www.vim.org/scripts/download_script.php?src_id=10153
 " colorscheme summerfruit256
