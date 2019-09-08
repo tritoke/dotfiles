@@ -52,7 +52,7 @@ dmenuinstall() {
 
 if xset q &>/dev/null
 then
-  if command -v dmenu
+  if command -v dmenu &>/dev/null
   then
     installer=dmenuinstall
     bginstall="yes"
