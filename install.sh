@@ -18,14 +18,14 @@ cmdinstall() {
 	echo -n $message
 	read CHOICE
 	case CHOICE in
-		"y" )        ;;
-		"Y" )        ;;
-		*   ) return ;;
+		"y"   )        ;;
+		"Y"   )        ;;
+		"yes" )        ;;
+		"Yes" )        ;;
+		*     ) return ;;
 	esac
 
-	[ -e "$location/$name" ] && rm "$location/$name"
-	readlink -q "$location/$name" >/dev/null && rm "$location/$name"
-	ln -s "$PWD/$file" "$location/$name"
+	ln -sf "$PWD/$file" "$location/$name"
 }
 
 dmenuinstall() {
@@ -43,20 +43,24 @@ dmenuinstall() {
 		message="Do you want to install $name?"
 	fi
 
-	replace=$(echo "yes\nno" | dmenu -p "$message")
+	replace=$(echo -e "yes\nno\nexit" | dmenu -p "$message")
+  [ "$replace" = "exit" ] && exit 
 	[ "$replace" != "yes" ] && return
 
-	[ -e "$location/$name" ] && rm "$location/$name"
-	readlink -q "$location/$name" >/dev/null && rm "$location/$name"
-	ln -s "$PWD/$file" "$location/$name"
+	ln -sf "$PWD/$file" "$location/$name"
 }
 
-if command -v dmenu
+if xset q &>/dev/null
 then
-	installer=dmenuinstall
-	bginstall="yes"
+  if command -v dmenu
+  then
+    installer=dmenuinstall
+    bginstall="yes"
+  else
+    installer=cmdinstall
+  fi
 else
-	installer=cmdinstall
+  installer=cmdinstall
 fi
 
 for file in shell/*
@@ -65,4 +69,13 @@ done
 $installer 'xinitrc'
 $installer 'vim/vimrc'
 $installer 'vim/init.vim' "$HOME/.config/nvim" 'yes'
-[ "$bginstall" = "yes" ] && feh --bg-fill "$PWD/backgrounds/$(ls backgrounds | sort | dmenu -p "choose background: " -l 30)"
+
+if [ "$bginstall" = "yes" ] 
+then
+  while [ "$again" != "no" ]
+  do
+      background="$PWD/backgrounds/"$(ls backgrounds | sort | dmenu -p 'choose background: ' -l 30)
+      feh --bg-fill "$background"
+      again=$(echo -e 'yes\nno' | dmenu -p "Choose a different background? ")
+  done
+fi
