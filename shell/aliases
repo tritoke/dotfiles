@@ -1,7 +1,7 @@
 # replace with modern rust based versions
 alias fd='fd -IH'
 alias grep='grep --color=auto'
-alias rg='rg --color=always 2>/dev/null'
+alias rg='rg -i --color=always 2>/dev/null'
 alias h=tldr
 
 # use exa instead of ls and tree

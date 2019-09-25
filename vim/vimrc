@@ -9,13 +9,17 @@ set mouse="" " the mouse is annoying
 
 " Text wrapping options.
 set linebreak " wrap words at word boundaries instead of at at characters
-set showbreak=…
+set showbreak=… " show a unicode elipsis at the start of every wrapped line
 
 " colourschemes
-" light: https://www.vim.org/scripts/download_script.php?src_id=10153
-" colorscheme summerfruit256
-" dark: https://raw.githubusercontent.com/tomasr/molokai/master/colors/molokai.vim
-colorscheme molokai
+if 1
+  " dark: https://raw.githubusercontent.com/tomasr/molokai/master/colors/molokai.vim
+  colorscheme molokai
+else
+  " light: https://www.vim.org/scripts/download_script.php?src_id=10153
+  colorscheme summerfruit256
+  set cul
+endif
 
 " add some space below/above the cursor when scrolling
 set scrolloff=2
@@ -56,20 +60,23 @@ set spellfile=~/.vim/spell/en.utf-8.add
 
 " language specific settings
 
-autocmd Filetype c,cpp setlocal cin fdm=syntax
-autocmd Filetype python setlocal ts=4 sw=4 sts=0 si fdm=indent 
-       \ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
-autocmd Filetype java setlocal ts=4 sw=4 sts=0 cin fdm=syntax
-autocmd Filetype rust setlocal ts=4 sw=4 sts=0 cin fdm=syntax
-autocmd Filetype asm setlocal ts=4 sw=4 sts=0 fdm=indent 
-autocmd FileType bib setlocal ts=6 sw=6 sts=0
-autocmd FileType markdown setlocal ts=4 sw=4 sts=0 noai spell
-autocmd FileType rmd,plaintex,mail setlocal spell
-autocmd FileType make setlocal noet fdm=indent
-autocmd FileType email setlocal tw=72
-autocmd FileType zsh,bash,vim setlocal fdm=marker
-autocmd FileType verilog,systemverilog setlocal si fdm=indent nowrap
-      \ cinwords=module,begin,function,task
+augroup language_settings
+  autocmd!
+  autocmd Filetype c,cpp setlocal cin fdm=syntax
+  autocmd Filetype python setlocal ts=4 sw=4 sts=0 si fdm=indent 
+         \ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
+  autocmd Filetype java setlocal ts=4 sw=4 sts=0 cin fdm=syntax
+  autocmd Filetype rust setlocal ts=4 sw=4 sts=0 cin fdm=syntax
+  autocmd Filetype asm setlocal ts=4 sw=4 sts=0 fdm=indent 
+  autocmd FileType bib setlocal ts=6 sw=6 sts=0
+  autocmd FileType markdown setlocal ts=4 sw=4 sts=0 noai spell
+  autocmd FileType rmd,plaintex,mail setlocal spell
+  autocmd FileType make setlocal noet fdm=indent
+  autocmd FileType email setlocal tw=72
+  autocmd FileType zsh,bash,vim setlocal fdm=marker
+  autocmd FileType verilog,systemverilog setlocal si fdm=indent nowrap
+        \ cinwords=module,begin,function,task
+augroup END
 
 " search settings
 set incsearch  " start searching as you type
@@ -83,29 +90,31 @@ set splitbelow splitright
 
 " Keyboard Shortcuts and remaps {{{
 " remapping arrow keys and pageup/down
-" normal mode
-nnoremap <Up> <Nop>
-nnoremap <Down> <Nop>
-nnoremap <Left> <Nop>
-nnoremap <Right> <Nop>
-nnoremap <PageUp> <Nop>
-nnoremap <PageDown> <Nop>
+if 1
+  " normal mode
+  nnoremap <Up> <Nop>
+  nnoremap <Down> <Nop>
+  nnoremap <Left> <Nop>
+  nnoremap <Right> <Nop>
+  nnoremap <PageUp> <Nop>
+  nnoremap <PageDown> <Nop>
 
-" insert mode
-inoremap <Up> <Nop>
-inoremap <Down> <Nop>
-inoremap <Left> <Nop>
-inoremap <Right> <Nop>
-inoremap <PageUp> <Nop>
-inoremap <PageDown> <Nop>
+  " insert mode
+  inoremap <Up> <Nop>
+  inoremap <Down> <Nop>
+  inoremap <Left> <Nop>
+  inoremap <Right> <Nop>
+  inoremap <PageUp> <Nop>
+  inoremap <PageDown> <Nop>
 
-" visual mode
-vnoremap <Up> <Nop>
-vnoremap <Down> <Nop>
-vnoremap <Left> <Nop>
-vnoremap <Right> <Nop>
-vnoremap <PageUp> <Nop>
-vnoremap <PageDown> <Nop>
+  " visual mode
+  vnoremap <Up> <Nop>
+  vnoremap <Down> <Nop>
+  vnoremap <Left> <Nop>
+  vnoremap <Right> <Nop>
+  vnoremap <PageUp> <Nop>
+  vnoremap <PageDown> <Nop>
+endif
 
 "map F1 to escape
 nnoremap <F1> <Esc>
@@ -145,11 +154,14 @@ nnoremap <leader>t :!st&disown<CR><CR>
 " search can be toggled
 nnoremap <silent><expr> <Leader>h (&hls && v:hlsearch ? ':nohls' : ':set hls')."\n"
 
-" shortcut automatically making a PDF in each of RMarkdown, Markdown
-autocmd FileType tex nnoremap <leader>p :!latexrun %<CR>
-autocmd FileType markdown map <leader>p :!pandoc % -s -o "%:r".pdf<CR>
-autocmd FileType rmd map <leader>p :!echo<space>"rmarkdown::render('<c-r>%')"<space>\|<space>R<space>--vanilla<CR>
-autocmd FileType rnd,markdown,tex nnoremap <leader>v :!zathura "%:r".pdf & disown<CR><CR>
+" shortcut automatically making a PDF in each of RMarkdown, Markdown and LaTeX
+augroup pdf_mappings
+  autocmd!
+  autocmd FileType tex nnoremap <leader>p :!latexrun %<CR>
+  autocmd FileType markdown map <leader>p :!pandoc % -s -o "%:r".pdf<CR>
+  autocmd FileType rmd map <leader>p :!echo<space>"rmarkdown::render('<c-r>%')"<space>\|<space>R<space>--vanilla<CR>
+  autocmd FileType rnd,markdown,tex nnoremap <leader>v :!zathura "%:r".pdf & disown<CR><CR>
+augroup END
 
 " }}}
 
@@ -160,7 +172,8 @@ set undodir=/tmp/tritoke/vim_undo
 set undofile
 
 " Jump to last location when file is opened
-if has("autocmd")
-  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-endif
+augroup jump_to_previous
+  autocmd!
+  autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+augroup END
 " }}}

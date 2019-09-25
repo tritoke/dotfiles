@@ -1,12 +1,9 @@
 # Make sure the GRML zsh config is installed so that cd is good and other things..
 
-# load prompt first because it is often the slowest part
-# and it makes it feel like the shell loaded faster if
-# you see the prompt sooner
 # spaceship options {{{
-
+# load completion and prompt
 autoload -U compinit promptinit
-promptinit
+promptinit  
 compinit
 prompt spaceship
 
@@ -16,30 +13,9 @@ SPACESHIP_PYENV_SUFFIX=") "
 SPACESHIP_VENV_PREFIX="venv:("
 SPACESHIP_VENV_SUFFIX=") "
 
-SPACESHIP_BATTERY_THRESHOLD=4
+SPACESHIP_BATTERY_THRESHOLD=4 
 
-# }}}
-
-#  sourcing {{{
-
-# set emacs mode early so we can overwrite other mappings
-set -o emacs
-# environment information
-source ~/.env
-# general aliases
-source ~/.aliases
-
-# fzf key bindings
-source "$FZF/key-bindings.zsh"
-
-autoload compinit; compinit
-
-# zsh syntax highlighting
-source "$ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-# zsh autosuggestions
-source "$ZSH_PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh"
-# zsh history substring search
-source "$ZSH_PLUGINS/zsh-history-substring-search/zsh-history-substring-search.zsh"
+SPACESHIP_VI_MODE_SHOW=false
 
 # }}}
 
@@ -91,6 +67,83 @@ setopt always_to_end            # move to the end of the word after completion
 setopt auto_menu                # get a menu of completion suggestions
 setopt complete_in_word         # tab completion from inside words
 unsetopt menu_complete          # make sure the completion menu can be shown
+
+# }}}
+
+# sourcing {{{
+
+# environment information
+source ~/.env
+# general aliases
+source ~/.aliases
+
+# fzf key bindings
+source "$FZF/key-bindings.zsh"
+
+# zsh syntax highlighting
+source "$ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+# zsh autosuggestions
+source "$ZSH_PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh"
+# zsh history substring search
+source "$ZSH_PLUGINS/zsh-history-substring-search/zsh-history-substring-search.zsh"
+
+# }}}
+
+# vi mode {{{
+
+bindkey -v
+export KEYTIMEOUT=1 
+
+# vi keys in tab complete menu
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -v '^?' backward-delete-char
+
+# change cursor shape for different modes
+function zle-keymap-select {
+  if [[ ${KEYMAP} == vicmd ]] ||
+     [[ $1 = 'block' ]]; then
+    echo -ne '\e[1 q'
+  elif [[ ${KEYMAP} == main ]] ||
+       [[ ${KEYMAP} == viins ]] ||
+       [[ ${KEYMAP} == '' ]] ||
+       [[ $1 == 'beam' ]]; then
+    echo -ne '\e[5 q'
+  fi
+}
+zle -N zle-keymap-select
+zle-line-init() {
+  zle -K viins # go to vi insert mode
+  echo -ne '\e[5 q' # use beam cursor for new prompts
+}
+zle -N zle-line-init
+echo -ne '\e[5 q' # use beam cursor on startup
+preexec() { echo -ne '\e[1 q' ; } 
+
+# Edit line in vim with ctrl-e
+autoload edit-command-line
+zle -N edit-command-line
+bindkey '^e' edit-command-line
+
+# ci"
+autoload -U select-quoted
+zle -N select-quoted
+for m in visual viopp; do
+  for c in {a,i}{\',\",\`}; do
+    bindkey -M $m $c select-quoted
+  done
+done
+
+# ci{, ci(, di{ etc..
+autoload -U select-bracketed
+zle -N select-bracketed
+for m in visual viopp; do
+  for c in {a,i}${(s..)^:-'()[]{}<>bB'}; do
+    bindkey -M $m $c select-bracketed
+  done
+done
 
 # }}}
 
