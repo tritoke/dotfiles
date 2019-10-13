@@ -162,7 +162,4 @@ bindkey "^[[P" delete-char-or-list
 HISTORY_SUBSTRING_SEARCH_FUZZY=1
 bindkey "^[[A" history-substring-search-up
 bindkey "^[[B" history-substring-search-down
-# for some reason my terminal likes to switch between these codes for up and down
-bindkey "^[OA" history-substring-search-up
-bindkey "^[OB" history-substring-search-down
 # }}}
