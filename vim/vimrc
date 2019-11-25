@@ -7,6 +7,7 @@ set laststatus=0 ruler
 set foldlevel=99
 set mouse="" " the mouse is annoying
 
+
 " Text wrapping options.
 set linebreak " wrap words at word boundaries instead of at at characters
 set showbreak=… " show a unicode elipsis at the start of every wrapped line
@@ -45,7 +46,6 @@ highlight Folded guifg=Black
 " styling for the vertical spliters - use unicode vertical bar
 set fillchars+=vert:│
 
-
 " highlight .md files
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
@@ -62,12 +62,12 @@ set spellfile=~/.vim/spell/en.utf-8.add
 
 augroup language_settings
   autocmd!
-  autocmd Filetype c,cpp setlocal cin fdm=syntax
+  autocmd Filetype tex setlocal spell
+  autocmd Filetype php,c,cpp,java setlocal cin fdm=syntax
   autocmd Filetype python setlocal ts=4 sw=4 sts=0 si fdm=indent 
          \ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
-  autocmd Filetype java setlocal ts=4 sw=4 sts=0 cin fdm=syntax
   autocmd Filetype rust setlocal ts=4 sw=4 sts=0 cin fdm=syntax
-  autocmd Filetype asm setlocal ts=4 sw=4 sts=0 fdm=indent 
+  autocmd Filetype asm setlocal ts=8 sw=8 sts=0 fdm=indent noet
   autocmd FileType bib setlocal ts=6 sw=6 sts=0
   autocmd FileType markdown setlocal ts=4 sw=4 sts=0 noai spell
   autocmd FileType rmd,plaintex,mail setlocal spell
@@ -154,13 +154,17 @@ nnoremap <leader>t :!st&disown<CR><CR>
 " search can be toggled
 nnoremap <silent><expr> <Leader>h (&hls && v:hlsearch ? ':nohls' : ':set hls')."\n"
 
+" toggle paste mode on / off
+nnoremap <silent><expr> <Leader>v (&paste ? ':set nopaste' : ':set paste')."\n"
+
 " shortcut automatically making a PDF in each of RMarkdown, Markdown and LaTeX
 augroup pdf_mappings
   autocmd!
+  autocmd FileType tex nnoremap <leader>w :!detex % \| wc -w<CR>
   autocmd FileType tex nnoremap <leader>p :!latexrun %<CR>
-  autocmd FileType markdown map <leader>p :!pandoc % -s -o "%:r".pdf<CR>
-  autocmd FileType rmd map <leader>p :!echo<space>"rmarkdown::render('<c-r>%')"<space>\|<space>R<space>--vanilla<CR>
-  autocmd FileType rnd,markdown,tex nnoremap <leader>v :!zathura "%:r".pdf & disown<CR><CR>
+  autocmd FileType markdown nnoremap <leader>p :!pandoc % -s -o "%:r".pdf<CR>
+  autocmd FileType rmd nnoremap <leader>p :!echo "rmarkdown::render('<c-r>%', rmarkdown::pdf_document())" \| R --vanilla<CR>
+  autocmd FileType rmd,markdown,tex nnoremap <leader>v :!zathura "%:r".pdf & disown<CR><CR>
 augroup END
 
 " }}}

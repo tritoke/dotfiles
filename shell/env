@@ -4,6 +4,9 @@
 export LANG="en_GB.UTF-8"
 export LC_ALL="en_GB.UTF-8" 
 
+# tell java where it lives
+export JAVA_HOME="/usr/lib/jvm/default"
+
 # makes mouse less jittery in kvm virtual machines
 export SDL_VIDEO_X11_DGAMOUSE=0
 
