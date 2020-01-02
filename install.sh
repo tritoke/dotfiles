@@ -69,6 +69,7 @@ done
 $installer 'xinitrc'
 $installer 'vim/vimrc'
 $installer 'vim/init.vim' "$HOME/.config/nvim" 'yes'
+$installer 'dunstrc' "$HOME/.config/dunst" 'yes'
 
 if [ "$bginstall" = "yes" ] 
 then
