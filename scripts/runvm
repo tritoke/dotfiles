@@ -15,14 +15,14 @@ run() {
   DRIVE="file=$BASEPATH/$DISKFILE,format=$DISKFORMAT"
   if [ "$USB_VENDORID" = "" ]
   then
-    qemu-system-x86_64 -enable-kvm -cpu host -smp 8 -drive "$DRIVE" -m "$MEMORY" &
+    qemu-system-x86_64 -enable-kvm -cpu host -smp 8 -usb -usbdevice tablet -drive "$DRIVE" -m "$MEMORY" &
   else
     echo "Passing through USB with vendorid=$USB_VENDORID and productid=$USB_PRODUCTID"
     echo "\nUDEV rule in case of permissions error:"
     echo "SUBSYSTEM==\"usb\", ATTR{idVendor}==\""$(echo $USB_VENDORID | cut -d 'x' -f 2)"\", ATTR{idProduct}==\""$(echo $USB_PRODUCTID | cut -d 'x' -f 2)"\", MODE=\"0666\""
     echo "\nPlace in /etc/udev/rules.d/<rulename>.rules"
     DEVICE="usb-host,bus=xhci.0,vendorid=$USB_VENDORID,productid=$USB_PRODUCTID"
-    qemu-system-x86_64 -enable-kvm -cpu host -smp 8 -drive "$DRIVE" -m "$MEMORY" -device nec-usb-xhci,id=xhci -device "$DEVICE" &
+    qemu-system-x86_64 -enable-kvm -cpu host -smp 8 -usb -usbdevice tablet -drive "$DRIVE" -m "$MEMORY" -device nec-usb-xhci,id=xhci -device "$DEVICE" &
   fi
 }
 
