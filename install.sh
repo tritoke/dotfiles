@@ -17,7 +17,7 @@ cmdinstall() {
 
 	echo -n $message
 	read CHOICE
-	case CHOICE in
+	case $CHOICE in
 		"y"   )        ;;
 		"Y"   )        ;;
 		"yes" )        ;;
