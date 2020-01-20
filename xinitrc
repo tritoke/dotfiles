@@ -18,8 +18,15 @@ case $WM in
   'xfce' ) 
     exec startxfce4
   ;;
-  'kde'  )
+  'kde' )
     exec startplasma-x11
+  ;;
+  'testing' ) # start the most recently made version of DWM
+    wmname LG3D
+    ~/.fehbg
+    slstatus 2>/dev/null &
+    dunst 2>/dev/null &
+    exec $HOME/.builds/dwm/dwm
   ;;
   * ) # start default WM - DWM
     wmname LG3D                           # sort out issues with JVM apps assuming a reparenting WM

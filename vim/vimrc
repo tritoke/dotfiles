@@ -4,12 +4,17 @@ set encoding=utf-8
 set fileformat=unix
 set showcmd
 set laststatus=0 ruler
-set foldlevel=99
-set foldnestmax=2
+set foldlevel=99 " don't fold anything when opening the file
+set foldnestmax=2 " don't fold more than 2 levels deep
 syn sync fromstart " make highlighting work properly?
 syn sync minlines=10000
 set mouse="" " the mouse is annoying
+set lazyredraw " don't redraw while doing macros (super speedy bois)
 
+if has('nvim')
+  set inccommand=nosplit " when substituting show the substition while typing
+  set runtimepath+=~/.vim " also look in ~/.vim for colorschemes and the like
+endif
 
 " Text wrapping options.
 set linebreak " wrap words at word boundaries instead of at at characters
@@ -44,9 +49,6 @@ set nocompatible
 " backspace over all the things
 set bs=indent,eol,start
 
-" don't redraw while doing macros (super speedy bois)
-set lazyredraw
-
 " highight a badly spelt word red
 highlight clear SpellBad
 highlight SpellBad ctermbg=Red 
@@ -77,6 +79,7 @@ augroup language_settings
   autocmd!
   autocmd Filetype tex setlocal spell
   autocmd Filetype php,c,cpp,java setlocal cin fdm=syntax
+  autocmd Filetype c setlocal noet " this is because of the suckless style guide
   autocmd Filetype python setlocal ts=4 sw=4 sts=0 si fdm=indent 
          \ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
   autocmd Filetype rust setlocal ts=4 sw=4 sts=0 cin fdm=syntax
@@ -160,7 +163,7 @@ imap <C-v> <ESC>"+pa
 
 " random leader commands
 nnoremap <leader>n /<++><CR>ca<
-nnoremap <leader>t :!st&disown<CR><CR>
+nnoremap <leader>t :!nohup st&>/dev/null&\!<CR><CR>
 
 " awesome line to toggle highlighting after a search but only until the next
 " one so each consecutive search will be highlighted but only the current

@@ -1,4 +1,5 @@
-# replace with modern rust based versions
+# vim: ft=sh
+# set global options
 alias fd='fd -IH'
 alias grep='grep --color=auto'
 alias rg='rg -i --color=always 2>/dev/null'
@@ -29,6 +30,10 @@ alias ........='cd ../../../../../../..'
 
 # application shortcuts
 alias z="zathura"
+alias vim="nvim -u ~/.vimrc"
+
+# enable viewing of svgs via rsvg-convert
+alias feh_svg='function (){ rsvg-convert $1 | feh - }'
 
 # I always forget to sudo these
 alias mount='sudo mount'
