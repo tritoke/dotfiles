@@ -10,7 +10,13 @@ export JAVA_HOME="/usr/lib/jvm/default"
 # makes mouse less jittery in kvm virtual machines
 export SDL_VIDEO_X11_DGAMOUSE=0
 
-export EDITOR='vim'
+# use the correct va-api driver
+export LIBVA_DRIVER_NAME="iHD"
+
+# use the correct vdpau driver
+export VDPAU_DRIVER="va_gl"
+
+export EDITOR="vim"
 
 export SSH_KEY_PATH="$HOME/.ssh/rsa_id"
 

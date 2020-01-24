@@ -10,6 +10,7 @@ syn sync fromstart " make highlighting work properly?
 syn sync minlines=10000
 set mouse="" " the mouse is annoying
 set lazyredraw " don't redraw while doing macros (super speedy bois)
+set omnifunc=syntaxcomplete#Complete " enable omnicompletion
 
 if has('nvim')
   set inccommand=nosplit " when substituting show the substition while typing
@@ -63,6 +64,7 @@ set fillchars+=vert:│
 
 " highlight .md files
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+autocmd BufNewFile,BufReadPost *.h set filetype=c
 
 " indentation settings
 set autoindent " keep the current level of indentation when you go to a newline, e.g. with o
@@ -89,7 +91,8 @@ augroup language_settings
   autocmd FileType rmd,plaintex,mail setlocal spell
   autocmd FileType make setlocal noet fdm=indent
   autocmd FileType email setlocal tw=72
-  autocmd FileType zsh,bash,vim setlocal fdm=marker
+  autocmd FileType vim setlocal fdm=marker
+  autocmd FileType sh,bash,zsh setlocal fdm=indent
   autocmd FileType verilog,systemverilog setlocal si fdm=indent nowrap
         \ cinwords=module,begin,function,task
 augroup END

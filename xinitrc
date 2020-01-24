@@ -1,6 +1,6 @@
 # vim: ft=sh
-primary=$(xrandr | grep primary | cut -d ' ' -f 1)
-screens=$(xrandr | egrep -v "(dis|primary)" | grep connect | cut -d ' ' -f 1)
+primary=$(xrandr | pcregrep -o1 '(\S+) connected primary')
+screens=$(xrandr | pcregrep -o1 '(\S+) connected (^primary)')
 for screen in $screens
 do
   xrandr --output $screen --auto --right-of $primary

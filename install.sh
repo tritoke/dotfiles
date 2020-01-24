@@ -18,10 +18,8 @@ cmdinstall() {
 	echo -n $message
 	read CHOICE
 	case $CHOICE in
-		"y"   )        ;;
-		"Y"   )        ;;
-		"yes" )        ;;
-		"Yes" )        ;;
+		y*    )        ;;
+		Y*    )        ;;
 		*     ) return ;;
 	esac
 
@@ -43,16 +41,16 @@ dmenuinstall() {
 		message="Do you want to install $name?"
 	fi
 
-	replace=$(echo -e "yes\nno\nexit" | dmenu -p "$message")
+	replace=$(echo "yes\nno\nexit" | dmenu -p "$message")
   [ "$replace" = "exit" ] && exit 
 	[ "$replace" != "yes" ] && return
 
 	ln -sf "$PWD/$file" "$location/$name"
 }
 
-if xset q &>/dev/null
+if xset q 2>&1 >/dev/null
 then
-  if command -v dmenu &>/dev/null
+  if command -v dmenu 2>&1 >/dev/null
   then
     installer=dmenuinstall
     bginstall="yes"
@@ -77,6 +75,6 @@ then
   do
       background="$PWD/backgrounds/"$(ls backgrounds | sort | dmenu -p 'choose background: ' -l 30)
       feh --bg-fill "$background"
-      again=$(echo -e 'yes\nno' | dmenu -p "Choose a different background? ")
+      again=$(echo 'yes\nno' | dmenu -p "Choose a different background? ")
   done
 fi
