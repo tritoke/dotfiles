@@ -79,13 +79,13 @@ set spellfile=~/.vim/spell/en.utf-8.add
 
 augroup language_settings
   autocmd!
-  autocmd Filetype tex setlocal spell
-  autocmd Filetype php,c,cpp,java setlocal cin fdm=syntax
-  autocmd Filetype c setlocal noet " this is because of the suckless style guide
-  autocmd Filetype python setlocal ts=4 sw=4 sts=0 si fdm=indent 
-         \ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
-  autocmd Filetype rust setlocal ts=4 sw=4 sts=0 cin fdm=syntax
-  autocmd Filetype asm setlocal ts=8 sw=8 sts=0 fdm=indent noet
+  autocmd FileType php setlocal cin fdm=syntax
+  autocmd FileType c,cpp,java setlocal cin fdm=syntax noet 
+  autocmd FileType java setlocal foldnestmax=4
+  autocmd FileType python setlocal ts=4 sw=4 sts=0 si fdm=indent 
+  autocmd FileType rust setlocal ts=4 sw=4 sts=0 cin fdm=syntax
+  autocmd FileType html setlocal ts=4 sw=4 sts=0
+  autocmd FileType asm,conf setlocal ts=8 sw=8 sts=0 fdm=indent noet
   autocmd FileType bib setlocal ts=6 sw=6 sts=0
   autocmd FileType markdown setlocal ts=4 sw=4 sts=0 noai spell
   autocmd FileType rmd,plaintex,mail setlocal spell
@@ -95,6 +95,7 @@ augroup language_settings
   autocmd FileType sh,bash,zsh setlocal fdm=indent
   autocmd FileType verilog,systemverilog setlocal si fdm=indent nowrap
         \ cinwords=module,begin,function,task
+  autocmd FileType tex setlocal spell
 augroup END
 
 " search settings
@@ -181,7 +182,7 @@ augroup pdf_mappings
   autocmd!
   autocmd FileType tex nnoremap <leader>w :!detex % \| wc -w<CR>
   autocmd FileType tex nnoremap <leader>p :!latexrun %<CR>
-  autocmd FileType markdown nnoremap <leader>p :!pandoc % -s -o "%:r".pdf<CR>
+  autocmd FileType markdown nnoremap <leader>p :!pandoc --variable monofont="JetBrains Mono Medium" --pdf-engine=xelatex % -s -o "%:r".pdf<CR>
   autocmd FileType rmd nnoremap <leader>p :!echo "rmarkdown::render('<c-r>%', rmarkdown::pdf_document())" \| R --vanilla<CR>
   autocmd FileType rmd,markdown,tex nnoremap <leader>v :!zathura "%:r".pdf & disown<CR><CR>
 augroup END

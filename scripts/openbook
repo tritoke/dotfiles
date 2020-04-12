@@ -1,6 +1,5 @@
 #!/bin/sh
-
-eval "$(cat $HOME/.scriptvars)"
-BOOKDIR=$(echo $BOOKPATH | awk '{ split($0,a,":"); for (line in a) { print a[line] } }' | dmenu -p "Select the directory to open books from:" -l 30)
-BOOK=$(ls $BOOKDIR/*.pdf | rev | cut -d '/' -f 1 | cut -d '.' -f 1 --complement | rev | dmenu -l 30 -p "Select the book to open: ")
+[ "$XDG_DATA_HOME" = "" ] && XDG_DATA_HOME="$HOME/.local/share"
+BOOKDIR="$XDG_DATA_HOME/books"
+BOOK=$(ls $BOOKDIR | cut -d '.' -f 1 | dmenu -l 30 -p "Select the book to open: ")
 [ "$BOOK" = "" ] || zathura "$BOOKDIR/$BOOK.pdf"

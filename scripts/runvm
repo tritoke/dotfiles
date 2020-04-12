@@ -82,8 +82,8 @@ select_usb() {
 }
 
 main() {
-  # source the script variables file to get useful locations
-  eval "$(cat $HOME/.scriptvars)"
+  [ "$XDG_DATA_HOME" = "" ] && XDG_DATA_HOME="$HOME/.local/share"
+  VMDIR = "$XDG_DATA_HOME/kvm"
 
   select_vm
   select_ram

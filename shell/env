@@ -4,9 +4,6 @@
 export LANG="en_GB.UTF-8"
 export LC_ALL="en_GB.UTF-8" 
 
-# tell java where it lives
-export JAVA_HOME="/usr/lib/jvm/default"
-
 # makes mouse less jittery in kvm virtual machines
 export SDL_VIDEO_X11_DGAMOUSE=0
 
@@ -16,23 +13,30 @@ export LIBVA_DRIVER_NAME="iHD"
 # use the correct vdpau driver
 export VDPAU_DRIVER="va_gl"
 
-export EDITOR="vim"
-
 export SSH_KEY_PATH="$HOME/.ssh/rsa_id"
+
+export EDITOR="vim"
+export BROWSER="firefox-developer-edition"
 
 # }}}
 
-# location shortcuts{{{
+# XDG base dir support {{{
+
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+
+export ANDROID_SDK_HOME="$XDG_CONFIG_HOME/android"
+export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
+
+# }}}
+
+# location shortcuts {{{
 
 FZF="/usr/share/fzf"
 ZSH_PLUGINS="/usr/share/zsh/plugins"
-SCRIPTDIR="$HOME/.scripts"
-sd="$SCRIPTDIR"
-
-# }}}
-
-# PATH changes {{{
-
-PATH="$SCRIPTDIR:$PATH"
+ROCKYOU="/usr/share/dict/rockyou.txt"
+DIRLIST="/usr/share/dirbuster/directory-list-2.3-medium.txt"
+DIRLIST_SMALL="/usr/share/dirbuster/directory-list-2.3-small.txt"
 
 # }}}
