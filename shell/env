@@ -18,6 +18,8 @@ export SSH_KEY_PATH="$HOME/.ssh/rsa_id"
 export EDITOR="vim"
 export BROWSER="firefox-developer-edition"
 
+export PATH="$PATH:$HOME/.scripts"
+
 # }}}
 
 # XDG base dir support {{{

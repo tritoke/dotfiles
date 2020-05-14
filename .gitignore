@@ -1,0 +1,6 @@
+" don't need github tracking neovim's shada files
+shade/
+*.shada
+
+" don't need this being tracked
+.netrwhist

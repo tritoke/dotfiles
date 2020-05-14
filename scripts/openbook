@@ -1,5 +1,7 @@
 #!/bin/sh
 [ "$XDG_DATA_HOME" = "" ] && XDG_DATA_HOME="$HOME/.local/share"
-BOOKDIR="$XDG_DATA_HOME/books"
+LIBRARYDIR="$XDG_DATA_HOME/books"
+LIBRARY=$(ls $LIBRARYDIR | cut -d '.' -f 1 | dmenu -l 30 -p "Select the library to choose from: ")
+[ "$LIBRARY" = "" ] && exit || BOOKDIR="$LIBRARYDIR/$LIBRARY"
 BOOK=$(ls $BOOKDIR | cut -d '.' -f 1 | dmenu -l 30 -p "Select the book to open: ")
 [ "$BOOK" = "" ] || zathura "$BOOKDIR/$BOOK.pdf"

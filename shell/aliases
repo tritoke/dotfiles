@@ -20,17 +20,16 @@ alias less='less -r'
 alias find='find 2>/dev/null'
 
 # .. aliases
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .....='cd ../../../..'
-alias ......='cd ../../../../..'
-alias .......='cd ../../../../../..'
-alias ........='cd ../../../../../../..'
+alias ..='cd ..; l'
+alias ...='cd ../..; l'
+alias ....='cd ../../..; l'
+alias .....='cd ../../../..; l'
+alias ......='cd ../../../../..; l'
+alias .......='cd ../../../../../..; l'
+alias ........='cd ../../../../../../..; l'
 
 # application shortcuts
 alias z="zathura"
-alias vim="nvim -u ~/.vimrc"
 
 # enable viewing of svgs via rsvg-convert
 alias feh_svg='function (){ rsvg-convert $1 | feh - }'
@@ -41,6 +40,9 @@ alias umount='sudo umount'
 
 # some commands for spawning new terminals from the current directory
 alias new="st 2>/dev/null &!"
+alias news="st -f 'undefined-medium:pixelsize=10:autohint=false:antialias=false' 2>/dev/null &!"
+alias newm="st -f 'JetBrains Mono:size=12' 2>/dev/null &!"
+alias newn="st -f 'JetBrains Mono NL:size=12' 2>/dev/null &!"
 alias newb="st -f 'JetBrains Mono:size=20' 2>/dev/null &!"
 alias renew="st &! exit"
 
@@ -53,3 +55,8 @@ alias archlinux-java="sudo archlinux-java"
 
 # AT&T syntax can go suck toes
 alias objdump="objdump -M intel"
+
+# prompt before removing / deleting stuff
+alias rm='rm -I'
+alias mv='mv -i'
+alias cp='cp -i'
