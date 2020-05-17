@@ -1,4 +1,4 @@
-" vim: foldmethod=marker foldlevel=0
+" vim: foldmethod=marker foldlevel=0 formatoptions-=cro
 
 " General Options {{{
 
@@ -68,47 +68,59 @@ set undofile
 
 " }}}
 
-" Jump to last location when file is opened
-augroup jump_to_previous " {{{
+" Jump to last location when file is opened {{{
+augroup jump_to_previous
   autocmd!
   autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 augroup END " }}}
 
+" Indentation settings {{{
+
+" keep the current level of indentation when you go to a newline, e.g. with o
+set autoindent
+
+" back space over tab boundaries i.e. <tab><bs> will leave you where you started
+set smarttab
+
+" default to replacing a tab char with 2 spaces
+set expandtab
+set tabstop=2
+set shiftwidth=2
+
 " }}}
 
-" language specific settings {{{
+" }}}
 
-" indentation settings
-set autoindent " keep the current level of indentation when you go to a newline, e.g. with o
-set smarttab " back space over tab boundaries i.e. <tab><bs> will leave you where you started
+" Appearance {{{
 
-" use 2 spaces for indentation normally
-set softtabstop=2 tabstop=2 shiftwidth=2 expandtab
+" colourschemes {{{
 
-augroup language_settings " {{{
-  autocmd!
-  autocmd FileType php setlocal cin fdm=syntax
-  autocmd FileType c,cpp,java setlocal cin fdm=syntax noet 
-  autocmd FileType java setlocal foldnestmax=4
-  autocmd FileType python setlocal ts=4 sw=4 sts=0 si fdm=indent 
-  autocmd FileType rust setlocal ts=4 sw=4 sts=0 cin fdm=syntax
-  autocmd FileType html setlocal ts=4 sw=4 sts=0
-  autocmd FileType asm,conf setlocal ts=8 sw=8 sts=0 fdm=indent noet
-  autocmd FileType bib setlocal ts=6 sw=6 sts=0
-  autocmd FileType markdown setlocal ts=4 sw=4 sts=0 ve=all noai spell
-  autocmd FileType rmd,plaintex,mail setlocal spell
-  autocmd FileType make setlocal noet fdm=indent
-  autocmd FileType email setlocal tw=72
-  autocmd FileType vim setlocal fdm=marker
-  autocmd FileType sh,bash,zsh setlocal fdm=indent
-  autocmd FileType verilog,systemverilog setlocal si fdm=indent nowrap
-        \ cinwords=module,begin,function,task
-  autocmd FileType tex setlocal spell
-augroup END " }}}
+function Light()
+  colorscheme summerfruit256
+  set cul
+endfunction
+
+function Dark()
+  colorscheme molokai
+  set nocul
+endfunction
+
+" }}}
+
+if 1
+  " dark: https://raw.githubusercontent.com/tomasr/molokai/master/colors/molokai.vim
+  call Dark()
+else
+  " light: https://www.vim.org/scripts/download_script.php?src_id=10153
+  call Light()
+endif
 
 " }}}
 
 " Keyboard Shortcuts and remappings {{{
+
+" set localleader
+let maplocalleader=","
 
 " easily open up vimrc
 nnoremap <leader>ev :tabe $MYVIMRC<enter>
@@ -134,76 +146,36 @@ vnoremap <C-x> "+c
 vnoremap <C-v> <ESC>"+p
 inoremap <C-v> <ESC>"+pa
 
-" random leader commands
-nnoremap <leader>n /<++><enter>ca<
+" search for the next instance of 
+" replace around it, and clear the search buffer
+nnoremap <leader>n /<++><enter>:let @/ = ""<enter>ca<
+
+" start a new terminal
 nnoremap <leader>t :!nohup st&>/dev/null&\!<enter><enter>
+
+" change colourscheme with a leader
+nnoremap <leader>l :call Light()<enter>
+nnoremap <leader>d :call Dark()<enter>
 
 " awesome line to toggle highlighting after a search but only until the next
 " one so each consecutive search will be highlighted but only the current
 " search can be toggled
-nnoremap <silent><expr> <Leader>h (&hls && v:hlsearch ? ':nohls' : ':set hls')."\n"
+nnoremap <silent><expr> <Leader>h (&hls && v:hlsearch ? ':nohls' : ':set hls').'<enter>'
+
+" clear the current search pattern
+nnoremap <Leader>c :let @/ = ""<enter>
 
 " toggle paste mode on / off
-nnoremap <silent><expr> <Leader>v (&paste ? ':set nopaste' : ':set paste')."\n"
+nnoremap <silent><expr> <Leader>v (&paste ? ':set nopaste' : ':set paste').'<enter>'
 
-" shortcut automatically making a PDF in each of RMarkdown, Markdown and LaTeX
-augroup pdf_mappings
-  autocmd!
-  autocmd FileType tex nnoremap <leader>w :!detex % \| wc -w<enter>
-  autocmd FileType tex nnoremap <leader>p :!latexrun %<enter>
-  autocmd FileType markdown nnoremap <leader>p :!pandoc % -s -o "%:r".pdf<enter>
-  autocmd FileType markdown nnoremap <leader>j :!pandoc % -V monofont="JetBrains Mono NL Medium" --pdf-engine=xelatex -s -o "%:r".pdf<enter>
-  autocmd FileType rmd nnoremap <leader>p :!echo "rmarkdown::render('<c-r>%', rmarkdown::pdf_document())" \| R --vanilla<enter>
-  autocmd FileType rmd,markdown,tex nnoremap <leader>v :!zathura "%:r".pdf & disown<enter><enter>
-augroup END
+" source vim-css-colour plugin
+nnoremap <silent> <Leader>css beans
 
 " }}}
 
-" Abbreviations {{{
+" Plugins {{{
 
-augroup shabangs " {{{
-  autocmd!
-  autocmd FileType python :iab <buffer> #! #!/usr/bin/env python
-  autocmd FileType sh :iab <buffer> #! #!/bin/sh
-augroup END " }}}
-
-
-
-" Java bad lol {{{
-
-" iabbrev print System.out.println
-" }}}
-
-" }}}
-
-" Appearance {{{
-" colourschemes
-if 1
-  " dark: https://raw.githubusercontent.com/tomasr/molokai/master/colors/molokai.vim
-  colorscheme molokai
-else
-  " light: https://www.vim.org/scripts/download_script.php?src_id=10153
-  colorscheme summerfruit256
-  set cul
-endif
-
-function Light()
-  colorscheme summerfruit256
-  set cul
-endfunction
-
-function Dark()
-  colorscheme molokai
-  set nocul
-endfunction
-
-" highight a badly spelt word red
-highlight clear SpellBad
-highlight SpellBad ctermbg=Red 
-highlight SpellCap ctermbg=DarkGrey
-
-" highlighting for folds
-highlight clear Folded
-highlight Folded guifg=Black
+" disable fzf.vim
+let g:loaded_fzf = 0
 
 " }}}

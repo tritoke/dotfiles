@@ -1,4 +1,5 @@
 #!/bin/sh
+
 # get device to add and it's device ID
 device=$(xinput list --name-only | dmenu -l 30 -p 'Choose the mouse you want to add a pointer for: ')
 [ "$device" = "" ] && exit

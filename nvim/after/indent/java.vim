@@ -1,0 +1,13 @@
+" set c style indentation
+setlocal cindent
+
+" use the syntax of the program to determine folds
+setlocal foldmethod=syntax
+
+" make tabs look like 2 spaces
+setlocal noexpandtab
+setlocal tabstop=2
+setlocal shiftwidth=2
+
+" allow java code to be folded deeper because of class structure
+setlocal foldnestmax=4
