@@ -3,8 +3,8 @@
 " General Options {{{
 
 " do syntax highlighting
-filetype on
 syntax on
+filetype plugin indent on
 
 " always give panes their own status bar
 set laststatus=1
@@ -117,6 +117,18 @@ endif
 
 " }}}
 
+" Plugins {{{
+
+" disable fzf.vim
+let g:loaded_fzf = 0
+
+" function to source the vim-css-colors plugin
+function Color()
+  exec "source /usr/share/vim/vimfiles/after/syntax/" . &filetype . ".vim"
+endfunction
+
+" }}}
+
 " Keyboard Shortcuts and remappings {{{
 
 " set localleader
@@ -163,19 +175,12 @@ nnoremap <leader>d :call Dark()<enter>
 nnoremap <silent><expr> <Leader>h (&hls && v:hlsearch ? ':nohls' : ':set hls').'<enter>'
 
 " clear the current search pattern
-nnoremap <Leader>c :let @/ = ""<enter>
+nnoremap <Leader>cs :let @/ = ""<enter>
 
 " toggle paste mode on / off
 nnoremap <silent><expr> <Leader>v (&paste ? ':set nopaste' : ':set paste').'<enter>'
 
 " source vim-css-colour plugin
-nnoremap <silent> <Leader>css beans
-
-" }}}
-
-" Plugins {{{
-
-" disable fzf.vim
-let g:loaded_fzf = 0
+nnoremap <silent> <Leader>co :call Color()<enter>
 
 " }}}

@@ -1,3 +1,5 @@
+# vim: fdm=marker foldlevel=0
+
 # global variables {{{
 
 # set locale
@@ -18,7 +20,16 @@ export SSH_KEY_PATH="$HOME/.ssh/rsa_id"
 export EDITOR="vim"
 export BROWSER="firefox-developer-edition"
 
+# path additions
+PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/.scripts"
+
+# look for man pages of locally installed programs
+if [ -z ${MANPATH+x} ]
+then
+  export MANPATH="`manpath`:$HOME/.local/share/man"
+fi
+
 
 # }}}
 
