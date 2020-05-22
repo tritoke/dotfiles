@@ -172,15 +172,20 @@ nnoremap <leader>d :call Dark()<enter>
 " awesome line to toggle highlighting after a search but only until the next
 " one so each consecutive search will be highlighted but only the current
 " search can be toggled
-nnoremap <silent><expr> <Leader>h (&hls && v:hlsearch ? ':nohls' : ':set hls').'<enter>'
+nnoremap <silent><expr> <leader>h (&hls && v:hlsearch ? ':nohls' : ':set hls').'<enter>'
 
 " clear the current search pattern
-nnoremap <Leader>cs :let @/ = ""<enter>
+nnoremap <leader>cs :let @/ = ""<enter>
 
 " toggle paste mode on / off
-nnoremap <silent><expr> <Leader>v (&paste ? ':set nopaste' : ':set paste').'<enter>'
+nnoremap <silent><expr> <leader>v (&paste ? ':set nopaste' : ':set paste').'<enter>'
 
 " source vim-css-colour plugin
-nnoremap <silent> <Leader>co :call Color()<enter>
+nnoremap <silent> <leader>co :call Color()<enter>
+
+" open open man page in splits / tabs
+nnoremap <silent> <leader>ms "zyiw:exe "sp man://".@z.""<enter>
+nnoremap <silent> <leader>mv "zyiw:exe "vsp man://".@z.""<enter>
+nnoremap <silent> <leader>me "zyiw:exe "tabe man://".@z.""<enter>
 
 " }}}
