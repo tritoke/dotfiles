@@ -65,3 +65,6 @@ alias cp='cp -i'
 
 # default to system clipboard
 alias xclip='xclip -selection clipboard'
+
+# a colour picker using maim
+alias colourpick="maim -st 0 | convert - -resize 1x1\! -format '%[pixel:p{0,0}]' info:-"

@@ -189,3 +189,10 @@ nnoremap <silent> <leader>mv "zyiw:exe "vsp man://".@z.""<enter>
 nnoremap <silent> <leader>me "zyiw:exe "tabe man://".@z.""<enter>
 
 " }}}
+
+" autocommands {{{
+
+" resize splits when the vim window changes size
+autocmd VimResized * wincmd =
+
+" }}}
