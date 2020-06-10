@@ -1,0 +1,36 @@
+#!/bin/sh
+echo '#!/usr/bin/env python
+import pwn
+
+pwn.context.terminal = ["st", "-e", "sh", "-c"]
+GDBSCRIPT = f"""
+c
+"""
+
+
+def get_challenge(elf):
+    if pwn.args.REMOTE:
+        challenge = pwn.remote("<++>", <++>)
+    elif pwn.args.GDB:
+        challenge = pwn.process(elf.path)
+        pwn.gdb.attach(
+            challenge,
+            gdbscript=GDBSCRIPT
+        )
+    else:
+        challenge = pwn.process(elf.path)
+
+    return challenge
+
+
+def main():
+    elf = pwn.ELF("./<++>")
+
+    challenge = get_challenge(elf)
+
+    challenge.interactive()
+
+
+if __name__ == "__main__":
+    main()' > pwn_template.py
+chmod +x pwn_template.py

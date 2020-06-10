@@ -20,8 +20,11 @@ export SSH_KEY_PATH="$HOME/.ssh/rsa_id"
 export EDITOR="vim"
 export BROWSER="firefox-developer-edition"
 
+export RISCV="$HOME/Code/Verilog/tools"
+
 # path additions
 PATH="$PATH:$HOME/.local/bin"
+PATH="$PATH:$RISCV/bin"
 export PATH="$PATH:$HOME/.scripts"
 
 # look for man pages of locally installed programs
@@ -30,6 +33,9 @@ then
   export MANPATH="`manpath`:$HOME/.local/share/man"
 fi
 
+# }}}
+
+# riscv stuff {{{
 
 # }}}
 

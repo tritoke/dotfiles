@@ -59,7 +59,7 @@ alias archlinux-java="sudo archlinux-java"
 alias objdump="objdump -M intel"
 
 # prompt before removing / deleting stuff
-alias rm='rm -i'
+alias rm='rm -I'
 alias mv='mv -i'
 alias cp='cp -i'
 
