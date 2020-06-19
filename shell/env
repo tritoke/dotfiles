@@ -22,8 +22,14 @@ export BROWSER="firefox-developer-edition"
 
 export RISCV="$HOME/Code/Verilog/tools"
 
-# path additions
+export GOPATH="$HOME/.local/go:$HOME/Code/Go"
+
+# }}}
+
+# path additions {{{
+
 PATH="$PATH:$HOME/.local/bin"
+PATH="$PATH:$HOME/.local/go/bin"
 PATH="$PATH:$RISCV/bin"
 export PATH="$PATH:$HOME/.scripts"
 
@@ -54,8 +60,15 @@ export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
 
 FZF="/usr/share/fzf"
 ZSH_PLUGINS="/usr/share/zsh/plugins"
-ROCKYOU="/usr/share/dict/rockyou.txt"
+ROCKYOU="/usr/share/wordlists/rockyou.txt"
 DIRLIST="/usr/share/dirbuster/directory-list-2.3-medium.txt"
 DIRLIST_SMALL="/usr/share/dirbuster/directory-list-2.3-small.txt"
+
+# }}}
+
+# Program default argument sets {{{
+# nmap
+SMBARGS="-p445 --script=smb-enum-shares,smb-enum-users"
+NFSARGS="-p111 --script=nfs-ls,nfs-statfs,nfs-showmount"
 
 # }}}

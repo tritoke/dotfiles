@@ -72,8 +72,6 @@ unsetopt menu_complete          # make sure the completion menu can be shown
 
 # sourcing {{{
 
-# environment information
-source ~/.env
 # general aliases
 source ~/.aliases
 

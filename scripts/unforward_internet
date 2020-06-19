@@ -1,0 +1,15 @@
+#!/bin/bash
+
+echo "Warning, this will kill dhcpd and flush all iptables rules."
+echo -n "Continue? (y/N) "
+read CONT
+
+[[ ! "$CONT" =~ "y" ]] && exit
+
+sudo killall dhcpd
+sudo iptables -F
+sudo sysctl net.ipv4.conf.wlan0.forwarding=0
+sudo sysctl net.ipv4.conf.enp0s31f6.forwarding=0
+sudo ip addr del 192.168.123.100/24 dev enp0s31f6
+sudo ip link set down dev enp0s31f6
+rm temp_dhcpd.conf

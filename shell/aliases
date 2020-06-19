@@ -68,3 +68,17 @@ alias xclip='xclip -selection clipboard'
 
 # a colour picker using maim
 alias colourpick="maim -st 0 | convert - -resize 1x1\! -format '%[pixel:p{0,0}]' info:-"
+
+# pro gamer move
+alias autopsy="docker run \
+            -d \
+            -it \
+            --shm-size 2G \
+            -v /tmp/.X11-unix:/tmp/.X11-unix \
+            -v $(pwd):/root/case \
+            -e DISPLAY=$DISPLAY \
+            -e JAVA_TOOL_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel' \
+            -e _JAVA_AWT_WM_NONREPARENTING=1 \
+            --network host \
+            --device /dev/dri \
+            bannsec/autopsy"

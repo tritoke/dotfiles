@@ -53,7 +53,6 @@ then
   if command -v dmenu 2>&1 >/dev/null
   then
     installer=dmenuinstall
-    bginstall="yes"
   else
     installer=cmdinstall
   fi
@@ -65,16 +64,7 @@ for file in shell/*
 do $installer "$file"
 done
 $installer 'xinitrc'
-$installer 'vim/vimrc'
-$installer 'vim/init.vim' "$HOME/.config/nvim" 'yes'
-$installer 'dunstrc' "$HOME/.config/dunst" 'yes'
+$installer 'nvim' "${XDG_CONFIG_HOME:-$HOME/.config}" 'yes'
 
-if [ "$bginstall" = "yes" ] 
-then
-  while [ "$again" != "no" ]
-  do
-      background="$PWD/backgrounds/"$(ls backgrounds | sort | dmenu -p 'choose background: ' -l 30)
-      feh --bg-fill "$background"
-      again=$(echo 'yes\nno' | dmenu -p "Choose a different background? ")
-  done
-fi
+mkdir -p "${XDG_CONFIG_HOME:-$HOME/.config}/dunst"
+$installer 'dunstrc' "${XDG_CONFIG_HOME:-$HOME/.config}/dunst" 'yes'

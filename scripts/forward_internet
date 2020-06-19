@@ -1,0 +1,64 @@
+#!/bin/bash
+BACKUPFILE="/etc/dhcpd.conf.ip_forwarding_backup"
+
+usage() {
+  echo "Usage: $0 <local dns server address> <internet0> <net0>"
+  exit
+}
+
+perm_error() {
+  echo "This script must be run as root."
+  exit
+}
+
+silent() {
+  $@ >/dev/null
+}
+
+localdns=$1
+internet0=$2
+net0=$3
+
+[ "$internet0" = "" ] && usage
+[ "$net0" = "" ] && usage
+
+echo "Forwarding internet from $internet0 to $net0"
+echo -n "Confirm (Y/n) "
+read CONT
+
+[[ "$CONT" =~ "[nN]" ]] && exit
+
+# use sudo if not root
+[[ $EUID -ne 0 ]] && SUDO='sudo' || SUDO=''
+
+# Check both are valid interfaces
+silent ip link show dev $internet0 || exit
+silent ip link show dev $net0 || exit
+
+# Assign static IP to net0
+$SUDO ip link set up dev $net0
+$SUDO ip addr add 192.168.123.100/24 dev $net0
+
+# Enable packet forwarding
+silent $SUDO sysctl "net.ipv4.conf.$internet0.forwarding=1"
+silent $SUDO sysctl "net.ipv4.conf.$net0.forwarding=1"
+
+# Enable NAT
+$SUDO iptables -t nat -A POSTROUTING -o $internet0 -j MASQUERADE
+$SUDO iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+$SUDO iptables -A FORWARD -i $net0 -o $internet0 -j ACCEPT
+
+# Allow DHCP
+$SUDO iptables -I INPUT -p udp --dport 67 -i net0 -j ACCEPT
+$SUDO iptables -I INPUT -p udp --dport 53 -s 192.168.123.0/24 -j ACCEPT
+$SUDO iptables -I INPUT -p tcp --dport 53 -s 192.168.123.0/24 -j ACCEPT
+
+# Start the DHCP daemon
+echo "option domain-name-servers $localdns, 1.1.1.1, 8.8.8.8;
+option subnet-mask 255.255.255.0;
+option routers 192.168.123.100;
+subnet 192.168.123.0 netmask 255.255.255.0 {
+  range 192.168.123.100 192.168.123.250;
+}" > temp_dhcpd.conf
+
+$SUDO dhcpd -cf temp_dhcpd.conf $net0

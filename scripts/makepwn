@@ -6,6 +6,7 @@ pwn.context.terminal = ["st", "-e", "sh", "-c"]
 GDBSCRIPT = f"""
 c
 """
+addr_to_offset = lambda num: pwn.cyclic_find(num.to_bytes(4, "little"))
 
 
 def get_challenge(elf):
