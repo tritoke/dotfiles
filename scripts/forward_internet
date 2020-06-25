@@ -15,9 +15,8 @@ silent() {
   $@ >/dev/null
 }
 
-localdns=$1
-internet0=$2
-net0=$3
+internet0=$1
+net0=$2
 
 [ "$internet0" = "" ] && usage
 [ "$net0" = "" ] && usage
@@ -48,17 +47,5 @@ $SUDO iptables -t nat -A POSTROUTING -o $internet0 -j MASQUERADE
 $SUDO iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
 $SUDO iptables -A FORWARD -i $net0 -o $internet0 -j ACCEPT
 
-# Allow DHCP
-$SUDO iptables -I INPUT -p udp --dport 67 -i net0 -j ACCEPT
-$SUDO iptables -I INPUT -p udp --dport 53 -s 192.168.123.0/24 -j ACCEPT
-$SUDO iptables -I INPUT -p tcp --dport 53 -s 192.168.123.0/24 -j ACCEPT
-
-# Start the DHCP daemon
-echo "option domain-name-servers $localdns, 1.1.1.1, 8.8.8.8;
-option subnet-mask 255.255.255.0;
-option routers 192.168.123.100;
-subnet 192.168.123.0 netmask 255.255.255.0 {
-  range 192.168.123.100 192.168.123.250;
-}" > temp_dhcpd.conf
-
-$SUDO dhcpd -cf temp_dhcpd.conf $net0
+echo "You can now assign the connected computer an IP address"
+echo "in the subnet 192.168.123.0/24"
