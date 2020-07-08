@@ -1,6 +1,6 @@
 #!/bin/sh
 EMOJIFILE=${XDG_DATA_DIR:-$HOME/.local/share}/emojis
 grep -v '#' $EMOJIFILE | dmenu -i -l 20 -fn 'JetBrains Mono:size=9' | cut -d ' ' -f 1 | tr -d '\n' | xclip -selection clipboard
-CHARCODE=$(grep "$(xclip -o -selection clipboard)" $EMOJIFILE | cut -d ' ' -f 3 | tr -d '\n')
+CHARCODE=$(grep "$(xclip -o -selection clipboard)" $EMOJIFILE | rev | cut -d ' ' -f 1 | rev | tr -d '\n')
 
 pgrep -x dunst >/dev/null && notify-send "$(xclip -o -selection clipboard) - $CHARCODE copied to clipboard."
