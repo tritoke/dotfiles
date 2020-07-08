@@ -6,23 +6,14 @@
 export LANG="en_GB.UTF-8"
 export LC_ALL="en_GB.UTF-8" 
 
-# makes mouse less jittery in kvm virtual machines
-export SDL_VIDEO_X11_DGAMOUSE=0
-
-# use the correct va-api driver
-export LIBVA_DRIVER_NAME="iHD"
-
-# use the correct vdpau driver
-export VDPAU_DRIVER="va_gl"
-
 export SSH_KEY_PATH="$HOME/.ssh/rsa_id"
 
 export EDITOR="vim"
 export BROWSER="firefox-developer-edition"
 
-export RISCV="$HOME/Code/Verilog/tools"
-
 export GOPATH="$HOME/.local/go:$HOME/Code/Go"
+
+export ANDROID_SDK_ROOT="/opt/android-sdk"
 
 # }}}
 
@@ -30,7 +21,6 @@ export GOPATH="$HOME/.local/go:$HOME/Code/Go"
 
 PATH="$PATH:$HOME/.local/bin"
 PATH="$PATH:$HOME/.local/go/bin"
-PATH="$PATH:$RISCV/bin"
 export PATH="$PATH:$HOME/.scripts"
 
 # look for man pages of locally installed programs
@@ -38,10 +28,6 @@ if [ -z ${MANPATH+x} ]
 then
   export MANPATH="`manpath`:$HOME/.local/share/man"
 fi
-
-# }}}
-
-# riscv stuff {{{
 
 # }}}
 
@@ -60,7 +46,7 @@ export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
 
 FZF="/usr/share/fzf"
 ZSH_PLUGINS="/usr/share/zsh/plugins"
-ROCKYOU="/usr/share/wordlists/rockyou.txt"
+ROCKYOU="/usr/share/wordlists/seclists-git/Passwords/Leaked-Databases/rockyou.txt"
 DIRLIST="/usr/share/dirbuster/directory-list-2.3-medium.txt"
 DIRLIST_SMALL="/usr/share/dirbuster/directory-list-2.3-small.txt"
 

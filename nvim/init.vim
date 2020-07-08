@@ -183,10 +183,21 @@ nnoremap <silent><expr> <leader>v (&paste ? ':set nopaste' : ':set paste').'<ent
 " source vim-css-colour plugin
 nnoremap <silent> <leader>co :call Color()<enter>
 
-" open open man page in splits / tabs
+" open man page in splits / tabs
 nnoremap <silent> <leader>ms "zyiw:exe "sp man://".@z.""<enter>
 nnoremap <silent> <leader>mv "zyiw:exe "vsp man://".@z.""<enter>
 nnoremap <silent> <leader>me "zyiw:exe "tabe man://".@z.""<enter>
+nnoremap <silent> <leader>mS "zyiW:exe "sp man://".@z.""<enter>
+nnoremap <silent> <leader>mV "zyiW:exe "vsp man://".@z.""<enter>
+nnoremap <silent> <leader>mE "zyiW:exe "tabe man://".@z.""<enter>
+
+" open terminals in splits
+nnoremap <silent> <leader>ts :exe "sp term://zsh"<enter>
+nnoremap <silent> <leader>tv :exe "vsp term://zsh"<enter>
+nnoremap <silent> <leader>te :exe "tabe term://zsh"<enter>
+
+" Escape out of nested term:// things
+tnoremap <Esc> <C-\><C-n>
 
 " }}}
 
