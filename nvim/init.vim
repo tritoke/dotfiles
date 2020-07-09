@@ -192,9 +192,9 @@ nnoremap <silent> <leader>mV "zyiW:exe "vsp man://".@z.""<enter>
 nnoremap <silent> <leader>mE "zyiW:exe "tabe man://".@z.""<enter>
 
 " open terminals in splits
-nnoremap <silent> <leader>ts :exe "sp term://zsh"<enter>
-nnoremap <silent> <leader>tv :exe "vsp term://zsh"<enter>
-nnoremap <silent> <leader>te :exe "tabe term://zsh"<enter>
+nnoremap <silent> <leader>zs :exe "sp term://zsh"<enter>
+nnoremap <silent> <leader>zv :exe "vsp term://zsh"<enter>
+nnoremap <silent> <leader>ze :exe "tabe term://zsh"<enter>
 
 " Escape out of nested term:// things
 tnoremap <Esc> <C-\><C-n>
