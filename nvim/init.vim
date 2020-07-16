@@ -9,12 +9,6 @@ filetype plugin indent on
 " always give panes their own status bar
 set laststatus=1
 
-" don't fold anything when opening the file
-set foldlevel=99
-
-" don't fold more than 2 levels deep
-set foldnestmax=2
-
 " don't redraw while doing macros (super speedy bois)
 set lazyredraw
 
@@ -135,8 +129,8 @@ endfunction
 let maplocalleader=","
 
 " easily open up vimrc
-nnoremap <leader>ev :tabe $MYVIMRC<enter>
-nnoremap <leader>sv :source $MYVIMRC<enter>
+nnoremap <silent> <leader>ev :tabe $MYVIMRC<enter>
+nnoremap <silent> <leader>sv :source $MYVIMRC<enter>
 
 " map F1 to escape
 nnoremap <F1> <Esc>
@@ -144,30 +138,30 @@ inoremap <F1> <Esc>
 vnoremap <F1> <Esc>
 
 " fold and unfold with space
-nnoremap <space> za
+nnoremap <silent> <space> za
 
 " switch tabs
-nnoremap = :tabn<enter>
-nnoremap - :tabp<enter> 
+nnoremap <silent> <leader>= :tabn<enter>
+nnoremap <silent> <leader>- :tabp<enter> 
 
 " Copy text to the clipboard directly
-vnoremap <C-c> "+y
-vnoremap <C-x> "+c
+vnoremap <silent> <C-c> "+y
+vnoremap <silent> <C-x> "+c
 
 " Paste text from the clipboard directly
-vnoremap <C-v> <ESC>"+p
-inoremap <C-v> <ESC>"+pa
+vnoremap <silent> <C-v> <ESC>"+p
+inoremap <silent> <C-v> <ESC>"+pa
 
 " search for the next instance of 
 " replace around it, and clear the search buffer
-nnoremap <leader>n /<++><enter>:let @/ = ""<enter>ca<
+nnoremap <silent> <leader>n /<++><enter>:let @/ = ""<enter>ca<
 
 " start a new terminal
-nnoremap <leader>t :!nohup st&>/dev/null&\!<enter><enter>
+nnoremap <silent> <leader>t :!nohup st&>/dev/null&\!<enter><enter>
 
 " change colourscheme with a leader
-nnoremap <leader>l :call Light()<enter>
-nnoremap <leader>d :call Dark()<enter>
+nnoremap <silent> <leader>l :call Light()<enter>
+nnoremap <silent> <leader>d :call Dark()<enter>
 
 " awesome line to toggle highlighting after a search but only until the next
 " one so each consecutive search will be highlighted but only the current
@@ -183,6 +177,9 @@ nnoremap <silent><expr> <leader>v (&paste ? ':set nopaste' : ':set paste').'<ent
 " source vim-css-colour plugin
 nnoremap <silent> <leader>co :call Color()<enter>
 
+" nerd tree mappings
+noremap <silent> <leader>o :NERDTree<enter>
+
 " open man page in splits / tabs
 nnoremap <silent> <leader>ms "zyiw:exe "sp man://".@z.""<enter>
 nnoremap <silent> <leader>mv "zyiw:exe "vsp man://".@z.""<enter>
@@ -197,7 +194,7 @@ nnoremap <silent> <leader>zv :exe "vsp term://zsh"<enter>
 nnoremap <silent> <leader>ze :exe "tabe term://zsh"<enter>
 
 " Escape out of nested term:// things
-tnoremap <Esc> <C-\><C-n>
+tnoremap <silent> <Esc> <C-\><C-n>
 
 " }}}
 

@@ -8,6 +8,3 @@ setlocal foldmethod=syntax
 setlocal noexpandtab
 setlocal tabstop=2
 setlocal shiftwidth=2
-
-" allow java code to be folded deeper because of class structure
-setlocal foldnestmax=4

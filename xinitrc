@@ -1,24 +1,7 @@
 # vim: ft=sh
-setup_screens() {
-  direction="$1"
-  primary=$(xrandr | pcregrep -o1 '(\S+) connected primary')
-  screens=$(xrandr | pcregrep -o1 '(\S+) connected (^primary)')
-  for screen in $screens
-  do
-    case $direction in
-      left   ) directionarg='--left-of'  ;;
-      right  ) directionarg='--right-of' ;;
-      above  ) directionarg='--above'    ;;
-      below  ) directionarg='--below'    ;;
-      mirror ) directionarg='--same-as'  ;;
-      *      ) directionarg='--same-as'  ;;
-    esac
 
-    xrandr --output HDMI2 --auto $directionarg eDP1
-    xrandr --output $screen --primary
-    break
-  done
-}
+xrandr --setprovideroutputsource modesetting NVIDIA-0
+xrandr --auto
 
 WM="$2"           # choose which window manager to use
 setxkbmap gb      # tell the keyboard to use a GB keymap
