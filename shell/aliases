@@ -21,15 +21,6 @@ alias less='less -r'
 # make find errors go to /dev/null
 alias find='find 2>/dev/null'
 
-# .. aliases
-alias ..='cd ..; l'
-alias ...='cd ../..; l'
-alias ....='cd ../../..; l'
-alias .....='cd ../../../..; l'
-alias ......='cd ../../../../..; l'
-alias .......='cd ../../../../../..; l'
-alias ........='cd ../../../../../../..; l'
-
 # application shortcuts
 alias z="zathura"
 

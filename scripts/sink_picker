@@ -1,0 +1,4 @@
+#!/bin/sh
+
+sink=$(pacmd list-sinks | grep -i 'name:' | pcregrep -o1 '<(.*)>' | dmenu -p 'Select default sink: ' -l 5)
+pacmd set-default-sink $sink

@@ -6,6 +6,9 @@
 syntax on
 filetype plugin indent on
 
+" don't fold by default
+set foldlevel=99
+
 " always give panes their own status bar
 set laststatus=1
 
@@ -141,8 +144,8 @@ vnoremap <F1> <Esc>
 nnoremap <silent> <space> za
 
 " switch tabs
-nnoremap <silent> <leader>= :tabn<enter>
-nnoremap <silent> <leader>- :tabp<enter> 
+nnoremap <silent> L :tabn<enter>
+nnoremap <silent> H :tabp<enter> 
 
 " Copy text to the clipboard directly
 vnoremap <silent> <C-c> "+y
