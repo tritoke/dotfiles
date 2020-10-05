@@ -25,7 +25,9 @@ alias find='find 2>/dev/null'
 alias z="zathura"
 
 # enable viewing of svgs via rsvg-convert
-alias feh_svg='function (){ rsvg-convert $1 | feh - }'
+function feh_svg() {
+  rsvg-convert $1 | feh -
+}
 
 # I always forget to sudo these
 alias mount='sudo mount'
@@ -57,8 +59,13 @@ alias cp='cp -i'
 # default to system clipboard
 alias xclip='xclip -selection clipboard'
 
-# a colour picker using maim
-alias colourpick="maim -st 0 | convert - -resize 1x1\! -format '%[pixel:p{0,0}]' info:-"
+# some sane defaults for rsync from the arch wiki
+function cpr() {
+  rsync --archive -hh --partial --info=stats1 --info=progress2 --modify-window=1 "$@"
+} 
+function mvr() {
+  rsync --archive -hh --partial --info=stats1 --info=progress2 --modify-window=1 --remove-source-files "$@"
+}
 
 # pro gamer move
 alias autopsy="docker run \
