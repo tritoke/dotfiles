@@ -32,6 +32,7 @@ function feh_svg() {
 # I always forget to sudo these
 alias mount='sudo mount'
 alias umount='sudo umount'
+alias chvt='sudo chvt'
 
 # some commands for spawning new terminals from the current directory
 alias new="st 2>/dev/null &!"
