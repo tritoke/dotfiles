@@ -124,6 +124,16 @@ function Color()
   exec "source /usr/share/vim/vimfiles/after/syntax/" . &filetype . ".vim"
 endfunction
 
+" if statement to allow easy disabling of all vim-plug plugins
+if 1
+  call plug#begin('~/.local/share/nvim')
+
+  " for tracking time spent programming in vim
+  Plug 'wakatime/vim-wakatime'
+  call plug#end()
+endif
+
+
 " }}}
 
 " Keyboard Shortcuts and remappings {{{
@@ -155,7 +165,7 @@ vnoremap <silent> <C-x> "+c
 vnoremap <silent> <C-v> <ESC>"+p
 inoremap <silent> <C-v> <ESC>"+pa
 
-" search for the next instance of 
+" search for the next instance of <++>
 " replace around it, and clear the search buffer
 nnoremap <silent> <leader>n /<++><enter>:let @/ = ""<enter>ca<
 

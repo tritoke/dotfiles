@@ -39,7 +39,7 @@ alias new="st 2>/dev/null &!"
 alias news="st -f 'undefined-medium:pixelsize=10:autohint=false:antialias=false' 2>/dev/null &!"
 alias newm="st -f 'JetBrains Mono:size=12' 2>/dev/null &!"
 alias newn="st -f 'JetBrains Mono NL:size=12' 2>/dev/null &!"
-alias newb="st -f 'JetBrains Mono:size=20' 2>/dev/null &!"
+alias newb="st -f 'JetBrains Mono:size=14' 2>/dev/null &!"
 alias renew="st &! exit"
 
 # arch uses the lightweight pinky command instead of finger
@@ -81,3 +81,56 @@ alias autopsy="docker run \
             --network host \
             --device /dev/dri \
             bannsec/autopsy"
+
+# actually quite useful
+function quote() {
+  lang=$1;
+  {
+    echo "\`\`\`$lang"
+    xclip -o -sel clip
+    echo -n "\`\`\`"
+  } | xclip -sel clip
+}
+
+# actually quite useful
+function spoiler() {
+  message=$1;
+  {
+    echo -n "$message ||"
+    xclip -o -sel clip
+    echo -n "||"
+  } | xclip -sel clip
+}
+
+# pro gamer move
+function komodo_shell() {
+  # Allow local processes access to the X server
+  xhost +local:root
+
+  # run the docker container
+  docker run \
+          -it \
+          --rm \
+          --shm-size 2G \
+          -v /tmp/.X11-unix:/tmp/.X11-unix \
+          -v $(pwd):/home/tritoke/comp22712 \
+          -e DISPLAY=$DISPLAY \
+          --device=/dev/dri \
+          komodo_image
+
+  # revoke local permissions
+  xhost -local:root
+}
+
+# clang format defaults
+function format_c() {
+  style=$({
+    echo -n '{'
+    echo -n 'BasedOnStyle: webkit'
+    echo -n ', BreakBeforeBraces: Attach'
+    echo -n ', UseTab: ForContinuationAndIndentation'
+    echo -n ', TabWidth: 4'
+    echo -n '}'
+  })
+  clang-format -i -style="$style" $@
+}
