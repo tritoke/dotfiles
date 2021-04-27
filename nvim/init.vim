@@ -130,6 +130,10 @@ if 1
 
   " for tracking time spent programming in vim
   Plug 'wakatime/vim-wakatime'
+
+  " because arm assembly is very cool
+  Plug 'alisdair/vim-armasm'
+
   call plug#end()
 endif
 
