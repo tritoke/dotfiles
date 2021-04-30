@@ -124,18 +124,18 @@ function Color()
   exec "source /usr/share/vim/vimfiles/after/syntax/" . &filetype . ".vim"
 endfunction
 
-" if statement to allow easy disabling of all vim-plug plugins
-if 1
-  call plug#begin('~/.local/share/nvim')
+call plug#begin('~/.local/share/nvim')
 
-  " for tracking time spent programming in vim
-  Plug 'wakatime/vim-wakatime'
+" for tracking time spent programming in vim
+Plug 'wakatime/vim-wakatime'
 
-  " because arm assembly is very cool
-  Plug 'alisdair/vim-armasm'
+" because arm assembly is very cool
+Plug 'alisdair/vim-armasm'
 
-  call plug#end()
-endif
+" I write lots of languages :)
+Plug 'sheerun/vim-polyglot'
+
+call plug#end()
 
 
 " }}}
