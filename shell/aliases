@@ -59,6 +59,7 @@ alias cp='cp -i'
 
 # default to system clipboard
 alias xclip='xclip -selection clipboard'
+alias xclip_png='xclip -selection clipboard -t image/png'
 
 # some sane defaults for rsync from the arch wiki
 function cpr() {

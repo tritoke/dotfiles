@@ -18,6 +18,7 @@
   status = auto
 
 [pull]
-	rebase = false
+	rebase = true
+
 [init]
 	defaultBranch = main
