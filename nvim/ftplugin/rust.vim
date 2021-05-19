@@ -1,6 +1,6 @@
 call Iab('main', 'fn main() {<Enter>}<Esc>O')
-call Iab('wlnd', 'writeln!("{:?}", x);<Esc>Fxs')
-call Iab('wln', 'writeln!("{}", x);<Esc>Fxs')
+call Iab('wlnd', 'writeln!(x, "{:?}", <++>)?;<Esc>Fxs')
+call Iab('wln', 'writeln!(x, "{}", <++>)?;<Esc>Fxs')
 call Iab('plnd', 'println!("{:?}", x);<Esc>Fxs')
 call Iab('pln', 'println!("{}", x);<Esc>Fxs')
 call Iab('eplnd', 'eprintln!("{:?}", x);<Esc>Fxs')
