@@ -1,4 +1,6 @@
 call sab#Iab('main', 'fn main() {<Enter>}<Esc>O')
+call sab#Iab('wlnd', 'writeln!(x, "{:?}", <++>)?;<Esc>Fxs')
+call sab#Iab('wln', 'writeln!(x, "{}", <++>)?;<Esc>Fxs')
 call sab#Iab('plnd', 'println!("{:?}", x);<Esc>Fxs')
 call sab#Iab('pln', 'println!("{}", x);<Esc>Fxs')
 call sab#Iab('eplnd', 'eprintln!("{:?}", x);<Esc>Fxs')
