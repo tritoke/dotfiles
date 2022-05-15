@@ -29,10 +29,16 @@ function feh_svg() {
   rsvg-convert $1 | feh -
 }
 
-# I always forget to sudo these
-alias mount='sudo mount'
-alias umount='sudo umount'
-alias chvt='sudo chvt'
+# sudo bad
+alias sudo=doas
+
+# aliases for my nopass doas commands
+alias mount="doas /usr/bin/mount"
+alias umount="doas /usr/bin/umount"
+alias openvpn="doas /usr/bin/openvpn"
+alias archlinux-java="doas /usr/bin/archlinux-java"
+alias chvt="doas /usr/bin/chvt"
+alias setxkbmap="doas /usr/bin/setxkbmap"
 
 # some commands for spawning new terminals from the current directory
 alias new="st 2>/dev/null &!"
@@ -134,4 +140,15 @@ function format_c() {
     echo -n '}'
   })
   clang-format -i -style="$style" $@
+}
+
+alias crackmapexec='docker run --rm -it byt3bl33d3r/crackmapexec'
+alias cme=crackmapexec
+
+function b64dec() {
+  echo $1 | base64 -d
+}
+
+function b64enc() {
+  echo $1 | base64
 }
