@@ -221,3 +221,4 @@ tnoremap <silent> <Esc> <C-\><C-n>
 autocmd VimResized * wincmd =
 
 " }}}
+

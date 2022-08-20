@@ -27,9 +27,9 @@ def get_challenge(elf):
 def main():
     elf = pwn.ELF("./<++>")
 
-    challenge = get_challenge(elf)
+    io = get_challenge(elf)
 
-    challenge.interactive()
+    io.interactive()
 
 
 if __name__ == "__main__":
