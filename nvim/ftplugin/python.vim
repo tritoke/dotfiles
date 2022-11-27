@@ -1,3 +1,6 @@
+" always retab a python file to four spaces
+auto BufWritePre *.py retab 4
+
 " set some python abbreviations
 
 " shabang

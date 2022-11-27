@@ -21,6 +21,7 @@ export ANDROID_SDK_ROOT="/opt/android-sdk"
 
 PATH="$PATH:$HOME/.local/bin"
 PATH="$PATH:$HOME/.local/go/bin"
+PATH="$PATH:$HOME/.local/share/JetBrains/Toolbox/scripts"
 export PATH="$PATH:$HOME/.scripts"
 
 # look for man pages of locally installed programs

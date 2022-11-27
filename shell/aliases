@@ -124,7 +124,7 @@ function komodo_shell() {
           -v $(pwd):/home/tritoke/comp22712 \
           -e DISPLAY=$DISPLAY \
           --device=/dev/dri \
-          komodo_image
+          komodo
 
   # revoke local permissions
   xhost -local:root

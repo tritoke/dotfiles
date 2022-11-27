@@ -1,0 +1,15 @@
+#!/bin/sh
+
+DEVICE=$(xrandr | grep ' connected' | dmenu -l 20 -fn 'JetBrains Mono:size=9' | cut -d' ' -f1)
+SAVEFILE="$HOME/Pictures/last_sc.png"
+
+if [ "$DEVICE" != "" ]
+then
+  GEOMETRY=$(xrandr | grep $DEVICE | pcregrep -o1 '(\d+x\d+(?>\+|-)\d+(?>\+|-)\d+)')
+fi
+
+if [ "$GEOMETRY" != "" ]
+then
+  maim -g $GEOMETRY | tee $SAVEFILE | xclip -sel clipboard -t image/png
+  pgrep -x dunst >/dev/null && notify-send "Saved screenshot of $DEVICE to $SAVEFILE and copied to clipboard."
+fi
