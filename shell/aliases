@@ -3,7 +3,6 @@
 # set global options
 alias fd='fd -IH'
 alias grep='grep --color=auto'
-alias rg='rg -i --color=always 2>/dev/null'
 alias cat=bat
 alias catt='/bin/cat'
 alias h=tldr
@@ -124,7 +123,7 @@ function komodo_shell() {
           -v $(pwd):/home/tritoke/comp22712 \
           -e DISPLAY=$DISPLAY \
           --device=/dev/dri \
-          komodo_image
+          komodo
 
   # revoke local permissions
   xhost -local:root
@@ -146,10 +145,16 @@ function format_c() {
 alias crackmapexec='docker run --rm -it byt3bl33d3r/crackmapexec'
 alias cme=crackmapexec
 
+alias vol2='python2 /home/tritoke/cyber/tools/volatility/vol.py'
+
 function b64dec() {
   echo $1 | base64 -d
 }
 
 function b64enc() {
   echo $1 | base64
+}
+
+functio bindiff() {
+  diff <(xxd $1) <(xxd $2)
 }

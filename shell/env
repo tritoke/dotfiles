@@ -36,7 +36,7 @@ fi
 # XDG base dir support {{{
 
 export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_CACHE_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 
 export ANDROID_SDK_HOME="$XDG_CONFIG_HOME/android"

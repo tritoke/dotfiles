@@ -1,33 +1,28 @@
 #!/bin/sh
 echo '#!/usr/bin/env python
-import pwn
+from pwn import *
 
 pwn.context.terminal = ["st", "-e", "sh", "-c"]
 GDBSCRIPT = f"""
 c
 """
 addr_to_offset = lambda num: pwn.cyclic_find(num.to_bytes(4, "little"))
+elf = pwn.ELF("./<++>")
 
+def start(argv=None, *a, **kw):
+    """Start the exploit against the target."""
+    if argv is None:
+        argv = []
 
-def get_challenge(elf):
-    if pwn.args.REMOTE:
-        challenge = pwn.remote("<++>", <++>)
-    elif pwn.args.GDB:
-        challenge = pwn.process(elf.path)
-        pwn.gdb.attach(
-            challenge,
-            gdbscript=GDBSCRIPT
-        )
+    if args.REMOTE:
+        return remote("<++>", <++>)
+    elif args.GDB:
+        return gdb.debug([exe.path] + argv, gdbscript=GDBSCRIPT, *a, **kw)
     else:
-        challenge = pwn.process(elf.path)
-
-    return challenge
-
+        return process([exe.path] + argv, *a, **kw)
 
 def main():
-    elf = pwn.ELF("./<++>")
-
-    io = get_challenge(elf)
+    io = start()
 
     io.interactive()
 
