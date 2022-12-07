@@ -135,6 +135,9 @@ Plug 'alisdair/vim-armasm'
 " I write lots of languages :)
 Plug 'sheerun/vim-polyglot'
 
+" these things get hella annoying sometimes
+Plug 'vim-scripts/Improved-AnsiEsc'
+
 call plug#end()
 
 
