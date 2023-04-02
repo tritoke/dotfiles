@@ -11,3 +11,5 @@ else
   nnoremap <LocalLeader>v :!zathura "%:r".pdf & disown<enter><enter>
 endif
 
+" tell gnuplot to go actually make the tables... latexrun doesn't handle this well
+nnoremap <LocalLeader>g :!cd latex.out && gnuplot *.gnuplot<enter>
