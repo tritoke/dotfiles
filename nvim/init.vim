@@ -213,6 +213,9 @@ nnoremap <silent> <leader>zs :exe "sp term://zsh"<enter>
 nnoremap <silent> <leader>zv :exe "vsp term://zsh"<enter>
 nnoremap <silent> <leader>ze :exe "tabe term://zsh"<enter>
 
+" set the X11 KB map
+nnoremap <silent> <leader>kb :! setxkbmap gb<enter><enter>
+
 " Escape out of nested term:// things
 tnoremap <silent> <Esc> <C-\><C-n>
 
