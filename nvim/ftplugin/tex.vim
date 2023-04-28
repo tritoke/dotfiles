@@ -4,6 +4,9 @@ if expand('%:ph') =~ 'comp30040/report'
   nnoremap <LocalLeader>p :!latexrun --latex-args="-shell-escape" --bibtex-cmd=biber report.tex<enter>
   nnoremap <LocalLeader>x :!latexrun --latex-args="-shell-escape" --bibtex-cmd=biber report.tex --latex-cmd xelatex<enter>
   nnoremap <LocalLeader>v :!zathura report.pdf & disown<enter><enter>
+elseif expand('%:ph') =~ 'comp30040/screencast'
+  nnoremap <LocalLeader>p :!latexrun presentation.tex --latex-cmd xelatex<enter>
+  nnoremap <LocalLeader>v :!zathura presentation.pdf & disown<enter><enter>
 else
   nnoremap <LocalLeader>w :!texcount % \| grep Total -A1 \| grep -o '[0-9]\+'<enter>
   nnoremap <LocalLeader>p :!latexrun --latex-args="-shell-escape" %<enter>
