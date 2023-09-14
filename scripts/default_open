@@ -1,0 +1,6 @@
+#!/bin/sh
+
+/usr/bin/quasselclient &
+/usr/bin/thunderbird &
+/usr/bin/spotify &
+/snap/bin/discord &

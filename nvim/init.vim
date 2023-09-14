@@ -69,7 +69,8 @@ set undofile
 augroup jump_to_previous
   autocmd!
   autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-augroup END " }}}
+augroup END
+" }}}
 
 " Indentation settings {{{
 
@@ -127,7 +128,7 @@ endfunction
 call plug#begin('~/.local/share/nvim')
 
 " for tracking time spent programming in vim
-Plug 'wakatime/vim-wakatime'
+" Plug 'wakatime/vim-wakatime'
 
 " because arm assembly is very cool
 Plug 'alisdair/vim-armasm'
@@ -228,3 +229,9 @@ autocmd VimResized * wincmd =
 
 " }}}
 
+" Project specific vimrc's {{{
+if expand('%:ph') =~ 'projects/systemd_integration_test_overhaul'
+  source /home/samleonard/projects/systemd_integration_test_overhaul/systemd/.vimrc
+endif
+
+" }}}

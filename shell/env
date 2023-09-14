@@ -46,8 +46,9 @@ export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
 
 # location shortcuts {{{
 
-FZF="/usr/share/fzf"
-ZSH_PLUGINS="/usr/share/zsh/plugins"
+FZF="/usr/share/doc/fzf/examples"
+ZSH_PLUGINS="/usr/share"
+ZSH_PLUGINS2="/usr/local/share"
 ROCKYOU="/usr/share/wordlists/seclists-git/Passwords/Leaked-Databases/rockyou.txt"
 DIRLIST="/usr/share/dirbuster/directory-list-2.3-medium.txt"
 DIRLIST_SMALL="/usr/share/dirbuster/directory-list-2.3-small.txt"

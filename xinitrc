@@ -1,28 +1,21 @@
 # vim: ft=sh
 
+xlayoutdisplay -p DP-3-1 -o DP-3-2 -o DP-3-1
+setxkbmap gb
 
-if [ "$2" = plasma ]
-then
-  ssh-agent /usr/bin/startplasma-x11
-else
-  sleep 1
-  xlayoutdisplay -p DP-4 -o DP-0 -o DP-4 -o DP-2
+# sort out issues with JVM apps assuming a reparenting WM
+wmname LG3D                           
+export AWT_TOOLKIT=MToolkit
+export _JAVA_AWT_WM_NONREPARENTING=1
 
-  setxkbmap gb      # tell the keyboard to use a GB keymap
+# fix java font rendering
+export _JAVA_OPTIONS=-Dawt.useSystemAAFontSettings=on
 
-  # sort out issues with JVM apps assuming a reparenting WM
-  wmname LG3D                           
-  export AWT_TOOLKIT=MToolkit
-  export _JAVA_AWT_WM_NONREPARENTING=1
+~/.fehbg                       # set the background 
+slstatus 2>/dev/null &         # run the statusbar
 
-  # fix java font rendering
-  export _JAVA_OPTIONS=-Dawt.useSystemAAFontSettings=on
+# xbindkeys --poll-rc            # map side scroll to volume
+# dunst 2>/dev/null &            # run the notificaion manager
 
-
-  ~/.fehbg                       # set the background 
-  xbindkeys --poll-rc            # map side scroll to volume
-  slstatus 2>/dev/null &         # run the statusbar
-  dunst 2>/dev/null &            # run the notificaion manager
-
-  ssh-agent /usr/local/bin/dwm   # default to running installed version of DWM
-fi 
+# dmenu_path doesn't have the right path sometimes
+eval $(ssh-agent -s)

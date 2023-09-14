@@ -1,10 +1,13 @@
 # vim: ft=sh
 
+# project aliases
+alias mkosi="/home/samleonard/projects/systemd_integration_test_overhaul/mkosi/builddir/mkosi"
+
 # set global options
-alias fd='fd -IH'
+alias fd='fdfind -IH'
 alias grep='grep --color=auto'
 alias rg='rg -i --color=always 2>/dev/null'
-alias cat=bat
+alias cat=batcat
 alias catt='/bin/cat'
 alias h=tldr
 
@@ -24,22 +27,13 @@ alias find='find 2>/dev/null'
 
 # application shortcuts
 alias z="zathura"
+alias ipython="ipython3"
+alias vim="lvim"
 
 # enable viewing of svgs via rsvg-convert
 function feh_svg() {
   rsvg-convert $1 | feh -
 }
-
-# sudo bad
-alias sudo=doas
-
-# aliases for my nopass doas commands
-alias mount='doas /usr/bin/mount'
-alias umount='doas /usr/bin/umount'
-alias openvpn='doas /usr/bin/openvpn'
-alias archlinux-java='doas /usr/bin/archlinux-java'
-alias chvt='doas /usr/bin/chvt'
-alias setxkbmap='doas /usr/bin/setxkbmap'
 
 # some commands for spawning new terminals from the current directory
 alias new="st 2>/dev/null &!"

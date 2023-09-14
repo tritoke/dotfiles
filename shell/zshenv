@@ -11,3 +11,5 @@ then
     source $(pyenv root)/completions/pyenv.zsh
   fi
 fi
+. "$HOME/.cargo/env"
+. "$HOME/.env"
