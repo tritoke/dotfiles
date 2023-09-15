@@ -1,0 +1,5 @@
+vim.cmd.nnoremap("<LocalLeader>w", [[:!texcount % \| grep Total -A1 \| grep -o '[0-9]\+'<enter>]])
+vim.cmd.nnoremap("<LocalLeader>p", [[:!latexrun --latex-args="-shell-escape" --bibtex-cmd=biber %<enter>]])
+vim.cmd.nnoremap("<LocalLeader>x", [[:!latexrun --latex-args="-shell-escape" --bibtex-cmd=bibe % --latex-cmd xelatex<enter>]])
+vim.cmd.nnoremap("<LocalLeader>v", [[:!zathura "%:r".pdf & disown<enter><enter>]])
+vim.cmd.nnoremap("<LocalLeader>g", [[:!cd latex.out && gnuplot *.gnuplot<enter>]])
