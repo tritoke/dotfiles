@@ -1,0 +1,33 @@
+{
+  "shabang": {
+    "prefix": "#!",
+    "body": ["#!/usr/bin/env python"],
+    "description": "Add a shabang line"
+  },
+  "main": {
+    "prefix": "pymain",
+    "body": [
+      "if __name__ == \"__main__\":",
+      "    main()"
+    ],
+    "description": "Add a shabang line"
+  },
+  "img_imports": {
+    "prefix": "imgimp",
+    "body": [
+      "import numpy as np",
+      "from PIL import Image"
+    ],
+    "description": "Imports relating to image manipulation"
+  },
+  "ds_imports": {
+    "prefix": "dsimp",
+    "body": [
+      "import numpy as np",
+      "import pandas as pd",
+      "import matplotlib as mpl",
+      "import matplotlib.pyplot as plt"
+    ],
+    "description": "Imports relating to Data Science"
+  }
+}
