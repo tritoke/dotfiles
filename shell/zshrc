@@ -35,8 +35,8 @@ REPORTTIME=5
 WORDCHARS='`~!@#$%^&*()-_=+[{]}\|;:",<.>/?'"'"
 
 HISTFILE=~/.zsh_history
-HISTSIZE=100000
-SAVEHIST=100000
+HISTSIZE=1000000000
+SAVEHIST=1000000000
 
 # History Options
 setopt append_history           # Dont overwrite history
