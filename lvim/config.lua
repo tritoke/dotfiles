@@ -17,10 +17,17 @@ lvim.colorscheme = "ronny"
 -- replace pyright with ruff_lsp
 -- add `pyright` to `skipped_servers` list
 vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "pyright" })
--- remove `ruff_lsp` from `skipped_servers` list
-lvim.lsp.automatic_configuration.skipped_servers = vim.tbl_filter(function(server)
-  return server ~= "ruff_lsp"
-end, lvim.lsp.automatic_configuration.skipped_servers)
+
+-- remove `ruff_lsp` and `json` from `skipped_servers` list
+lvim.lsp.automatic_configuration.skipped_servers = vim.tbl_filter(
+  function(server)
+    return server ~= "ruff_lsp" and server ~= "json"
+  end,
+  lvim.lsp.automatic_configuration.skipped_servers
+)
+
+-- add json to the list of language servers
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "pyright" })
 
 -- space fold / unfold
 lvim.keys.normal_mode["<space>"] = "za"
@@ -44,6 +51,19 @@ lvim.keys.normal_mode["<leader>me"] = [["zyiw:exe "tabe man://".@z.""<enter>]]
 vim.opt.undolevels = 10000
 vim.opt.undodir = "/tmp/tritoke/vim_undo"
 vim.opt.undofile = true
+
+-- jump to previous location in file
+local jtp_group = vim.api.nvim_create_augroup('jump_to_previous', { clear = true })
+vim.api.nvim_create_autocmd({ "BufReadPost" }, {
+  pattern = "*",
+  group = jtp_group,
+  callback = function(_)
+    local last_line = vim.fn.line([['"]])
+    if last_line > 1 and last_line <= vim.fn.line("$") then
+      vim.fn.cursor({last_line, 0})
+    end
+  end
+})
 
 -- Project specific vimrc's 
 if string.find(vim.fn.expand("%:ph"), "projects/systemd_integration_test_overhaul") then

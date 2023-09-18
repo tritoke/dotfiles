@@ -1,7 +1,7 @@
 # vim: ft=sh
 
 xlayoutdisplay -p DP-3-1 -o DP-3-2 -o DP-3-1
-setxkbmap gb
+setxkbmap -option ctrl:nocaps gb
 
 # sort out issues with JVM apps assuming a reparenting WM
 wmname LG3D                           
