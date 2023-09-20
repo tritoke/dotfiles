@@ -14,20 +14,13 @@ lvim.plugins = {
 
 lvim.colorscheme = "ronny"
 
--- replace pyright with ruff_lsp
--- add `pyright` to `skipped_servers` list
-vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "pyright" })
-
--- remove `ruff_lsp` and `json` from `skipped_servers` list
+-- remove `json` from `skipped_servers` list
 lvim.lsp.automatic_configuration.skipped_servers = vim.tbl_filter(
   function(server)
-    return server ~= "ruff_lsp" and server ~= "json"
+    return server ~= "json"
   end,
   lvim.lsp.automatic_configuration.skipped_servers
 )
-
--- add json to the list of language servers
-vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "pyright" })
 
 -- space fold / unfold
 lvim.keys.normal_mode["<space>"] = "za"
