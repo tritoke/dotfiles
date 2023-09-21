@@ -17,6 +17,13 @@ export ANDROID_SDK_ROOT="/opt/android-sdk"
 
 # }}}
 
+# Make GPG use TTY pinentry {{{
+# ensure this line is present in the gpg agent config
+# echo "pinentry-program /usr/bin/pinentry-curses" >> .gnupg/gpg-agent.conf
+export GPG_TTY=$(tty)
+gpg-connect-agent updatestartuptty /bye >/dev/null
+# }}}
+
 # path additions {{{
 
 PATH="$PATH:$HOME/.local/bin"
