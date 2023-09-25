@@ -23,6 +23,7 @@ alias find='find 2>/dev/null'
 
 # application shortcuts
 alias z="zathura"
+alias vim="lvim"
 
 # enable viewing of svgs via rsvg-convert
 function feh_svg() {
