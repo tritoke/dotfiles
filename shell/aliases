@@ -158,3 +158,5 @@ function b64enc() {
 functio bindiff() {
   diff <(xxd $1) <(xxd $2)
 }
+
+alias binja=binaryninja
