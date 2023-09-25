@@ -1,8 +1,7 @@
 [user]
-  #email = tritoke@protonmail.com
-  #name = Sam
-  email = samuel.leonard@student.manchester.ac.uk
+  email = samuelleonard35@gmail.com
   name = Sam Leonard
+	signingkey = 93ED04802956FA85!
 
 [alias]
   lol = log --graph --decorate --pretty=oneline --abbrev-commit
@@ -18,7 +17,13 @@
   status = auto
 
 [pull]
-	rebase = true
+	rebase = false
 
 [init]
 	defaultBranch = main
+
+[credential]
+	helper = store
+
+[commit]
+	gpgsign = true
