@@ -1,8 +1,7 @@
 [user]
-  #email = tritoke@protonmail.com
-  #name = Sam
-  email = samuel.leonard@student.manchester.ac.uk
+  email = sam.leonard@codethink.co.uk
   name = Sam Leonard
+	signingkey = 96850F0978CE78F0!
 
 [alias]
   lol = log --graph --decorate --pretty=oneline --abbrev-commit
@@ -22,3 +21,6 @@
 
 [init]
 	defaultBranch = main
+
+[commit]
+	gpgsign = true

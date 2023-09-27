@@ -14,7 +14,7 @@ export _JAVA_OPTIONS=-Dawt.useSystemAAFontSettings=on
 ~/.fehbg                       # set the background 
 slstatus 2>/dev/null &         # run the statusbar
 
-# xbindkeys --poll-rc            # map side scroll to volume
+xbindkeys --poll-rc            # map side scroll to volume
 # dunst 2>/dev/null &            # run the notificaion manager
 
 # dmenu_path doesn't have the right path sometimes
