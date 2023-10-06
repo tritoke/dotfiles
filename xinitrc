@@ -1,6 +1,8 @@
 # vim: ft=sh
 
-xlayoutdisplay -p DP-3-1 -o DP-3-2 -o DP-3-1
+DP1=$(xrandr | grep -E 'DP-([0-9])-1 connected' | cut -d' ' -f1)
+DP2=$(xrandr | grep -E 'DP-([0-9])-2 connected' | cut -d' ' -f1)
+xlayoutdisplay -p "$DP1" -o "$DP2" -o "$DP1"
 setxkbmap -option ctrl:nocaps gb
 
 # sort out issues with JVM apps assuming a reparenting WM
@@ -17,5 +19,4 @@ slstatus 2>/dev/null &         # run the statusbar
 xbindkeys --poll-rc            # map side scroll to volume
 # dunst 2>/dev/null &            # run the notificaion manager
 
-# dmenu_path doesn't have the right path sometimes
 eval $(ssh-agent -s)
