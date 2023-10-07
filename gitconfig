@@ -9,6 +9,7 @@
   lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
   lolan = log --graph --decorate --pretty=oneline --abbrev-commit --all --name-status
   log1 = log --pretty=oneline --abbrev-commit
+  difft = difftool
 
 [color]
   branch = auto
@@ -27,3 +28,15 @@
 
 [commit]
 	gpgsign = true
+
+[diff]
+  tool = difftastic
+
+[difftool]
+  prompt = false
+
+[difftool "difftastic"]
+  cmd = difft "$LOCAL" "$REMOTE"
+
+[pager]
+  difftool = true
