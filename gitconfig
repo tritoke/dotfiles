@@ -1,8 +1,7 @@
 [user]
-  #email = tritoke@protonmail.com
-  #name = Sam
-  email = samuel.leonard@student.manchester.ac.uk
+  email = samuelleonard35@gmail.com
   name = Sam Leonard
+	signingkey = FDB71181BF389E18!
 
 [alias]
   lol = log --graph --decorate --pretty=oneline --abbrev-commit
@@ -10,6 +9,7 @@
   lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
   lolan = log --graph --decorate --pretty=oneline --abbrev-commit --all --name-status
   log1 = log --pretty=oneline --abbrev-commit
+  difft = difftool
 
 [color]
   branch = auto
@@ -22,3 +22,21 @@
 
 [init]
 	defaultBranch = main
+
+[credential]
+	helper = store
+
+[commit]
+	gpgsign = true
+
+[diff]
+  tool = difftastic
+
+[difftool]
+  prompt = false
+
+[difftool "difftastic"]
+  cmd = difft "$LOCAL" "$REMOTE"
+
+[pager]
+  difftool = true
