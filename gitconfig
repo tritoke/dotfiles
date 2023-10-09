@@ -9,7 +9,8 @@
   lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
   lolan = log --graph --decorate --pretty=oneline --abbrev-commit --all --name-status
   log1 = log --pretty=oneline --abbrev-commit
-  difft = log --pretty=oneline --abbrev-commit
+  difft = difftool
+  dlog = "!f() { GIT_EXTERNAL_DIFF=difft git log -p --ext-diff; }; f"
 
 [color]
   branch = auto
