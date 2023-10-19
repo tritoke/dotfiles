@@ -3,7 +3,7 @@
 # set global options
 alias fd='fd -IH'
 alias grep='grep --color=auto'
-alias rg='rg -i --color=always 2>/dev/null'
+alias rg='rg -S 2>/dev/null'
 alias cat=bat
 alias catt='/bin/cat'
 alias h=tldr
