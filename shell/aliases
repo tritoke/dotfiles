@@ -6,7 +6,7 @@ alias mkosi="/home/samleonard/projects/systemd_integration_test_overhaul/mkosi/b
 # set global options
 alias fd='fdfind -IH'
 alias grep='grep --color=auto'
-alias rg='rg -i --color=always 2>/dev/null'
+alias rg='rg -S 2>/dev/null'
 alias cat=batcat
 alias catt='/bin/cat'
 alias h=tldr

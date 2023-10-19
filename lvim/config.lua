@@ -142,6 +142,20 @@ lvim.builtin.which_key.mappings["C"] = {
 
 -- }}}
 
+-- formatter setup {{{
+
+lvim.format_on_save = {
+  enabled = true,
+  pattern = "*.rs"
+}
+
+local formatters = require "lvim.lsp.null-ls.formatters"
+formatters.setup {
+  { name = "rustfmt" },
+}
+
+-- }}}
+
 -- space fold / unfold
 lvim.keys.normal_mode["<space>"] = "za"
 
