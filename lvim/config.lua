@@ -146,13 +146,21 @@ lvim.builtin.which_key.mappings["C"] = {
 
 lvim.format_on_save = {
   enabled = true,
-  pattern = "*.rs"
+  pattern = { "*.rs", "*.py" }
 }
 
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
   { name = "rustfmt" },
+  { name = "black" },
 }
+
+-- }}}
+
+-- linter setup {{{
+
+local linters = require "lvim.lsp.null-ls.linters"
+linters.setup { { command = "ruff", filetypes = { "python" } } }
 
 -- }}}
 
