@@ -7,3 +7,6 @@ shade/
 
 # don't need to track this...
 nvim/log
+
+# AHHHH
+lvim/lazy-lock.json
