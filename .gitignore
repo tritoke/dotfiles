@@ -4,3 +4,9 @@ shade/
 
 " don't need this being tracked
 .netrwhist
+
+" backup files are cringe
+*.bak
+
+" kitty things
+/kitty/*.json
