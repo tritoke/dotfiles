@@ -10,3 +10,9 @@ nvim/log
 
 # nope
 lvim/lazy-lock.json
+
+# backup files are cringe
+*.bak
+
+# kitty things
+/kitty/*.json
