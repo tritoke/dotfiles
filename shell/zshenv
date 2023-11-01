@@ -1,13 +1,4 @@
 # vim:foldmethod=marker
 
-# man page said so
-if [[ -o rcs ]]
-then
-  # setup pyenv
-  if command -v pyenv 1>/dev/null 2>&1
-  then
-    eval "$(pyenv init -)" # Initialise pyenv
-    eval "$(pyenv virtualenv-init -)" # initialise virtualenvs
-    source $(pyenv root)/completions/pyenv.zsh
-  fi
-fi
+. "$HOME/.cargo/env"
+. "$HOME/.env"

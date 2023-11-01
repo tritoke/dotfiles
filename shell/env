@@ -15,12 +15,15 @@ export GOPATH="$HOME/.local/go:$HOME/Code/Go"
 
 export ANDROID_SDK_ROOT="/opt/android-sdk"
 
+export PYENV_ROOT="$HOME/.local/share/pyenv"
+
 # }}}
 
 # path additions {{{
 
 PATH="$PATH:$HOME/.local/bin"
 PATH="$PATH:$HOME/.local/go/bin"
+PATH="$PATH:$HOME/.local/share/pyenv/bin"
 PATH="$PATH:$HOME/.local/share/JetBrains/Toolbox/scripts"
 PATH="$PATH:$HOME/.cargo/bin"
 export PATH="$PATH:$HOME/.scripts"
