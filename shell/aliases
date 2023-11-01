@@ -144,3 +144,9 @@ function b64dec() {
 function b64enc() {
   echo $1 | base64
 }
+
+function load_pyenv() {
+  eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init -)"
+  . "$(pyenv root)/completions/pyenv.zsh"
+}
