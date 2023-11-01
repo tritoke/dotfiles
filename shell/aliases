@@ -45,9 +45,6 @@ alias setxkbmap='doas /usr/bin/setxkbmap'
 # some commands for spawning new terminals from the current directory
 alias new="st 2>/dev/null &!"
 alias news="st -f 'undefined-medium:pixelsize=10:autohint=false:antialias=false' 2>/dev/null &!"
-alias newm="st -f 'JetBrains Mono:size=12' 2>/dev/null &!"
-alias newn="st -f 'JetBrains Mono NL:size=12' 2>/dev/null &!"
-alias newb="st -f 'JetBrains Mono:size=14' 2>/dev/null &!"
 alias renew="st &! exit"
 
 # arch uses the lightweight pinky command instead of finger
