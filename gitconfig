@@ -9,6 +9,7 @@
   lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
   lolan = log --graph --decorate --pretty=oneline --abbrev-commit --all --name-status
   log1 = log --pretty=oneline --abbrev-commit
+  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
   difft = difftool
   dlog = "!f() { GIT_EXTERNAL_DIFF=difft git log -p --ext-diff; }; f"
 
