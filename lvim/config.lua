@@ -167,7 +167,7 @@ lvim.keys.normal_mode["H"] = ":BufferLineCyclePrev<CR>"
 lvim.keys.normal_mode["<leader>n"] = [[<cmd>/<++><enter>:let @/=""<enter>ca<]]
 
 -- open a new terminal
-lvim.keys.normal_mode["<leader>t"] = "<cmd>:!nohup st&>/dev/null&<enter><enter>"
+lvim.keys.normal_mode["<leader>t"] = "<cmd>:!nohup kitty&>/dev/null&<enter><enter>"
 
 -- open man pages in splits / tabs
 lvim.keys.normal_mode["<leader>ms"] = [["zyiw:exe "sp man://".@z.""<enter>]]
