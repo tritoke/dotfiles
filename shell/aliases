@@ -151,3 +151,5 @@ function load_pyenv() {
   eval "$(pyenv virtualenv-init -)"
   . "$(pyenv root)/completions/pyenv.zsh"
 }
+
+alias jadx-gui="flatpak run com.github.skylot.jadx"
