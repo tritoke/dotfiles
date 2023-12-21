@@ -1,8 +1,5 @@
 # vim: ft=sh
 
-# project aliases
-alias mkosi="/home/samleonard/projects/systemd_integration_test_overhaul/mkosi/builddir/mkosi"
-
 # set global options
 alias fd='fdfind -IH'
 alias grep='grep --color=auto'

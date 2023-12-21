@@ -83,9 +83,9 @@ source ~/.aliases
 
 # fzf key bindings
 source "$FZF/key-bindings.zsh"
-
 # zsh syntax highlighting
 source "$ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+export ZSH_HIGHLIGHT_STYLES[comment]="fg=8" # kitty refuses to have bold=bright
 # zsh autosuggestions
 source "$ZSH_PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh"
 # zsh history substring search
