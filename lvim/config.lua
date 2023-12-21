@@ -11,6 +11,13 @@ lvim.plugins = {
     "folke/trouble.nvim",
     cmd = "TroubleToggle"
   },
+  -- Sometimes seeing hex codes as colours is nice...
+  {
+    "norcalli/nvim-colorizer.lua",
+    config = function()
+      require("colorizer").setup()
+    end
+  },
   -- Rust Plugins {{{
   "simrat39/rust-tools.nvim",
   {
