@@ -163,8 +163,35 @@ formatters.setup {
 
 -- }}}
 
+-- linter setup {{{
+
+local linters = require "lvim.lsp.null-ls.linters"
+linters.setup { { command = "ruff", filetypes = { "python" } } }
+
+-- }}}
+
+-- folding setup {{{
+
+-- use expression based folding
+vim.opt.foldmethod = "expr"
+
+-- use treesitter to determine fold expressions
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+
+-- default to unfolded
+-- autocmd BufReadPost,FileReadPost * normal zR
+vim.api.nvim_create_autocmd({"bufreadpost", "filereadpost"}, {
+  pattern = "*",
+  callback = function(_)
+    vim.opt.foldlevel = 99
+    vim.opt.foldlevelstart = 99
+  end
+})
+
 -- space fold / unfold
 lvim.keys.normal_mode["<space>"] = "za"
+
+-- }}}
 
 -- navigate between tabs nicely navigate between tabs nicely navigate between tabs nicely navigate between tabs nicely navigate between tabs nicely navigate between tabs nicely navigate between tabs nicely navigate between tabs nicely navigate between tabs nicely navigate between tabs nicely
 lvim.keys.normal_mode["L"] = ":BufferLineCycleNext<CR>"
