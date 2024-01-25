@@ -31,16 +31,16 @@ function feh_svg() {
   rsvg-convert $1 | feh -
 }
 
-# sudo bad
-alias sudo=doas
+# pls do my aliases...
+alias sudo='sudo '
 
-# aliases for my nopass doas commands
-alias mount='doas /usr/bin/mount'
-alias umount='doas /usr/bin/umount'
-alias openvpn='doas /usr/bin/openvpn'
-alias archlinux-java='doas /usr/bin/archlinux-java'
-alias chvt='doas /usr/bin/chvt'
-alias setxkbmap='doas /usr/bin/setxkbmap'
+# aliases for my nopass sudo commands
+alias mount='sudo /usr/bin/mount'
+alias umount='sudo /usr/bin/umount'
+alias openvpn='sudo /usr/bin/openvpn'
+alias archlinux-java='sudo /usr/bin/archlinux-java'
+alias chvt='sudo /usr/bin/chvt'
+alias setxkbmap='sudo /usr/bin/setxkbmap'
 
 # some commands for spawning new terminals from the current directory
 alias new="kitty 2>/dev/null &!"
