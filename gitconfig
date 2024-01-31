@@ -1,7 +1,7 @@
 [user]
   email = samuelleonard35@gmail.com
   name = Sam Leonard
-	signingkey = 93ED04802956FA85!
+	signingkey = 652BB38CC02E3918!
 
 [alias]
   lol = log --graph --decorate --pretty=oneline --abbrev-commit

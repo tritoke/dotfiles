@@ -34,6 +34,10 @@ then
   export MANPATH="`manpath`:$HOME/.local/share/man"
 fi
 
+# add /usr/local to PYTHONPATH
+PY_LOCAL_BASE="/usr/local/lib/$(python -V | cut -d. -f3 --complement | tr '[[:upper:]]' '[[:lower:]]' | tr -d ' ')"
+export PYTHONPATH="$PY_LOCAL_BASE:$PY_LOCAL_BASE/site-packages:$PYTHONPATH"
+
 # }}}
 
 # XDG base dir support {{{
