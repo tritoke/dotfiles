@@ -20,7 +20,7 @@ SPACESHIP_BATTERY_THRESHOLD=4
 SPACESHIP_VI_MODE_SHOW=false
 
 #                       time user dir host git hg gradle maven package node ruby elm elixir xcode swift golang php rust haskell julia docker aws gcloud venv conda pyenv dotnet ember kubectl terraform ibmcloud exec_time line_sep battery vi_mode jobs exit_code char
-SPACESHIP_PROMPT_ORDER=(time user dir host git    gradle maven package node ruby                        golang php rust haskell julia        aws        venv       pyenv dotnet                                  exec_time line_sep                 jobs exit_code char)
+SPACESHIP_PROMPT_ORDER=(time user dir host git                 package node ruby                        golang php rust haskell julia        aws        venv             dotnet                                  exec_time line_sep                 jobs exit_code char)
 
 # }}}
 

@@ -23,6 +23,7 @@ else
   xbindkeys --poll-rc            # map side scroll to volume
   slstatus 2>/dev/null &         # run the statusbar
   dunst 2>/dev/null &            # run the notificaion manager
+  xss-lock slock &               # lock on suspend
 
   ssh-agent /usr/local/bin/dwm   # default to running installed version of DWM
 fi 
