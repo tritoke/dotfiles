@@ -66,6 +66,7 @@ done
 
 $installer 'xinitrc'
 $installer 'gitconfig'
+$installer 'xbindkeysrc'
 $installer 'scripts'
 
 $installer 'nvim' "${XDG_CONFIG_HOME:-$HOME/.config}" 'yes'
