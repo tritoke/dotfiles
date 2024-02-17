@@ -19,6 +19,15 @@ export PYENV_ROOT="$HOME/.local/share/pyenv"
 
 # }}}
 
+# dark theme stuff {{{
+
+# https://wiki.archlinux.org/title/Dark_mode_switching
+GTK_THEME=Adwaita:dark
+GTK2_RC_FILES=/usr/share/themes/Adwaita-dark/gtk-2.0/gtkrc
+QT_STYLE_OVERRIDE=Adwaita-Dark
+
+# }}}
+
 # path additions {{{
 
 PATH="$PATH:$HOME/.local/bin"
@@ -62,7 +71,7 @@ VENV_DIR="$XDG_DATA_HOME/venvs"
 
 # }}}
 
-# Program default argument sets {{{
+# program default argument sets {{{
 # nmap
 SMBARGS="-p445 --script=smb-enum-shares,smb-enum-users"
 NFSARGS="-p111 --script=nfs-ls,nfs-statfs,nfs-showmount"
