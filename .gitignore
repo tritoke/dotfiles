@@ -10,3 +10,5 @@ shade/
 
 " kitty things
 /kitty/*.json
+
+/lvim/lazy-lock.json

@@ -1,7 +1,7 @@
 [user]
   email = samuelleonard35@gmail.com
   name = Sam Leonard
-	signingkey = FDB71181BF389E18!
+	signingkey = 0136C9BD529ACE0D!
 
 [alias]
   lol = log --graph --decorate --pretty=oneline --abbrev-commit
@@ -41,3 +41,4 @@
 
 [pager]
   difftool = true
+

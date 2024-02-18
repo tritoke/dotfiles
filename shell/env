@@ -6,8 +6,6 @@
 export LANG="en_GB.UTF-8"
 export LC_ALL="en_GB.UTF-8" 
 
-export SSH_KEY_PATH="$HOME/.ssh/rsa_id"
-
 export EDITOR="/home/tritoke/.local/bin/lvim"
 export BROWSER="firefox-developer-edition"
 
@@ -16,6 +14,10 @@ export GOPATH="$HOME/.local/go:$HOME/Code/Go"
 export ANDROID_SDK_ROOT="/opt/android-sdk"
 
 export VENV_HOME="$XDG_DATA_HOME/venvs"
+
+# colour man
+export MANPAGER="less -R --use-color -Dd+r -Du+b"
+export MANROFFOPT="-P -c"
 
 # }}}
 
@@ -50,9 +52,9 @@ export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
 
 FZF="/usr/share/fzf"
 ZSH_PLUGINS="/usr/share/zsh/plugins"
-ROCKYOU="/usr/share/wordlists/seclists-git/Passwords/Leaked-Databases/rockyou.txt"
-DIRLIST="/usr/share/dirbuster/directory-list-2.3-medium.txt"
-DIRLIST_SMALL="/usr/share/dirbuster/directory-list-2.3-small.txt"
+ROCKYOU="/usr/share/seclists/Passwords/Leaked-Databases/rockyou.txt"
+DIRLIST="/usr/share/seclists/Discovery/Web-Content/raft-large-words.txt"
+DIRLIST_SMALL="/usr/share/seclists/Discovery/Web-Content/raft-small-words.txt"
 
 # }}}
 

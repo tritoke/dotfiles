@@ -64,9 +64,11 @@ for file in shell/*
 do $installer "$file"
 done
 $installer 'xinitrc'
+$installer 'gitconfig'
 $installer 'nvim' "${XDG_CONFIG_HOME:-$HOME/.config}" 'yes'
 
 mkdir -p "${XDG_CONFIG_HOME:-$HOME/.config}/dunst"
 $installer 'dunstrc' "${XDG_CONFIG_HOME:-$HOME/.config}/dunst" 'yes'
 $installer 'resources/emojis' "${XDG_DATA_HOME:-$HOME/.local/share}" 'yes'
+$installer 'resources/gitmojis' "${XDG_DATA_HOME:-$HOME/.local/share}" 'yes'
 
