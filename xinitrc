@@ -15,8 +15,7 @@ export _JAVA_OPTIONS=-Dawt.useSystemAAFontSettings=on
 
 ~/.fehbg                       # set the background 
 slstatus 2>/dev/null &         # run the statusbar
-
+xss-lock slock &               # autolocker
 xbindkeys --poll-rc            # map side scroll to volume
-# dunst 2>/dev/null &            # run the notificaion manager
 
-eval $(ssh-agent -s)
+eval "$(ssh-agent -s)"
