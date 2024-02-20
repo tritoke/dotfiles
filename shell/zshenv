@@ -1,4 +1,1 @@
-# vim:foldmethod=marker
-
-. "$HOME/.cargo/env"
-. "$HOME/.env"
+env
