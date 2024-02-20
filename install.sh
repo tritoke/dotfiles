@@ -1,5 +1,13 @@
 #!/bin/sh
 
+hash() {
+  loc=$1
+  if [ -d $loc ]
+  then find $loc -type f -exec sha256sum | cut -d' ' -f1 | sha256sum | cut -d' ' -f1
+  else sha256sum $loc | cut -d' ' -f1
+  fi
+}
+
 cmdinstall() {
 	file=$1
 	name=$(echo $file | rev | cut -d '/' -f 1 | rev)
@@ -10,6 +18,7 @@ cmdinstall() {
 
 	if [ -e "$location/$name" ]
 	then
+    if [ "$(readlink $location/$name)" = "$PWD/$file" ]; then return; fi
 		message="Do you want to replace your $name with the new one? (y/N): "
 	else
 		message="Do you want to install $name? (y/N): "
@@ -36,6 +45,7 @@ dmenuinstall() {
 
 	if [ -e "$location/$name" ]
 	then
+    if [ "$(readlink $location/$name)" = "$PWD/$file" ]; then return; fi
 		message="Do you want to replace your $name with the new one?"
 	else
 		message="Do you want to install $name?"
@@ -60,6 +70,9 @@ else
   installer=cmdinstall
 fi
 
+XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+
 for file in shell/*
 do $installer "$file"
 done
@@ -69,13 +82,16 @@ $installer 'gitconfig'
 $installer 'xbindkeysrc'
 $installer 'scripts'
 
-$installer 'nvim' "${XDG_CONFIG_HOME:-$HOME/.config}" 'yes'
-$installer 'lvim' "${XDG_CONFIG_HOME:-$HOME/.config}" 'yes'
-$installer 'kitty' "${XDG_CONFIG_HOME:-$HOME/.config}" 'yes'
+for dir in "nvim" "lvim" "kitty"
+do $installer "$dir" "$XDG_CONFIG_HOME" 'yes'
+done
 
-mkdir -p "${XDG_CONFIG_HOME:-$HOME/.config}/dunst"
-$installer 'dunstrc' "${XDG_CONFIG_HOME:-$HOME/.config}/dunst" 'yes'
+for tool in "dunst" "zathura"
+do
+  mkdir -p "$XDG_CONFIG_HOME/$tool"
+  $installer "${tool}rc" "$XDG_CONFIG_HOME/$tool" 'yes'
+done
 
-$installer 'resources/emojis' "${XDG_DATA_HOME:-$HOME/.local/share}" 'yes'
-$installer 'resources/gitmojis' "${XDG_DATA_HOME:-$HOME/.local/share}" 'yes'
-
+for file in resources/*
+do $installer "$file" "$XDG_DATA_HOME" 'yes'
+done
