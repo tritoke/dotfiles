@@ -17,6 +17,9 @@ export ANDROID_SDK_ROOT="/opt/android-sdk"
 
 export PYENV_ROOT="$HOME/.local/share/pyenv"
 
+export MANPAGER="less -R"
+export MANROFFOPT="-P -c"
+
 # }}}
 
 # dark theme stuff {{{
