@@ -79,6 +79,7 @@ done
 
 $installer 'xinitrc'
 $installer 'gitconfig'
+$installer 'gitconfig-home'
 $installer 'xbindkeysrc'
 $installer 'scripts'
 

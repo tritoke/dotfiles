@@ -1,0 +1,7 @@
+[user]
+  name = tritoke
+  email = tritoke@protonmail.com
+	signingkey = 4E13CB2D
+
+[core]
+  sshCommand = "ssh -i /home/samleonard/.ssh/tritoke_id_ed25519"

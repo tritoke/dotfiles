@@ -1,7 +1,13 @@
 [user]
-  email = samuelleonard35@gmail.com
   name = Sam Leonard
-	signingkey = 652BB38CC02E3918!
+  email = sam.leonard@codethink.co.uk
+	signingkey = 4F00CD0F!
+
+[includeIf "gitdir:~/.builds/"]
+  path = "~/.gitconfig-home"
+
+[includeIf "gitdir:~/.dotfiles/"]
+  path = "~/.gitconfig-home"
 
 [alias]
   lol = log --graph --decorate --pretty=oneline --abbrev-commit
