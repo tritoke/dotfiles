@@ -26,5 +26,5 @@ else
   slstatus 2>/dev/null &         # run the statusbar
   xss-lock slock &               # lock on suspend
 
-  ssh-agent /usr/local/bin/dwm   # default to running installed version of DWM
+  ssh-agent /home/samleonard/.local/bin/dwm
 fi 
