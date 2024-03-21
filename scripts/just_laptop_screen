@@ -15,5 +15,9 @@ done
 
 DPI=${1:-96}
 
-xrandr --dpi $DPI --output eDP-1 --pos 0x0 --mode 1920x1200 --rate 60 --primary "${args[@]}"
+echo "DPI: $DPI"
+echo "eDP-1: pos 0x0, mode 1920x1200, rate 60, primary"
+echo "$DP1: off"
+echo "$DP2: off"
+xrandr --dpi "$DPI" --output eDP-1 --pos 0x0 --mode 1920x1200 --rate 60 --primary "${args[@]}"
 echo "Xft.dpi: $DPI" | xrdb -merge

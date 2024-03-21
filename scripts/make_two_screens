@@ -11,6 +11,10 @@ then
   exit 1
 fi
 
+echo "DPI: $DPI"
+echo "eDP-1: off"
+echo "$DP1: pos 0x0, mode 1920x1080, rate 75"
+echo "$DP2: pos 19201x0, mode 1920x1080, rate 75, primary"
 xrandr --dpi "$DPI" --output eDP-1 --off \
   --output "$DP2" --pos 0x0 --mode 1920x1080 --rate 75 \
   --output "$DP1" --pos 1920x0 --mode 1920x1080 --rate 75 --primary
