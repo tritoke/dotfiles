@@ -17,7 +17,7 @@ alias tree='exa -T --color=always'
 
 # make less interpret control characters
 # this is why always colour is used above
-alias less='less -r'
+alias less='less -R'
 
 # make find errors go to /dev/null
 alias find='find 2>/dev/null'

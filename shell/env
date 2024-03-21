@@ -9,7 +9,7 @@ export LC_ALL="en_GB.UTF-8"
 export SSH_KEY_PATH="$HOME/.ssh/rsa_id"
 
 export EDITOR="lvim"
-export BROWSER="firefox-developer-edition"
+export BROWSER="firefox-devedition"
 
 export GOPATH="$HOME/.local/go:$HOME/Code/Go"
 
@@ -56,13 +56,13 @@ export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
 
 # location shortcuts {{{
 
-FZF="/usr/share/doc/fzf/examples"
-ZSH_PLUGINS="/usr/share"
-ZSH_PLUGINS2="/usr/local/share"
-ROCKYOU="/usr/share/wordlists/seclists-git/Passwords/Leaked-Databases/rockyou.txt"
-DIRLIST="/usr/share/dirbuster/directory-list-2.3-medium.txt"
-DIRLIST_SMALL="/usr/share/dirbuster/directory-list-2.3-small.txt"
-VENV_DIR="$XDG_DATA_HOME/venvs"
+export FZF="/usr/share/doc/fzf/examples"
+export ZSH_PLUGINS="/usr/share"
+export ZSH_PLUGINS2="/usr/local/share"
+export ROCKYOU="$HOME/.builds/SecLists/Passwords/Leaked-Databases/rockyou.txt"
+export DIRLIST="$HOME/.builds/SecLists/Discovery/Web-Content/raft-medium-words.txt"
+export DIRLIST_SMALL="$HOME/.builds/SecLists/Discovery/Web-Content/raft-small-words.txt"
+export VENV_DIR="$XDG_DATA_HOME/venvs"
 
 # }}}
 
