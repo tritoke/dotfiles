@@ -42,3 +42,9 @@
 
 [rerere]
 	enabled = true
+
+[includeIf "gitdir:~/.builds/"]
+    path = .gitconfig-tritoke
+
+[includeIf "gitdir:~/.dotfiles/"]
+    path = .gitconfig-tritoke

@@ -1,0 +1,7 @@
+[core]
+	sshCommand = ssh -F /dev/null -o 'IdentityFile /home/samleonard/.ssh/tritoke_github.id_ed25519' -o 'IdentitiesOnly yes' -o 'AddKeysToAgent yes'
+
+[user]
+	name = tritoke
+	email = tritoke@protonmail.com
+	signingkey = 1041B40770A8A69B!

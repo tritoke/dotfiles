@@ -71,6 +71,7 @@ done
 
 $installer 'xinitrc'
 $installer 'gitconfig'
+$installer 'gitconfig-tritoke'
 $installer 'xbindkeysrc'
 $installer 'scripts'
 
