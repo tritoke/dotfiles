@@ -1,3 +1,5 @@
+set database                    "sqlite"
+
 set default-bg                  "#1d2021"
 set default-fg                  "#3c3836"
 
