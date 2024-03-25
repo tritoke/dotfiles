@@ -16,7 +16,7 @@ export ANDROID_SDK_ROOT="/opt/android-sdk"
 export VENV_HOME="$XDG_DATA_HOME/venvs"
 
 # colour man
-export MANPAGER="less -R --use-color -Dd+r -Du+b"
+export MANPAGER="less -R"
 export MANROFFOPT="-P -c"
 
 # }}}
