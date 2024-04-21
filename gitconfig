@@ -1,7 +1,7 @@
 [user]
   email = samuelleonard35@gmail.com
   name = Sam Leonard
-	signingkey = 652BB38CC02E3918!
+  signingkey = 652BB38CC02E3918!
 
 [alias]
   lol = log --graph --decorate --pretty=oneline --abbrev-commit
@@ -12,6 +12,8 @@
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
   difft = difftool
   dlog = "!f() { GIT_EXTERNAL_DIFF=difft git log -p --ext-diff; }; f"
+  show-pick = "!git log --color=always --oneline | fzf --ansi --preview='git show --color=always $(echo {} | cut -d\\  -f1)' | awk '{print $1}' | xargs -r git show"
+  checkout-pick = "!git branch --all --color=always | cut -b 3- | fzf --ansi --preview='git show --color=always $(echo {} | cut -d\\  -f1)' | awk '{print $1}' | xargs -r git checkout"
 
 [color]
   branch = auto
@@ -20,16 +22,16 @@
   status = auto
 
 [pull]
-	rebase = false
+  rebase = false
 
 [init]
-	defaultBranch = main
+  defaultBranch = main
 
 [credential]
-	helper = store
+  helper = store
 
 [commit]
-	gpgsign = true
+  gpgsign = true
 
 [diff]
   tool = difftastic
@@ -42,3 +44,17 @@
 
 [pager]
   difftool = true
+
+[core]
+  pager = delta
+
+[interactive]
+  diffFilter = delta --color-only
+
+[delta]
+  navigate = true    # use n and N to move between diff sections
+  light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+  hyperlinks = true
+  hyperlinks-file-link-format = "file-line://{path}:{line}"
+  line-numbers = true
+  side-by-side = true
