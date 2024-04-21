@@ -11,9 +11,9 @@
   log1 = log --pretty=oneline --abbrev-commit
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
   difft = difftool
-  dlog = "!GIT_EXTERNAL_DIFF=difft git log -p --ext-diff $@"
-  show-pick = "!git log --color=always --oneline $@ | fzf --ansi --preview='git show --color=always $(echo {} | cut -d\\  -f1)' | awk '{print $1}' | xargs -r git show"
-  checkout-pick = "!git branch --all --color=always $@ | cut -b 3- | fzf --ansi --preview='git show --color=always $(echo {} | cut -d\\  -f1)' | awk '{print $1}' | xargs -r git checkout"
+  dlog = "!GIT_EXTERNAL_DIFF=difft git log -p --ext-diff"
+  show-pick = "!f() { git log --color=always --oneline $@ | fzf --ansi --preview='git show --color=always $(echo {} | cut -d\" \" -f1)' | awk '{print $1}' | xargs -r git show; }; f"
+  checkout-pick = "!git branch --all --color=always | cut -b 3- | fzf --ansi --preview='git show --color=always {}' | xargs -r git checkout"
 
 [color]
   branch = auto
