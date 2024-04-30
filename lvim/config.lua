@@ -127,6 +127,7 @@ end
 -- rust which_key bindings {{{
 lvim.builtin.which_key.mappings["C"] = {
   name = "Rust",
+  a = { "<cmd>RustCodeAction<Cr>", "Run Code Action" },
   r = { "<cmd>RustRunnables<Cr>", "Runnables" },
   t = { "<cmd>lua _CARGO_TEST()<cr>", "Cargo Test" },
   m = { "<cmd>RustExpandMacro<Cr>", "Expand Macro" },
