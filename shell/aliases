@@ -182,6 +182,5 @@ function borg_create_backup() {
                                                                                    \
           "$REPOSITORY"::'{hostname}-{now}'                                        \
           /home                                                                    \
-          /var/lib/iwd                                                             \
           /usr/local
 }
