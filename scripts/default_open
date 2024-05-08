@@ -1,7 +1,6 @@
 #!/bin/sh
 
 /usr/bin/quasselclient &
-/usr/bin/thunderbird &
 /usr/bin/spotify &
-/snap/bin/discord &
-/usr/bin/telegram-desktop &
+/usr/bin/discord &
+/usr/bin/thunderbird &
