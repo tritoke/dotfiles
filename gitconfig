@@ -1,7 +1,7 @@
 [user]
   email = sam.leonard@codethink.co.uk
   name = Sam Leonard
-	signingkey = 96850F0978CE78F0!
+	signingkey = 229CFF7096841F33!
 
 [alias]
   lol = log --graph --decorate --pretty=oneline --abbrev-commit
