@@ -228,7 +228,7 @@ vim.api.nvim_create_autocmd({ "BufReadPost" }, {
 })
 
 -- Project specific vimrc's 
-if string.find(vim.fn.expand("%:ph"), "projects/systemd_integration_test_overhaul") then
-  vim.cmd.source("/home/samleonard/projects/systemd_integration_test_overhaul/systemd/.vimrc")
-end
+-- if string.find(vim.fn.expand("%:ph"), "projects/systemd_integration_test_overhaul/systemd") then
+--   vim.cmd.source("/home/samleonard/projects/systemd_integration_test_overhaul/systemd/.vimrc")
+-- end
 
