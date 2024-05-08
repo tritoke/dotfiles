@@ -18,4 +18,7 @@ slstatus 2>/dev/null &         # run the statusbar
 xss-lock slock &               # autolocker
 xbindkeys --poll-rc            # map side scroll to volume
 
-eval "$(ssh-agent -s)"
+# needed by dunst
+systemctl --user import-environment DISPLAY
+
+ssh-agent /usr/local/bin/dwm
