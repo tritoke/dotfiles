@@ -1,6 +1,6 @@
 # Make sure the GRML zsh config is installed so that cd is good and other things..
 
-source "$ZSH_PLUGINS2/spaceship-prompt/spaceship.zsh"
+source "/usr/lib/spaceship-prompt/spaceship.zsh"
 
 # spaceship options {{{
 # load completion and prompt
@@ -89,7 +89,7 @@ export ZSH_HIGHLIGHT_STYLES[comment]="fg=8" # kitty refuses to have bold=bright
 # zsh autosuggestions
 source "$ZSH_PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh"
 # zsh history substring search
-source "$ZSH_PLUGINS2/zsh-history-substring-search/zsh-history-substring-search.zsh"
+source "$ZSH_PLUGINS/zsh-history-substring-search/zsh-history-substring-search.zsh"
 
 # }}}
 

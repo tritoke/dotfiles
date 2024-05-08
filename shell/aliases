@@ -1,10 +1,10 @@
 # vim: ft=sh
 
 # set global options
-alias fd='fdfind -IH'
+alias fd='fd -IH'
 alias grep='grep --color=auto'
 alias rg='rg -S 2>/dev/null'
-alias cat=batcat
+alias cat=bat
 alias catt='/bin/cat'
 alias h=tldr
 
@@ -26,6 +26,9 @@ alias find='find 2>/dev/null'
 alias z="zathura"
 alias ipython="ipython3"
 alias vim="lvim"
+
+# if we are running in kitty then alias ssh
+[ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
 
 # enable viewing of svgs via rsvg-convert
 function feh_svg() {
@@ -75,8 +78,8 @@ alias autopsy="docker run \
             -it \
             --shm-size 2G \
             -v /tmp/.X11-unix:/tmp/.X11-unix \
-            -v $(pwd):/root/case \
-            -e DISPLAY=$DISPLAY \
+            -v \$(pwd):/root/case \
+            -e DISPLAY=\$DISPLAY \
             -e JAVA_TOOL_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel' \
             -e _JAVA_AWT_WM_NONREPARENTING=1 \
             --network host \
@@ -114,7 +117,7 @@ function komodo_shell() {
           --rm \
           --shm-size 2G \
           -v /tmp/.X11-unix:/tmp/.X11-unix \
-          -v $(pwd):/home/tritoke/comp22712 \
+          -v "$(pwd):/home/tritoke/comp22712" \
           -e DISPLAY=$DISPLAY \
           --device=/dev/dri \
           komodo
@@ -133,7 +136,7 @@ function format_c() {
     echo -n ', TabWidth: 4'
     echo -n '}'
   })
-  clang-format -i -style="$style" $@
+  clang-format -i -style="$style" "$@"
 }
 
 alias crackmapexec='docker run --rm -it byt3bl33d3r/crackmapexec'
@@ -154,3 +157,31 @@ function load_pyenv() {
 }
 
 alias jadx-gui="flatpak run com.github.skylot.jadx"
+
+function borg_create_backup() {
+  REPOSITORY="$1"
+  borg create -v                                                                   \
+          --stats                                                                  \
+          --progress                                                               \
+          --show-rc                                                                \
+          --compression lz4                                                        \
+          --exclude-caches                                                         \
+          --exclude '/home/*/.cache/*'                                             \
+          --exclude '/var/cache/*'                                                 \
+          --exclude '/var/tmp/*'                                                   \
+          --exclude '/home/samleonard/.steam/*'                                    \
+          --exclude '/home/samleonard/.var/*'                                      \
+          --exclude '/home/samleonard/.builds/*'                                   \
+          --exclude '/home/samleonard/snap/*'                                      \
+          --exclude '/home/samleonard/.rustup/toolchains/*'                        \
+          --exclude '/home/samleonard/.cargo/*'                                    \
+          --exclude '/home/samleonard/.gradle/*'                                   \
+          --exclude '/home/samleonard/.wine/*'                                     \
+          --exclude '/home/samleonard/mnt/*'                                       \
+          --exclude '/home/samleonard/Documents/keyboard_setup/qmk_firmware/lib/*' \
+                                                                                   \
+          "$REPOSITORY"::'{hostname}-{now}'                                        \
+          /home                                                                    \
+          /var/lib/iwd                                                             \
+          /usr/local
+}
