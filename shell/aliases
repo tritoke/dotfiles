@@ -30,9 +30,6 @@ function feh_svg() {
   rsvg-convert $1 | feh -
 }
 
-# expand my aliases please
-alias sudo='sudo '
-
 # aliases for my nopass sudo commands
 alias mount='sudo /usr/bin/mount'
 alias umount='sudo /usr/bin/umount'
