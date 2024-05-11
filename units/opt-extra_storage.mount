@@ -1,0 +1,7 @@
+[Unit]
+Description=Extra storage
+
+[Mount]
+What=/dev/mapper/extra-storage
+Where=/opt/extra_storage
+Type=btrfs

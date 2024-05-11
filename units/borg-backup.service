@@ -1,0 +1,23 @@
+[Unit]
+Description=Create Borg Backup
+BindsTo=opt-extra_storage.mount
+After=opt-extra_storage.mount
+
+[Service]
+Type=oneshot
+Restart=no
+User=tritoke
+Group=tritoke
+ExecStart=/usr/bin/borg \
+  create \
+  -v \
+  --stats \
+  --progress \
+  --show-rc \
+  --compression zstd \
+  --exclude-caches \
+  --exclude '/home/tritoke/.cache/*' \
+  /opt/extra_storage/desktop_backups::'{hostname}-{now}' \
+  /home/tritoke
+ExecStart=/usr/bin/borg prune --keep-last 7 --list /opt/extra_storage/desktop_backups
+ExecStart=/usr/bin/borg compact /opt/extra_storage/desktop_backups
