@@ -31,8 +31,7 @@ function feh_svg() {
   rsvg-convert $1 | feh -
 }
 
-# pls do my aliases...
-alias sudo='sudo '
+[ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
 
 # aliases for my nopass sudo commands
 alias mount='sudo /usr/bin/mount'
