@@ -1,0 +1,9 @@
+[Unit]
+Description=Extra storage
+
+[Automount]
+Where=/opt/extra_storage
+TimeoutIdleSec=10mins
+
+[Install]
+WantedBy=multi-user.target
