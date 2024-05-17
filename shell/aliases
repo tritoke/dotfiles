@@ -28,7 +28,7 @@ alias ipython="ipython3"
 alias vim="lvim"
 
 # if we are running in kitty then alias ssh
-[ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
+alias ssh="TERM=xterm ssh"
 
 # enable viewing of svgs via rsvg-convert
 function feh_svg() {
