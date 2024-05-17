@@ -2,7 +2,7 @@
 
 DP1=$(xrandr | grep -E 'DP-([0-9])-1 connected' | cut -d' ' -f1)
 DP2=$(xrandr | grep -E 'DP-([0-9])-2 connected' | cut -d' ' -f1)
-xlayoutdisplay -p "$DP1" -o "$DP2" -o "$DP1"
+xlayoutdisplay -p "$DP2" -o "$DP1" -o "$DP2"
 setxkbmap -option ctrl:nocaps gb
 
 # sort out issues with JVM apps assuming a reparenting WM
@@ -21,4 +21,4 @@ xbindkeys --poll-rc            # map side scroll to volume
 # needed by dunst
 systemctl --user import-environment DISPLAY
 
-ssh-agent /usr/local/bin/dwm
+/usr/bin/ssh-agent /usr/local/bin/dwm
