@@ -162,7 +162,10 @@ lvim.format_on_save = {
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
   { name = "rustfmt" },
-  { name = "black" },
+  {
+    name = "black",
+    args = { "--line-length=131" },
+  },
 }
 
 -- }}}
