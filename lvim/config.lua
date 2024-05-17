@@ -1,4 +1,4 @@
--- vim: fdm=marker
+-- vim: fdm=marker foldlevel=1
 -- setup leaders
 lvim.leader = "\\"
 vim.g.maplocalleader = ","
@@ -127,7 +127,6 @@ end
 -- rust which_key bindings {{{
 lvim.builtin.which_key.mappings["C"] = {
   name = "Rust",
-  a = { "<cmd>RustCodeAction<Cr>", "Run Code Action" },
   r = { "<cmd>RustRunnables<Cr>", "Runnables" },
   t = { "<cmd>lua _CARGO_TEST()<cr>", "Cargo Test" },
   m = { "<cmd>RustExpandMacro<Cr>", "Expand Macro" },
@@ -154,20 +153,37 @@ lvim.builtin.which_key.mappings["C"] = {
 
 lvim.format_on_save = {
   enabled = true,
-  pattern = "*.rs"
+  pattern = {
+    "*.rs",
+    "*.py",
+  }
 }
 
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
   { name = "rustfmt" },
+  { name = "black" },
 }
 
 -- }}}
 
 -- linter setup {{{
-
-local linters = require "lvim.lsp.null-ls.linters"
-linters.setup { { command = "ruff", filetypes = { "python" } } }
+-- Only setup linters if its for a project
+if string.find(vim.fn.expand("%:ph"), "/home/samleonard/projects/") then
+  local linters = require "lvim.lsp.null-ls.linters"
+  linters.setup {
+    { name = "ruff", },
+    {
+      name = "flake8",
+      args = {
+        "--format=pylint",
+        "--max-line-length=131",
+        "--extend-ignore=E203",
+        "--show-source",
+      },
+    },
+  }
+end
 
 -- }}}
 
@@ -194,7 +210,7 @@ lvim.keys.normal_mode["<space>"] = "za"
 
 -- }}}
 
--- navigate between tabs nicely navigate between tabs nicely navigate between tabs nicely navigate between tabs nicely navigate between tabs nicely navigate between tabs nicely navigate between tabs nicely navigate between tabs nicely navigate between tabs nicely navigate between tabs nicely
+-- navigate between tabs nicely
 lvim.keys.normal_mode["L"] = ":BufferLineCycleNext<CR>"
 lvim.keys.normal_mode["H"] = ":BufferLineCyclePrev<CR>"
 
@@ -226,9 +242,3 @@ vim.api.nvim_create_autocmd({ "BufReadPost" }, {
     end
   end
 })
-
--- Project specific vimrc's 
--- if string.find(vim.fn.expand("%:ph"), "projects/systemd_integration_test_overhaul/systemd") then
---   vim.cmd.source("/home/samleonard/projects/systemd_integration_test_overhaul/systemd/.vimrc")
--- end
-
