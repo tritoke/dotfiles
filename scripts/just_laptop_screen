@@ -1,7 +1,8 @@
 #!/bin/bash
 
-DP1=$(xrandr | grep -E 'DP-?([0-9])-1 connected' | cut -d' ' -f1)
-DP2=$(xrandr | grep -E 'DP-?([0-9])-2 connected' | cut -d' ' -f1)
+EDP=$(xrandr | grep -E 'eDP-?1 connected' | cut -d' ' -f1)
+DP1=$(xrandr | grep -E 'DP-?([0-9])-?1 connected' | cut -d' ' -f1)
+DP2=$(xrandr | grep -E 'DP-?([0-9])-?2 connected' | cut -d' ' -f1)
 
 # handle the missing screens
 declare -a args=()
@@ -16,8 +17,8 @@ done
 DPI=${1:-96}
 
 echo "DPI: $DPI"
-echo "eDP-1: pos 0x0, mode 1920x1200, rate 60, primary"
+echo "$EDP: pos 0x0, mode 1920x1200, rate 60, primary"
 echo "$DP1: off"
 echo "$DP2: off"
-xrandr --dpi "$DPI" --output eDP-1 --pos 0x0 --mode 1920x1200 --rate 60 --primary "${args[@]}"
+xrandr --dpi "$DPI" --output "$EDP" --pos 0x0 --mode 1920x1200 --rate 60 --primary "${args[@]}"
 echo "Xft.dpi: $DPI" | xrdb -merge
