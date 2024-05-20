@@ -3,6 +3,9 @@
 lvim.leader = "\\"
 vim.g.maplocalleader = ","
 
+-- Feature will be removed in ts_context_commentstring in the future (see https://github.com/JoosepAlviste/nvim-ts-context-commentstring/issues/82 for more info)
+vim.g.skip_ts_context_commentstring_module = true
+
 -- plugins {{{
 lvim.plugins = {
   "stevearc/dressing.nvim",
