@@ -1,0 +1,23 @@
+[Unit]
+Description=Create Borg Backup
+
+[Service]
+Type=oneshot
+Restart=no
+User=tritoke
+Group=tritoke
+Environment=BORG_REPO=ssh://tritoke@zoomyboi/opt/extra_storage/laptop_backups
+Environment=BORG_RSH='ssh -i /home/tritoke/.ssh/borg_only'
+ExecStart=/usr/bin/borg \
+  create \
+  -v \
+  --stats \
+  --progress \
+  --show-rc \
+  --compression zstd \
+  --exclude-caches \
+  --exclude '/home/tritoke/.cache/*' \
+  ::'{hostname}-{now}' \
+  /home/tritoke
+ExecStart=/usr/bin/borg prune --keep-last 7 --list
+ExecStart=/usr/bin/borg compact
