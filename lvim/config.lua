@@ -53,7 +53,7 @@ lvim.plugins = {
 lvim.colorscheme = "ronny"
 
 -- rust settings {{{
-vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "rust_analyzer" })
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "rust_analyzer", "robotframework_ls" })
 
 local mason_path = vim.fn.glob(vim.fn.stdpath "data" .. "/mason/")
 
@@ -235,6 +235,10 @@ lvim.keys.normal_mode["<leader>me"] = [["zyiw:exe "tabe man://".@z.""<enter>]]
 vim.opt.undolevels = 10000
 vim.opt.undodir = "/tmp/tritoke/vim_undo"
 vim.opt.undofile = true
+
+vim.o.expandtab = true
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
 
 -- jump to previous location in file
 local jtp_group = vim.api.nvim_create_augroup('jump_to_previous', { clear = true })

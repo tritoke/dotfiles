@@ -9,7 +9,7 @@ export LC_ALL="en_GB.UTF-8"
 export SSH_KEY_PATH="$HOME/.ssh/rsa_id"
 
 export EDITOR="lvim"
-export BROWSER="firefox-devedition"
+export BROWSER="firefox-developer-edition"
 
 export GOPATH="$HOME/.local/go:$HOME/Code/Go"
 

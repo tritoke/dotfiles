@@ -1,11 +1,11 @@
 #!/bin/sh
 primary=$(xrandr | grep primary | cut -d ' ' -f 1)
 [ "$primary" = "" ] && exit
-screens=$(xrandr | egrep -v "(dis|primary)" | grep connect | cut -d ' ' -f 1)
+screens=$(xrandr | grep -Ev "(dis|primary)" | grep connect | cut -d ' ' -f 1)
 [ "$screens" = "" ] && exit
-toattach=$(echo $screens | dmenu -p 'Screen to attach: ')
+toattach=$(echo "$screens" | dmenu -p 'Screen to attach: ')
 [ "$toattach" = "" ] && exit
-direction=$(echo 'left\nright\nabove\nbelow\nmirror' | dmenu -p "How to attach screen: " -l 5)
+direction=$(printf 'left\nright\nabove\nbelow\nmirror' | dmenu -p "How to attach screen: " -l 5)
 [ "$direction" = "" ] && exit
 case $direction in
   left ) directionarg='--left-of' ;;
@@ -15,7 +15,7 @@ case $direction in
   mirror ) directionarg='--same-as' ;;
 esac
 
-xrandr --output $toattach --auto $directionarg $primary
+xrandr --output "$toattach" --auto "$directionarg" "$primary"
 # if there is a background set, reset it for the new window
 [ -f ~/.fehbg ] && ~/.fehbg
 setxkbmap gb
