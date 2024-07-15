@@ -70,14 +70,6 @@ local opts = {
     hover_actions = {
       border = "rounded",
     },
-    on_initialized = function()
-      vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter", "CursorHold", "InsertLeave" }, {
-        pattern = { "*.rs" },
-        callback = function()
-          local _, _ = pcall(vim.lsp.codelens.refresh)
-        end,
-      })
-    end,
   },
   dap = {
     adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
