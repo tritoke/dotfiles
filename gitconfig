@@ -1,70 +1,75 @@
 [user]
-  email = sam.leonard@codethink.co.uk
-  name = Sam Leonard
-	signingkey = 229CFF7096841F33!
+    email = sam.leonard@codethink.co.uk
+    name = Sam Leonard
+    signingkey = 229CFF7096841F33!
 
 [alias]
-  lol = log --graph --decorate --pretty=oneline --abbrev-commit
-  loln = log --graph --decorate --pretty=oneline --abbrev-commit --name-status
-  lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
-  lolan = log --graph --decorate --pretty=oneline --abbrev-commit --all --name-status
-  log1 = log --pretty=oneline --abbrev-commit
-  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-  rr = "!git remote update && git rebase -i --autosquash origin/main"
-  last = show HEAD
-  difft = difftool
-  dlog = "!GIT_EXTERNAL_DIFF=difft git log -p --ext-diff"
-  show-pick = "!f() { git log --color=always --oneline $@ | fzf --ansi --preview='git show --color=always $(echo {} | cut -d\" \" -f1)' | awk '{print $1}' | xargs -r git show; }; f"
-  checkout-pick = "!git branch --all --color=always | cut -b 3- | fzf --ansi --preview='git show --color=always {}' | xargs -r git checkout"
-  fixup-pick = "!f() { git log --color=always --oneline | fzf --ansi --preview='git show --color=always $(echo {} | cut -d\" \" -f1)' | awk '{print $1}' | xargs -r git commit $@ --fixup; }; f"
-  cherry-picker = "!f() { git log --color=always --oneline $@ | fzf --ansi --preview='git show --color=always $(echo {} | cut -d\" \" -f1)' | awk '{print $1}' | xargs -r git cherry-pick; }; f"
+    lol = log --graph --decorate --pretty=oneline --abbrev-commit
+    loln = log --graph --decorate --pretty=oneline --abbrev-commit --name-status
+    lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+    lolan = log --graph --decorate --pretty=oneline --abbrev-commit --all --name-status
+    log1 = log --pretty=oneline --abbrev-commit
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    rr = "!git remote update && git rebase -i --autosquash origin/main"
+    last = "!git show ${1:-HEAD}"
+    last-sha = "!git rev-list -n 1 ${1:-HEAD}"
+    copy-last-sha = "!git rev-list -n 1 ${1:-HEAD} | tr -d '\n' | xclip -selection clipboard"
+    difft = difftool
+    dlog = "!GIT_EXTERNAL_DIFF=difft git log -p --ext-diff"
+    show-pick = "!f() { git log --color=always --oneline $@ | fzf --ansi --preview='git show --color=always $(echo {} | cut -d\" \" -f1)' | awk '{print $1}' | xargs -r git show; }; f"
+    checkout-pick = "!git branch --all --color=always | cut -b 3- | fzf --ansi --preview='git show --color=always {}' | xargs -r git checkout"
+    fixup-pick = "!f() { git log --color=always --oneline | fzf --ansi --preview='git show --color=always $(echo {} | cut -d\" \" -f1)' | awk '{print $1}' | xargs -r git commit $@ --fixup; }; f"
+    cherry-picker = "!f() { git log --color=always --oneline $@ | fzf --ansi --preview='git show --color=always $(echo {} | cut -d\" \" -f1)' | awk '{print $1}' | xargs -r git cherry-pick; }; f"
 
 [color]
-  branch = auto
-  diff = auto
-  interactive = auto
-  status = auto
+    branch = auto
+    diff = auto
+    interactive = auto
+    status = auto
 
 [pull]
-	rebase = true
+    rebase = true
 
 [init]
-	defaultBranch = main
+    defaultBranch = main
 
 [commit]
-	gpgsign = true
-  
+    gpgsign = true
+
 [diff]
-  tool = difftastic
+    tool = difftastic
 
 [difftool]
-  prompt = false
+    prompt = false
 
 [difftool "difftastic"]
-  cmd = difft "$LOCAL" "$REMOTE"
+    cmd = difft "$LOCAL" "$REMOTE"
 
 [pager]
-  difftool = true
+    difftool = true
 
 [rerere]
-	enabled = true
+    enabled = true
 
 [core]
-  pager = delta
+    pager = delta
 
 [interactive]
-  diffFilter = delta --color-only
+    diffFilter = delta --color-only
 
 [delta]
-  navigate = true    # use n and N to move between diff sections
-  light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
-  hyperlinks = true
-  hyperlinks-file-link-format = "file-line://{path}:{line}"
-  line-numbers = true
-  side-by-side = true
+    navigate = true    # use n and N to move between diff sections
+    light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+    hyperlinks = true
+    hyperlinks-file-link-format = "file-line://{path}:{line}"
+    line-numbers = true
+    side-by-side = true
 
 [includeIf "gitdir:~/.builds/"]
     path = .gitconfig-tritoke
 
 [includeIf "gitdir:~/.dotfiles/"]
+    path = .gitconfig-tritoke
+
+[includeIf "gitdir:~/projects/rust_teaching/"]
     path = .gitconfig-tritoke
