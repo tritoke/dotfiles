@@ -1,4 +1,9 @@
 # vim:foldmethod=marker
 
-. "$HOME/.cargo/env"
+# might not be present
+if [[ -f "$HOME/.cargo/env" ]]; then
+    . "$HOME/.cargo/env"
+fi
+
+# should always be present
 . "$HOME/.env"
