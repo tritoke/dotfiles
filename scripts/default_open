@@ -1,0 +1,5 @@
+#!/bin/sh
+
+/usr/bin/firefox-developer-edition &
+/usr/bin/discord &
+/usr/bin/spotify &
