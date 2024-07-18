@@ -81,8 +81,8 @@ $installer gitconfig
 $installer xbindkeysrc
 $installer scripts
 
-for dir in nvim lvim kitty
-do $installer "$dir" "$XDG_CONFIG_HOME" 'yes'
+for item in nvim lvim kitty
+do $installer "$item" "$XDG_CONFIG_HOME" 'yes'
 done
 
 for tool in dunst zathura

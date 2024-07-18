@@ -67,14 +67,6 @@ local opts = {
     hover_actions = {
       border = "rounded",
     },
-    on_initialized = function()
-      vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter", "CursorHold", "InsertLeave" }, {
-        pattern = { "*.rs" },
-        callback = function()
-          local _, _ = pcall(vim.lsp.codelens.refresh)
-        end,
-      })
-    end,
   },
   dap = {
     adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
@@ -104,24 +96,6 @@ local opts = {
   },
 }
 require("rust-tools").setup(opts)
--- }}}
-
--- Rust DAP setup {{{
-lvim.builtin.dap.on_config_done = function(dap)
-  dap.adapters.codelldb = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path)
-  dap.configurations.rust = {
-    {
-      name = "Launch file",
-      type = "codelldb",
-      request = "launch",
-      program = function()
-        return vim.fn.input({"Path to executable: ", vim.fn.getcwd() .. "/", "file"})
-      end,
-      cwd = "${workspaceFolder}",
-      stopOnEntry = false,
-    },
-  }
-end
 -- }}}
 
 -- rust which_key bindings {{{
