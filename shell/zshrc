@@ -1,28 +1,8 @@
 # Make sure the GRML zsh config is installed so that cd is good and other things..
 
-# spaceship options {{{
-# load completion and prompt
-autoload -U compinit promptinit
+# load completion
+autoload -U compinit
 promptinit  
-compinit
-prompt spaceship
-
-SPACESHIP_PYENV_PREFIX="pyenv:("
-SPACESHIP_PYENV_SUFFIX=") "
-
-SPACESHIP_VENV_PREFIX="venv:("
-SPACESHIP_VENV_SUFFIX=") "
-
-SPACESHIP_RUST_SYMBOL="🦀 "
-
-SPACESHIP_BATTERY_THRESHOLD=4 
-
-SPACESHIP_VI_MODE_SHOW=false
-
-#                       time user dir host git hg gradle maven package node ruby elm elixir xcode swift golang php rust haskell julia docker aws gcloud venv conda pyenv dotnet ember kubectl terraform ibmcloud exec_time line_sep battery vi_mode jobs exit_code char
-SPACESHIP_PROMPT_ORDER=(time user dir host git                 package node ruby                        golang php rust haskell julia        aws        venv             dotnet                                  exec_time line_sep                 jobs exit_code char)
-
-# }}}
 
 # zsh options {{{ 
 
@@ -166,3 +146,6 @@ HISTORY_SUBSTRING_SEARCH_FUZZY=1
 bindkey "^[[A" history-substring-search-up
 bindkey "^[[B" history-substring-search-down
 # }}}
+
+prompt off
+eval "$(starship init zsh)"
