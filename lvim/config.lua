@@ -42,21 +42,12 @@ lvim.plugins = {
     ft = { "rust" },
     opts = {
       tools = {
-        executor = require("rustaceanvim/executors").termopen, -- termopen / quickfix / toggleterm / vimux
         runnables = {
           use_telescope = true,
         },
         hover_actions = {
           border = "rounded",
         },
-        on_initialized = function()
-          vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter", "CursorHold", "InsertLeave" }, {
-            pattern = { "*.rs" },
-            callback = function()
-              local _, _ = pcall(vim.lsp.codelens.refresh)
-            end,
-          })
-        end,
       },
       server = {
         default_settings = {
@@ -101,7 +92,7 @@ lvim.plugins = {
 
 lvim.colorscheme = "ronny"
 
--- formatter setup {{{
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "rust_analyzer" })
 
 lvim.format_on_save = {
   enabled = true,
@@ -114,14 +105,8 @@ formatters.setup {
   { name = "black" },
 }
 
--- }}}
-
--- linter setup {{{
-
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup { { command = "ruff", filetypes = { "python" } } }
-
--- }}}
 
 -- folding setup {{{
 
@@ -146,7 +131,7 @@ lvim.keys.normal_mode["<space>"] = "za"
 
 -- }}}
 
--- navigate between tabs nicely navigate between tabs nicely navigate between tabs nicely navigate between tabs nicely navigate between tabs nicely navigate between tabs nicely navigate between tabs nicely navigate between tabs nicely navigate between tabs nicely navigate between tabs nicely
+-- navigate between tabs nicely
 lvim.keys.normal_mode["L"] = ":BufferLineCycleNext<CR>"
 lvim.keys.normal_mode["H"] = ":BufferLineCyclePrev<CR>"
 
@@ -165,3 +150,7 @@ lvim.keys.normal_mode["<leader>me"] = [["zyiw:exe "tabe man://".@z.""<enter>]]
 vim.opt.undolevels = 10000
 vim.opt.undodir = "/tmp/tritoke/vim_undo"
 vim.opt.undofile = true
+vim.opt.tabstop = 4
+vim.opt.expandtab = true
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
