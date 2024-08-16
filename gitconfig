@@ -71,5 +71,14 @@
 [includeIf "gitdir:~/.dotfiles/"]
     path = .gitconfig-tritoke
 
-[includeIf "gitdir:~/projects/rust_teaching/"]
+[includeIf "gitdir:~/Documents/personal/"]
+    path = .gitconfig-tritoke
+
+[includeIf "gitdir:~/Documents/open_source/"]
+    path = .gitconfig-tritoke
+
+[includeIf "gitdir:~/projects/rust_teaching/rust-workshop/"]
+    path = .gitconfig-tritoke
+
+[includeIf "gitdir:~/projects/rust_teaching/rust-workshop-homework-solutions/"]
     path = .gitconfig-tritoke
