@@ -36,7 +36,6 @@ function feh_svg() {
 }
 
 # pls respect my aliases...
-alias sudo='sudo '
 alias watch='watch -c'
 
 # some commands for spawning new terminals from the current directory
