@@ -1,3 +1,5 @@
+set database "sqlite"
+
 set default-bg                  "#1d2021"
 set default-fg                  "#3c3836"
 
@@ -16,8 +18,8 @@ set notification-error-fg       "#fb4934"
 set notification-warning-bg     "#1d2021"
 set notification-warning-fg     "#fb4934"
 
-set highlight-color             "#fabd2f"
-set highlight-active-color      "#83a598"
+set highlight-color             "rgba(250, 189, 47, 0.5)"
+set highlight-active-color      "rgba(131, 165, 152, 0.5)"
 
 set completion-bg               "#3c3836"
 set completion-fg               "#83a598"
