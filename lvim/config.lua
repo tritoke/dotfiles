@@ -1,7 +1,10 @@
--- vim: fdm=marker
+-- vim: fdm=marker foldlevel=1
 -- setup leaders
 lvim.leader = "\\"
 vim.g.maplocalleader = ","
+
+-- Feature will be removed in ts_context_commentstring in the future (see https://github.com/JoosepAlviste/nvim-ts-context-commentstring/issues/82 for more info)
+vim.g.skip_ts_context_commentstring_module = true
 
 -- plugins {{{
 lvim.plugins = {
@@ -50,7 +53,7 @@ lvim.plugins = {
 lvim.colorscheme = "ronny"
 
 -- rust settings {{{
-vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "rust_analyzer" })
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "rust_analyzer", "robotframework_ls" })
 
 local mason_path = vim.fn.glob(vim.fn.stdpath "data" .. "/mason/")
 
@@ -67,14 +70,6 @@ local opts = {
     hover_actions = {
       border = "rounded",
     },
-    on_initialized = function()
-      vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter", "CursorHold", "InsertLeave" }, {
-        pattern = { "*.rs" },
-        callback = function()
-          local _, _ = pcall(vim.lsp.codelens.refresh)
-        end,
-      })
-    end,
   },
   dap = {
     adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
@@ -153,21 +148,40 @@ lvim.builtin.which_key.mappings["C"] = {
 
 lvim.format_on_save = {
   enabled = true,
-  pattern = { "*.rs", "*.py" }
+  pattern = {
+    "*.rs",
+    "*.py",
+  }
 }
 
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
   { name = "rustfmt" },
-  { name = "black" },
+  {
+    name = "black",
+    args = { "--line-length=131" },
+  },
 }
 
 -- }}}
 
 -- linter setup {{{
-
-local linters = require "lvim.lsp.null-ls.linters"
-linters.setup { { command = "ruff", filetypes = { "python" } } }
+-- Only setup linters if its for a project
+if string.find(vim.fn.expand("%:ph"), "/home/samleonard/projects/") then
+  local linters = require "lvim.lsp.null-ls.linters"
+  linters.setup {
+    { name = "ruff", },
+    {
+      name = "flake8",
+      args = {
+        "--format=pylint",
+        "--max-line-length=131",
+        "--extend-ignore=E203",
+        "--show-source",
+      },
+    },
+  }
+end
 
 -- }}}
 
@@ -194,7 +208,7 @@ lvim.keys.normal_mode["<space>"] = "za"
 
 -- }}}
 
--- navigate between tabs nicely navigate between tabs nicely navigate between tabs nicely navigate between tabs nicely navigate between tabs nicely navigate between tabs nicely navigate between tabs nicely navigate between tabs nicely navigate between tabs nicely navigate between tabs nicely
+-- navigate between tabs nicely
 lvim.keys.normal_mode["L"] = ":BufferLineCycleNext<CR>"
 lvim.keys.normal_mode["H"] = ":BufferLineCyclePrev<CR>"
 
@@ -211,6 +225,22 @@ lvim.keys.normal_mode["<leader>me"] = [["zyiw:exe "tabe man://".@z.""<enter>]]
 
 -- vim settings
 vim.opt.undolevels = 10000
-vim.opt.undodir = "/tmp/tritoke/vim_undo"
+vim.opt.undodir = "/tmp/samleonard/vim_undo"
 vim.opt.undofile = true
 
+vim.o.expandtab = true
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
+
+-- jump to previous location in file
+local jtp_group = vim.api.nvim_create_augroup('jump_to_previous', { clear = true })
+vim.api.nvim_create_autocmd({ "BufReadPost" }, {
+  pattern = "*",
+  group = jtp_group,
+  callback = function(_)
+    local last_line = vim.fn.line([['"]])
+    if last_line > 1 and last_line <= vim.fn.line("$") then
+      vim.fn.cursor({last_line, 0})
+    end
+  end
+})

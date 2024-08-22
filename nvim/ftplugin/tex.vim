@@ -7,16 +7,10 @@ if expand('%:ph') =~ 'comp30040/report'
 elseif expand('%:ph') =~ 'comp30040/screencast'
   nnoremap <LocalLeader>p :!latexrun presentation.tex --latex-cmd xelatex<enter>
   nnoremap <LocalLeader>v :!zathura presentation.pdf & disown<enter><enter>
-elseif expand('%:ph') =~ '/cv/'
-  nnoremap <LocalLeader>p :!latexrun cv.tex<enter>
-  nnoremap <LocalLeader>v :!zathura cv.pdf & disown<enter><enter>
-elseif expand('%:ph') =~ '/cover_letter/'
-  nnoremap <LocalLeader>p :!latexrun cover_letter.tex<enter>
-  nnoremap <LocalLeader>v :!zathura cover_letter.pdf & disown<enter><enter>
 else
-  nnoremap <LocalLeader>w :!texcount % \| grep 'Words in text:' \| grep -o '[0-9]\+'<enter>
-  nnoremap <LocalLeader>p :!latexrun --latex-args="-shell-escape" --bibtex-cmd=biber %<enter>
-  nnoremap <LocalLeader>x :!latexrun --latex-args="-shell-escape" --bibtex-cmd=biber % --latex-cmd xelatex<enter>
+  nnoremap <LocalLeader>w :!texcount % \| grep Total -A1 \| grep -o '[0-9]\+'<enter>
+  nnoremap <LocalLeader>p :!latexrun --latex-args="-shell-escape" %<enter>
+  nnoremap <LocalLeader>x :!latexrun --latex-args="-shell-escape" % --latex-cmd xelatex<enter>
   nnoremap <LocalLeader>v :!zathura "%:r".pdf & disown<enter><enter>
 endif
 

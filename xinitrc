@@ -26,5 +26,5 @@ else
   slstatus 2>/dev/null &         # run the statusbar
   xss-lock slock &               # lock on suspend
 
-  ssh-agent /home/samleonard/.local/bin/dwm
+  /usr/bin/ssh-agent /home/samleonard/.local/bin/dwm
 fi 

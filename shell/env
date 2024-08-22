@@ -8,7 +8,7 @@ export LC_ALL="en_GB.UTF-8"
 
 export SSH_KEY_PATH="$HOME/.ssh/rsa_id"
 
-export EDITOR="vim"
+export EDITOR="lvim"
 export BROWSER="firefox-developer-edition"
 
 export GOPATH="$HOME/.local/go:$HOME/Code/Go"
@@ -22,13 +22,11 @@ export MANROFFOPT="-P -c"
 
 # }}}
 
-# dark theme stuff {{{
-
-# https://wiki.archlinux.org/title/Dark_mode_switching
-GTK_THEME=Adwaita:dark
-GTK2_RC_FILES=/usr/share/themes/Adwaita-dark/gtk-2.0/gtkrc
-QT_STYLE_OVERRIDE=Adwaita-Dark
-
+# Make GPG use TTY pinentry {{{
+# ensure this line is present in the gpg agent config
+# echo "pinentry-program /usr/bin/pinentry-curses" >> .gnupg/gpg-agent.conf
+export GPG_TTY=$(tty)
+gpg-connect-agent updatestartuptty /bye >/dev/null
 # }}}
 
 # path additions {{{
@@ -46,10 +44,6 @@ then
   export MANPATH="`manpath`:$HOME/.local/share/man"
 fi
 
-# add /usr/local to PYTHONPATH
-PY_LOCAL_BASE="/usr/local/lib/$(python -V | cut -d. -f3 --complement | tr '[[:upper:]]' '[[:lower:]]' | tr -d ' ')"
-export PYTHONPATH="$PY_LOCAL_BASE:$PY_LOCAL_BASE/site-packages:$PYTHONPATH"
-
 # }}}
 
 # XDG base dir support {{{
@@ -65,16 +59,16 @@ export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
 
 # location shortcuts {{{
 
-FZF="/usr/share/fzf"
-ZSH_PLUGINS="/usr/share/zsh/plugins"
-ROCKYOU="/usr/share/wordlists/seclists-git/Passwords/Leaked-Databases/rockyou.txt"
-DIRLIST="/usr/share/dirbuster/directory-list-2.3-medium.txt"
-DIRLIST_SMALL="/usr/share/dirbuster/directory-list-2.3-small.txt"
-VENV_DIR="$XDG_DATA_HOME/venvs"
+export FZF="/usr/share/fzf/"
+export ZSH_PLUGINS="/usr/share/zsh/plugins/"
+export ROCKYOU="$HOME/.builds/SecLists/Passwords/Leaked-Databases/rockyou.txt"
+export DIRLIST="$HOME/.builds/SecLists/Discovery/Web-Content/raft-medium-words.txt"
+export DIRLIST_SMALL="$HOME/.builds/SecLists/Discovery/Web-Content/raft-small-words.txt"
+export VENV_DIR="$XDG_DATA_HOME/venvs"
 
 # }}}
 
-# program default argument sets {{{
+# Program default argument sets {{{
 # nmap
 SMBARGS="-p445 --script=smb-enum-shares,smb-enum-users"
 NFSARGS="-p111 --script=nfs-ls,nfs-statfs,nfs-showmount"

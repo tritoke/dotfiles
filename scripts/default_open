@@ -1,0 +1,7 @@
+#!/bin/sh
+
+/usr/bin/quasselclient &
+/usr/bin/spotify &
+/usr/bin/discord &
+/usr/bin/thunderbird &
+/usr/bin/firefox-developer-edition &

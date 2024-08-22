@@ -17,30 +17,26 @@ alias tree='exa -T --color=always'
 
 # make less interpret control characters
 # this is why always colour is used above
-alias less='less -r'
+alias less='less -R'
 
 # make find errors go to /dev/null
 alias find='find 2>/dev/null'
 
 # application shortcuts
 alias z="zathura"
+alias ipython="ipython3"
 alias vim="lvim"
+
+# if we are running in kitty then alias ssh
+alias ssh="TERM=xterm ssh"
 
 # enable viewing of svgs via rsvg-convert
 function feh_svg() {
   rsvg-convert $1 | feh -
 }
 
-# pls do my aliases...
-alias sudo='sudo '
-
-# aliases for my nopass sudo commands
-alias mount='sudo /usr/bin/mount'
-alias umount='sudo /usr/bin/umount'
-alias openvpn='sudo /usr/bin/openvpn'
-alias archlinux-java='sudo /usr/bin/archlinux-java'
-alias chvt='sudo /usr/bin/chvt'
-alias setxkbmap='sudo /usr/bin/setxkbmap'
+# pls respect my aliases...
+alias watch='watch -c'
 
 # some commands for spawning new terminals from the current directory
 alias new="kitty 2>/dev/null &!"
@@ -81,8 +77,8 @@ alias autopsy="docker run \
             -it \
             --shm-size 2G \
             -v /tmp/.X11-unix:/tmp/.X11-unix \
-            -v $(pwd):/root/case \
-            -e DISPLAY=$DISPLAY \
+            -v \$(pwd):/root/case \
+            -e DISPLAY=\$DISPLAY \
             -e JAVA_TOOL_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel' \
             -e _JAVA_AWT_WM_NONREPARENTING=1 \
             --network host \
@@ -120,7 +116,7 @@ function komodo_shell() {
           --rm \
           --shm-size 2G \
           -v /tmp/.X11-unix:/tmp/.X11-unix \
-          -v $(pwd):/home/tritoke/comp22712 \
+          -v "$(pwd):/home/tritoke/comp22712" \
           -e DISPLAY=$DISPLAY \
           --device=/dev/dri \
           komodo
@@ -139,7 +135,7 @@ function format_c() {
     echo -n ', TabWidth: 4'
     echo -n '}'
   })
-  clang-format -i -style="$style" $@
+  clang-format -i -style="$style" "$@"
 }
 
 alias crackmapexec='docker run --rm -it byt3bl33d3r/crackmapexec'
@@ -153,10 +149,37 @@ function b64enc() {
   echo $1 | base64
 }
 
-alias binja=binaryninja
-
 function load_pyenv() {
   eval "$(pyenv init -)"
   eval "$(pyenv virtualenv-init -)"
   . "$(pyenv root)/completions/pyenv.zsh"
+}
+
+alias jadx-gui="flatpak run com.github.skylot.jadx"
+
+function borg_create_backup() {
+  REPOSITORY="$1"
+  borg create -v                                                                   \
+          --stats                                                                  \
+          --progress                                                               \
+          --show-rc                                                                \
+          --compression lz4                                                        \
+          --exclude-caches                                                         \
+          --exclude '/home/*/.cache/*'                                             \
+          --exclude '/var/cache/*'                                                 \
+          --exclude '/var/tmp/*'                                                   \
+          --exclude '/home/samleonard/.steam/*'                                    \
+          --exclude '/home/samleonard/.var/*'                                      \
+          --exclude '/home/samleonard/.builds/*'                                   \
+          --exclude '/home/samleonard/snap/*'                                      \
+          --exclude '/home/samleonard/.rustup/toolchains/*'                        \
+          --exclude '/home/samleonard/.cargo/*'                                    \
+          --exclude '/home/samleonard/.gradle/*'                                   \
+          --exclude '/home/samleonard/.wine/*'                                     \
+          --exclude '/home/samleonard/mnt/*'                                       \
+          --exclude '/home/samleonard/Documents/keyboard_setup/qmk_firmware/lib/*' \
+                                                                                   \
+          "$REPOSITORY"::'{hostname}-{now}'                                        \
+          /home                                                                    \
+          /usr/local
 }
