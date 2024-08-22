@@ -86,3 +86,5 @@ done
 for file in resources/*; do
     ask_and_link "$file" "$XDG_DATA_HOME"
 done
+
+ask_and_link "fonts.conf" "$XDG_CONFIG_HOME/fontconfig"
