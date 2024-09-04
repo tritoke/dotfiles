@@ -31,7 +31,7 @@ gpg-connect-agent updatestartuptty /bye >/dev/null
 
 # path additions {{{
 
-PATH="$PATH:$HOME/.local/bin"
+PATH="$HOME/.local/bin:$PATH"
 PATH="$PATH:$HOME/.local/go/bin"
 PATH="$PATH:$HOME/.local/share/pyenv/bin"
 PATH="$PATH:$HOME/.local/share/JetBrains/Toolbox/scripts"
