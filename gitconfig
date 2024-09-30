@@ -9,6 +9,8 @@
     lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
     lolan = log --graph --decorate --pretty=oneline --abbrev-commit --all --name-status
     log1 = log --pretty=oneline --abbrev-commit
+    log1l = log --pretty=oneline
+    head = log --pretty=oneline --abbrev-commit --max-count 10
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
     rr = "!git remote update && git rebase -i --autosquash origin/main"
     last = "!git show ${1:-HEAD}"

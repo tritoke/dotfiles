@@ -1,6 +1,6 @@
 #!/bin/sh
 EMOJIFILE=${XDG_DATA_HOME:-$HOME/.local/share}/emojis
-EMOJI=$(grep -v '#' $EMOJIFILE | dmenu -l 20 -fn 'JetBrains Mono:size=9' | cut -d ' ' -f 1 | tr -d '\n')
+EMOJI=$(grep -v '#' $EMOJIFILE | dmenu -l 20 | cut -d ' ' -f 1 | tr -d '\n')
 if [ "$EMOJI" != "" ]
 then
   echo -n $EMOJI | xclip -selection clipboard

@@ -1,5 +1,5 @@
 #!/bin/sh
 
-ID=$(xinput list | pcregrep -o1 'Synaptics \S+\s+id=(\d+)')
+ID=$(xinput list | pcregrep -o1 "Touchpad.*?id=(\d+)")
 STATE=$(xinput list-props "$ID" | pcregrep -o1 'Device Enabled \(\d+\):\s+(\d)')
 [ "$STATE" = "1" ] && xinput disable "$ID" || xinput enable "$ID"
