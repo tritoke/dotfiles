@@ -67,6 +67,10 @@
     line-numbers = true
     side-by-side = true
 
+# not secrets but I'd rather they weren't in git
+[include]
+    path = .gitconfig-work-private
+
 [includeIf "gitdir:~/.builds/"]
     path = .gitconfig-tritoke
 
