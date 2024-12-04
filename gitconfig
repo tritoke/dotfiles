@@ -88,3 +88,13 @@
 
 [includeIf "gitdir:~/projects/rust_teaching/rust-workshop-homework-solutions/"]
     path = .gitconfig-tritoke
+
+[credential]
+	helper = store
+	useHttpPath = true
+
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
