@@ -67,9 +67,7 @@ export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
 
 FZF="/usr/share/fzf"
 ZSH_PLUGINS="/usr/share/zsh/plugins"
-ROCKYOU="/usr/share/wordlists/seclists-git/Passwords/Leaked-Databases/rockyou.txt"
-DIRLIST="/usr/share/dirbuster/directory-list-2.3-medium.txt"
-DIRLIST_SMALL="/usr/share/dirbuster/directory-list-2.3-small.txt"
+ROCKYOU="/usr/share/seclists/Passwords/Leaked-Databases/rockyou.txt"
 VENV_DIR="$XDG_DATA_HOME/venvs"
 
 # }}}
