@@ -2,9 +2,10 @@
 
 hash() {
   loc=$1
-  if [ -d $loc ]
-  then find $loc -type f -exec sha256sum | cut -d' ' -f1 | sha256sum | cut -d' ' -f1
-  else sha256sum $loc | cut -d' ' -f1
+  if [ -d "$loc" ]; then 
+      find "$loc" -type f -exec sha256sum | cut -d' ' -f1 | sha256sum | cut -d' ' -f1
+  else
+      sha256sum "$loc" | cut -d' ' -f1
   fi
 }
 
@@ -37,7 +38,7 @@ cmdinstall() {
 
 dmenuinstall() {
 	file=$1
-	name=$(echo $file | rev | cut -d '/' -f 1 | rev)
+	name=$(echo "$file" | rev | cut -d '/' -f 1 | rev)
 	location=$2
 	[ "$location" = "" ] && location="$HOME"
 	nodot=$3
@@ -45,22 +46,22 @@ dmenuinstall() {
 
 	if [ -e "$location/$name" ]
 	then
-    if [ "$(readlink $location/$name)" = "$PWD/$file" ]; then return; fi
+    if [ "$(readlink "$location/$name")" = "$PWD/$file" ]; then return; fi
 		message="Do you want to replace your $name with the new one?"
 	else
 		message="Do you want to install $name?"
 	fi
 
-	replace=$(echo "yes\nno\nexit" | dmenu -p "$message")
+	replace=$(printf "yes\nno\nexit" | dmenu -p "$message")
   [ "$replace" = "exit" ] && exit 
 	[ "$replace" != "yes" ] && return
 
 	ln -sf "$PWD/$file" "$location/$name"
 }
 
-if xset q 2>&1 >/dev/null
+if xset q >/dev/null 2>&1 
 then
-  if command -v dmenu 2>&1 >/dev/null
+  if command -v dmenu >/dev/null 2>&1 
   then
     installer=dmenuinstall
   else
@@ -91,6 +92,9 @@ do
   mkdir -p "$XDG_CONFIG_HOME/$tool"
   $installer "${tool}rc" "$XDG_CONFIG_HOME/$tool" 'yes'
 done
+
+mkdir -p "$XDG_CONFIG_HOME/fontconfig"
+$installer "fonts.conf" "$XDG_CONFIG_HOME/fontconfig" 'yes'
 
 for file in resources/*
 do $installer "$file" "$XDG_DATA_HOME" 'yes'
