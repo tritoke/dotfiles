@@ -1,6 +1,10 @@
 # vim: ft=sh
 
-setxkbmap gb      # tell the keyboard to use a GB keymap
+# tell the keyboard to use a GB keymap
+setxkbmap gb
+
+# set the primary monitor etc
+xlayoutdisplay -p DP-4 -o DP-0 -o DP-4 -o DP-2
 
 # sort out issues with JVM apps assuming a reparenting WM
 wmname LG3D                           
