@@ -155,8 +155,6 @@ function load_pyenv() {
   . "$(pyenv root)/completions/pyenv.zsh"
 }
 
-alias jadx-gui="flatpak run com.github.skylot.jadx"
-
 function borg_create_backup() {
   REPOSITORY="$1"
   borg create -v                                                                   \
