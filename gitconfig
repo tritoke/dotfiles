@@ -38,6 +38,9 @@
 [commit]
     gpgsign = true
 
+[tag]
+    gpgsign = true
+
 [diff]
     tool = difftastic
 
