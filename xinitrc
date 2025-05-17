@@ -6,7 +6,7 @@ then
   ssh-agent /usr/bin/startplasma-x11
 else
   sleep 1
-  xlayoutdisplay -p DP-4 -o DP-0 -o DP-4 -o DP-2
+  xlayoutdisplay -p DisplayPort-1
 
   setxkbmap gb      # tell the keyboard to use a GB keymap
 
