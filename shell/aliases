@@ -1,7 +1,6 @@
 # vim: ft=sh
 
 # set global options
-alias fd='fd -IH'
 alias grep='grep --color=auto'
 alias rg='rg -S 2>/dev/null'
 alias cat=bat
