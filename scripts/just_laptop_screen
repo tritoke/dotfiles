@@ -22,3 +22,10 @@ echo "$DP1: off"
 echo "$DP2: off"
 xrandr --dpi "$DPI" --output "$EDP" --pos 0x0 --mode 1920x1200 --rate 60 --primary "${args[@]}"
 echo "Xft.dpi: $DPI" | xrdb -merge
+
+# reset the background
+~/.fehbg
+# restart dunst so the DPI change takes effect
+systemctl restart --user dunst
+# restart all DWM instances so the DPI change takes effect
+killall -SIGHUP dwm
