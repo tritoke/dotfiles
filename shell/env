@@ -20,6 +20,12 @@ export PYENV_ROOT="$HOME/.local/share/pyenv"
 export MANPAGER="less -R"
 export MANROFFOPT="-P -c"
 
+# finally I am free
+export RUSTUP_AUTO_INSTALL="0"
+
+# STOP IT AHHHHHH
+export UV_NO_MANAGED_PYTHON="yes"
+
 # }}}
 
 # Make GPG use TTY pinentry {{{
