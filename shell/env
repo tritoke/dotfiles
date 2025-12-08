@@ -23,9 +23,6 @@ export MANROFFOPT="-P -c"
 # finally I am free
 export RUSTUP_AUTO_INSTALL="0"
 
-# STOP IT AHHHHHH
-export UV_NO_MANAGED_PYTHON="yes"
-
 # }}}
 
 # Make GPG use TTY pinentry {{{
@@ -67,9 +64,9 @@ export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
 
 export FZF="/usr/share/fzf/"
 export ZSH_PLUGINS="/usr/share/zsh/plugins/"
-export ROCKYOU="$HOME/.builds/SecLists/Passwords/Leaked-Databases/rockyou.txt"
-export DIRLIST="$HOME/.builds/SecLists/Discovery/Web-Content/raft-medium-words.txt"
-export DIRLIST_SMALL="$HOME/.builds/SecLists/Discovery/Web-Content/raft-small-words.txt"
+export ROCKYOU="/usr/share/seclists/Passwords/Leaked-Databases/rockyou.txt"
+export DIRLIST="/usr/share/seclists/Discovery/Web-Content/raft-medium-words.txt"
+export DIRLIST_SMALL="/usr/share/seclists/Discovery/Web-Content/raft-small-words.txt"
 export VENV_DIR="$XDG_DATA_HOME/venvs"
 
 # }}}
