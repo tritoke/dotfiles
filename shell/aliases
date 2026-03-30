@@ -63,6 +63,9 @@ alias rm='rm -I'
 alias mv='mv -i'
 alias cp='cp -i'
 
+# colour for watch :D
+alias watch="TERM=xterm watch -c"
+
 # default to system clipboard
 alias xclip='xclip -selection clipboard'
 alias xclip_png='xclip -selection clipboard -t image/png'
@@ -160,3 +163,5 @@ function load_pyenv() {
   eval "$(pyenv virtualenv-init -)"
   . "$(pyenv root)/completions/pyenv.zsh"
 }
+
+alias disk_editor="sudo /opt/lsoft/DiskEditor/DiskEditor.sh"

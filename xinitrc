@@ -24,7 +24,8 @@ else
   ~/.fehbg                       # set the background 
   xbindkeys --poll-rc            # map side scroll to volume
   slstatus 2>/dev/null &         # run the statusbar
-  xss-lock slock &               # lock on suspend
+  # fuck this I don't care you're not in my house
+  # xss-lock slock &               # lock on suspend
 
   ssh-agent /usr/local/bin/dwm   # default to running installed version of DWM
 fi 
