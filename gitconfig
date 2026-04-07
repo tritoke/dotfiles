@@ -4,6 +4,7 @@
   signingkey = 652BB38CC02E3918!
 
 [alias]
+  last = show HEAD
   lol = log --graph --decorate --pretty=oneline --abbrev-commit
   loln = log --graph --decorate --pretty=oneline --abbrev-commit --name-status
   lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
