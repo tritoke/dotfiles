@@ -177,7 +177,7 @@ inoremap <silent> <C-v> <ESC>"+pa
 nnoremap <silent> <leader>n /<++><enter>:let @/ = ""<enter>ca<
 
 " start a new terminal
-nnoremap <silent> <leader>t :!nohup st&>/dev/null&\!<enter><enter>
+nnoremap <silent> <leader>t :!nohup kitty&>/dev/null&\!<enter><enter>
 
 " change colourscheme with a leader
 nnoremap <silent> <leader>l :call Light()<enter>

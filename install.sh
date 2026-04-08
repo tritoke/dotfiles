@@ -83,7 +83,7 @@ $installer 'gitconfig'
 $installer 'xbindkeysrc'
 $installer 'scripts'
 
-for dir in "nvim" "lvim" "kitty"
+for dir in "nvim" "lvim" "astronvim" "kitty"
 do $installer "$dir" "$XDG_CONFIG_HOME" 'yes'
 done
 
