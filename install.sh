@@ -81,7 +81,7 @@ $installer gitconfig
 $installer xbindkeysrc
 $installer scripts
 
-for item in nvim lvim kitty zed
+for item in nvim astronvim kitty zed
 do $installer "$item" "$XDG_CONFIG_HOME" 'yes'
 done
 
