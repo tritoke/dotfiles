@@ -23,8 +23,7 @@ alias find='find 2>/dev/null'
 
 # application shortcuts
 alias z="zathura"
-alias ipython="ipython3"
-alias vim="lvim"
+alias vim="NVIM_APPNAME=astronvim vim"
 
 # if we are running in kitty then alias ssh
 alias ssh="TERM=xterm ssh"

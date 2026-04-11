@@ -1,0 +1,3 @@
+#!/bin/sh
+
+NVIM_APPNAME=astronvim /usr/bin/nvim "$@"
