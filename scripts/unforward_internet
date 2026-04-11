@@ -10,7 +10,11 @@ read CONT
 [[ $EUID -ne 0 ]] && SUDO='sudo' || SUDO=''
 
 $SUDO iptables -F
-$SUDO sysctl net.ipv4.conf.wlan0.forwarding=0
-$SUDO sysctl net.ipv4.conf.enp0s31f6.forwarding=0
+
+# Disable packet forwarding
+$SUDO sysctl -w net.ipv4.ip_forward=0
+$SUDO sysctl -w net.ipv4.conf.all.forwarding=0
+$SUDO sysctl -w net.ipv6.conf.all.forwarding=0
+
 $SUDO ip addr del 192.168.123.100/24 dev enp0s31f6
 $SUDO ip link set down dev enp0s31f6

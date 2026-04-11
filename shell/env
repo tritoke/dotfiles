@@ -73,3 +73,6 @@ SMBARGS="-p445 --script=smb-enum-shares,smb-enum-users"
 NFSARGS="-p111 --script=nfs-ls,nfs-statfs,nfs-showmount"
 
 # }}}
+
+# Temp
+export PODMAN_COMPOSE_PROVIDER="podman-compose"

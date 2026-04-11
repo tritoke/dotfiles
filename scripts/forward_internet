@@ -39,8 +39,12 @@ $SUDO ip link set up dev $net0
 $SUDO ip addr add 192.168.123.100/24 dev $net0
 
 # Enable packet forwarding
-silent $SUDO sysctl "net.ipv4.conf.$internet0.forwarding=1"
-silent $SUDO sysctl "net.ipv4.conf.$net0.forwarding=1"
+$SUDO sysctl -w net.ipv4.ip_forward=1
+$SUDO sysctl -w net.ipv4.conf.all.forwarding=1
+$SUDO sysctl -w net.ipv6.conf.all.forwarding=1
+
+# silent $SUDO sysctl "net.ipv4.conf.$internet0.forwarding=1"
+# silent $SUDO sysctl "net.ipv4.conf.$net0.forwarding=1"
 
 # Enable NAT
 $SUDO iptables -t nat -A POSTROUTING -o $internet0 -j MASQUERADE

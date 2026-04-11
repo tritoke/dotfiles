@@ -47,6 +47,7 @@ lvim.plugins = {
 }
 -- }}}
 
+-- lvim.colorscheme = "delek"
 lvim.colorscheme = "ronny"
 
 -- rust settings {{{

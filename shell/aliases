@@ -7,6 +7,8 @@ alias cat=bat
 alias catt='/bin/cat'
 alias h=tldr
 
+alias ssh="TERM=xterm ssh"
+
 # use eza instead of ls and tree
 alias ls=eza
 alias l=ls
@@ -150,7 +152,7 @@ function b64enc() {
   echo $1 | base64
 }
 
-functio bindiff() {
+function bindiff() {
   diff <(xxd $1) <(xxd $2)
 }
 
