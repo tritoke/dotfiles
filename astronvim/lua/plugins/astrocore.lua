@@ -64,22 +64,22 @@ return {
       -- first key is the mode
       n = {
         -- second key is the lefthand side of the map
-        ["<space>"] = "za",
+        ["<Space>"] = "za",
 
         -- navigate buffer tabs
         ["L"] = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "Next buffer" },
         ["H"] = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "Previous buffer" },
 
         -- goto next <++> and enter insert mode
-        ["<leader>n"] = [[<cmd>/<++><enter>:let @/=""<enter>ca<]],
+        ["<Leader>n"] = [[<cmd>/<++><enter>:let @/=""<enter>ca<]],
 
         -- open a new terminal
-        ["<leader>t"] = "<cmd>:!nohup kitty&>/dev/null&<enter><enter>",
+        ["<Leader>t"] = "<cmd>:!nohup kitty&>/dev/null&<enter><enter>",
 
         -- open man pages in splits / tabs
-        ["<leader>ms"] = [["zyiw:exe "sp man://".@z.""<enter>]],
-        ["<leader>mv"] = [["zyiw:exe "vsp man://".@z.""<enter>]],
-        ["<leader>me"] = [["zyiw:exe "tabe man://".@z.""<enter>]],
+        ["<Leader>ms"] = [["zyiw:exe "sp man://".@z.""<enter>]],
+        ["<Leader>mv"] = [["zyiw:exe "vsp man://".@z.""<enter>]],
+        ["<Leader>me"] = [["zyiw:exe "tabe man://".@z.""<enter>]],
       },
     },
   },
