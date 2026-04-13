@@ -8,9 +8,4 @@ return {
   -- == Examples of Adding Plugins ==
 
   "judaew/ronny.nvim", 
-  {
-    "ray-x/lsp_signature.nvim",
-    event = "BufRead",
-    config = function() require("lsp_signature").setup() end,
-  },
 }
