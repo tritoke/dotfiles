@@ -45,7 +45,7 @@ return {
         wrap = false, -- sets vim.opt.wrap
         -- my settings
         undolevels = 10000,
-        undodir = "/home/tritoke/.cache/astronvim_undo",
+        undodir = vim.fn.expand('$XDG_CACHE_HOME') .. "/astronvim_undo",
         undofile = true,
         expandtab = true,
         tabstop = 4,
